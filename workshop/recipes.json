@@ -1,0 +1,4211 @@
+{
+  "checked": "2026-09-25",
+  "stats": {
+    "alter": {
+      "cli": 91,
+      "mapped": 75
+    },
+    "craft": {
+      "cli": 1834,
+      "mapped": 401
+    }
+  },
+  "recipes": {
+    "alter:철괴(광석)": {
+      "output": "철괴(광석)",
+      "yield": 3,
+      "ingredients": {
+        "광석": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=124&comeidx=6366"
+    },
+    "alter:철괴(철 광석)": {
+      "output": "철괴(철 광석)",
+      "yield": 3,
+      "ingredients": {
+        "철 광석": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=124&comeidx=6366"
+    },
+    "alter:강철괴": {
+      "output": "강철괴",
+      "yield": 3,
+      "ingredients": {
+        "철괴": 3,
+        "석탄": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=124&comeidx=6366"
+    },
+    "alter:목재": {
+      "output": "목재",
+      "yield": 3,
+      "ingredients": {
+        "통나무": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+    },
+    "alter:목재+": {
+      "output": "목재+",
+      "yield": 3,
+      "ingredients": {
+        "목재": 3,
+        "나무 진액": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+    },
+    "alter:옷감": {
+      "output": "옷감",
+      "yield": 3,
+      "ingredients": {
+        "양털": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:실크": {
+      "output": "실크",
+      "yield": 2,
+      "ingredients": {
+        "거미줄": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:옷감+": {
+      "output": "옷감+",
+      "yield": 3,
+      "ingredients": {
+        "옷감": 3,
+        "양털": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:가죽": {
+      "output": "가죽",
+      "yield": 3,
+      "ingredients": {
+        "생가죽": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+    },
+    "alter:가죽+": {
+      "output": "가죽+",
+      "yield": 3,
+      "ingredients": {
+        "가죽": 3,
+        "타닌 가루": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+    },
+    "alter:새록 버섯 진액": {
+      "output": "새록 버섯 진액",
+      "yield": 5,
+      "ingredients": {
+        "새록 버섯 포자": 10,
+        "물이 든 병": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:튼튼 버섯 가루": {
+      "output": "튼튼 버섯 가루",
+      "yield": 5,
+      "ingredients": {
+        "튼튼 버섯": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:튼튼 버섯 진액": {
+      "output": "튼튼 버섯 진액",
+      "yield": 5,
+      "ingredients": {
+        "튼튼 버섯 포자": 10,
+        "물이 든 병": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:광휘의 결정(유령 반딧불이)": {
+      "output": "광휘의 결정(유령 반딧불이)",
+      "yield": 3,
+      "ingredients": {
+        "유령 반딧불이": 3,
+        "마나 허브": 10,
+        "점토": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:마요네즈": {
+      "output": "마요네즈",
+      "yield": 3,
+      "ingredients": {
+        "달걀": 10,
+        "식용유": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:합금강괴": {
+      "output": "합금강괴",
+      "yield": 3,
+      "ingredients": {
+        "강철괴": 3,
+        "동 광석": 15,
+        "석탄": 8
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=124&comeidx=6366"
+    },
+    "alter:타르": {
+      "output": "타르",
+      "yield": 5,
+      "ingredients": {
+        "통나무": 50,
+        "점토": 25
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=124&comeidx=6366"
+    },
+    "alter:상급 목재": {
+      "output": "상급 목재",
+      "yield": 3,
+      "ingredients": {
+        "목재+": 3,
+        "상급 통나무": 15,
+        "나무 진액": 8
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+    },
+    "alter:상급 옷감": {
+      "output": "상급 옷감",
+      "yield": 3,
+      "ingredients": {
+        "옷감+": 3,
+        "상급 양털": 15,
+        "양털": 8
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:상급 실크": {
+      "output": "상급 실크",
+      "yield": 2,
+      "ingredients": {
+        "실크": 4,
+        "튼튼 버섯 진액": 8
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:상급 가죽": {
+      "output": "상급 가죽",
+      "yield": 3,
+      "ingredients": {
+        "가죽+": 3,
+        "상급 생가죽": 15,
+        "타닌 가루": 8
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+    },
+    "alter:새록 버섯 포자": {
+      "output": "새록 버섯 포자",
+      "yield": 15,
+      "ingredients": {
+        "새록 버섯": 30,
+        "종이": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:튼튼 버섯 포자": {
+      "output": "튼튼 버섯 포자",
+      "yield": 15,
+      "ingredients": {
+        "튼튼 버섯": 30,
+        "종이": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:쑥쑥 버섯 포자": {
+      "output": "쑥쑥 버섯 포자",
+      "yield": 15,
+      "ingredients": {
+        "쑥쑥 버섯": 30,
+        "종이": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:쑥쑥 버섯 진액": {
+      "output": "쑥쑥 버섯 진액",
+      "yield": 5,
+      "ingredients": {
+        "쑥쑥 버섯 포자": 10,
+        "물이 든 병": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:불꽃의 결정(석양나비)": {
+      "output": "불꽃의 결정(석양나비)",
+      "yield": 3,
+      "ingredients": {
+        "석양나비": 3,
+        "마나 허브": 10,
+        "점토": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:아교": {
+      "output": "아교",
+      "yield": 5,
+      "ingredients": {
+        "상급 생가죽": 30,
+        "물이 든 병": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:밀가루": {
+      "output": "밀가루",
+      "yield": 3,
+      "ingredients": {
+        "밀": 15
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:치즈": {
+      "output": "치즈",
+      "yield": 3,
+      "ingredients": {
+        "우유": 6,
+        "소금": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:특수강괴": {
+      "output": "특수강괴",
+      "yield": 3,
+      "ingredients": {
+        "합금강괴": 4,
+        "백동 광석": 20,
+        "석탄": 12
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=124&comeidx=6366"
+    },
+    "alter:상급 목재+": {
+      "output": "상급 목재+",
+      "yield": 3,
+      "ingredients": {
+        "상급 목재": 4,
+        "상급 통나무+": 20,
+        "나무 진액": 12
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+    },
+    "alter:부드러운 목재": {
+      "output": "부드러운 목재",
+      "yield": 3,
+      "ingredients": {
+        "상급 목재+": 15,
+        "부드러운 통나무": 30,
+        "나무 진액": 30
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+    },
+    "alter:단단한 목재": {
+      "output": "단단한 목재",
+      "yield": 3,
+      "ingredients": {
+        "상급 목재+": 15,
+        "단단한 통나무": 30,
+        "나무 진액": 30
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+    },
+    "alter:상급 옷감+": {
+      "output": "상급 옷감+",
+      "yield": 3,
+      "ingredients": {
+        "상급 옷감": 4,
+        "상급 양털+": 20,
+        "양털": 12
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:식물 섬유": {
+      "output": "식물 섬유",
+      "yield": 10,
+      "ingredients": {
+        "긴 줄기": 150
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:밧줄": {
+      "output": "밧줄",
+      "yield": 3,
+      "ingredients": {
+        "식물 섬유": 45,
+        "밀랍": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:상급 가죽+": {
+      "output": "상급 가죽+",
+      "yield": 3,
+      "ingredients": {
+        "상급 가죽": 4,
+        "상급 생가죽+": 20,
+        "타닌 가루": 12
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+    },
+    "alter:숨숨꽃 가루": {
+      "output": "숨숨꽃 가루",
+      "yield": 5,
+      "ingredients": {
+        "숨숨꽃": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:깔끔 버섯 포자": {
+      "output": "깔끔 버섯 포자",
+      "yield": 15,
+      "ingredients": {
+        "깔끔 버섯": 30,
+        "종이": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:깔끔 버섯 진액": {
+      "output": "깔끔 버섯 진액",
+      "yield": 5,
+      "ingredients": {
+        "깔끔 버섯 포자": 10,
+        "물이 든 병": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:얼음의 결정(흰얼음풍뎅이)": {
+      "output": "얼음의 결정(흰얼음풍뎅이)",
+      "yield": 3,
+      "ingredients": {
+        "흰얼음풍뎅이": 3,
+        "마나 허브": 10,
+        "점토": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:마력 기폭제": {
+      "output": "마력 기폭제",
+      "yield": 10,
+      "ingredients": {
+        "마력 깃든 돌": 50,
+        "마나 허브": 50,
+        "반짝이는 이끼": 25
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:면": {
+      "output": "면",
+      "yield": 3,
+      "ingredients": {
+        "밀가루": 3,
+        "달걀": 5,
+        "물이 든 병": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:생크림": {
+      "output": "생크림",
+      "yield": 3,
+      "ingredients": {
+        "우유": 12,
+        "달걀": 6,
+        "설탕": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:은합금괴": {
+      "output": "은합금괴",
+      "yield": 3,
+      "ingredients": {
+        "특수강괴": 4,
+        "은 광석": 20,
+        "석탄": 16
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=124&comeidx=6366"
+    },
+    "alter:최상급 목재": {
+      "output": "최상급 목재",
+      "yield": 3,
+      "ingredients": {
+        "상급 목재+": 5,
+        "최상급 통나무": 20,
+        "나무 진액": 16
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+    },
+    "alter:최상급 옷감": {
+      "output": "최상급 옷감",
+      "yield": 3,
+      "ingredients": {
+        "상급 옷감+": 5,
+        "최상급 양털": 20,
+        "양털": 16
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:최상급 실크": {
+      "output": "최상급 실크",
+      "yield": 2,
+      "ingredients": {
+        "상급 실크": 4,
+        "최상급 거미줄": 20,
+        "튼튼 버섯 진액": 16
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:튼튼한 밧줄": {
+      "output": "튼튼한 밧줄",
+      "yield": 3,
+      "ingredients": {
+        "밧줄": 6,
+        "식물 섬유": 90,
+        "밀랍": 8,
+        "타르": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:최상급 가죽": {
+      "output": "최상급 가죽",
+      "yield": 3,
+      "ingredients": {
+        "상급 가죽+": 5,
+        "최상급 생가죽": 20,
+        "타닌 가루": 16
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+    },
+    "alter:생채기꽃 가루": {
+      "output": "생채기꽃 가루",
+      "yield": 5,
+      "ingredients": {
+        "생채기꽃": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:증폭 버섯 포자": {
+      "output": "증폭 버섯 포자",
+      "yield": 15,
+      "ingredients": {
+        "증폭 버섯": 30,
+        "종이": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:증폭 버섯 진액": {
+      "output": "증폭 버섯 진액",
+      "yield": 5,
+      "ingredients": {
+        "증폭 버섯 포자": 10,
+        "쑥쑥 버섯 진액": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:전기의 결정(낙엽나방)": {
+      "output": "전기의 결정(낙엽나방)",
+      "yield": 3,
+      "ingredients": {
+        "낙엽나방": 3,
+        "마나 허브": 10,
+        "점토": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:물에 불린 콩": {
+      "output": "물에 불린 콩",
+      "yield": 5,
+      "ingredients": {
+        "콩": 30,
+        "물이 든 병": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:두부": {
+      "output": "두부",
+      "yield": 3,
+      "ingredients": {
+        "물에 불린 콩": 3,
+        "물이 든 병": 1,
+        "소금": 2,
+        "옷감": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:두유": {
+      "output": "두유",
+      "yield": 3,
+      "ingredients": {
+        "물에 불린 콩": 3,
+        "물이 든 병": 3,
+        "소금": 1,
+        "식용유": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:숙성된 커다란 고기": {
+      "output": "숙성된 커다란 고기",
+      "yield": 1,
+      "ingredients": {
+        "커다란 고기": 1,
+        "허브": 6,
+        "마늘": 2,
+        "소금": 2,
+        "후추": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:운철괴": {
+      "output": "운철괴",
+      "yield": 3,
+      "ingredients": {
+        "은합금괴": 4,
+        "운철 광석": 20,
+        "석탄": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=124&comeidx=6366"
+    },
+    "alter:최상급 목재+": {
+      "output": "최상급 목재+",
+      "yield": 3,
+      "ingredients": {
+        "최상급 목재": 5,
+        "최상급 통나무+": 20,
+        "나무 진액": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+    },
+    "alter:최상급 옷감+": {
+      "output": "최상급 옷감+",
+      "yield": 3,
+      "ingredients": {
+        "최상급 옷감": 5,
+        "최상급 양털+": 20,
+        "양털": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+    },
+    "alter:최상급 가죽+": {
+      "output": "최상급 가죽+",
+      "yield": 3,
+      "ingredients": {
+        "최상급 가죽": 5,
+        "최상급 생가죽+": 20,
+        "타닌 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+    },
+    "alter:진정초 가루": {
+      "output": "진정초 가루",
+      "yield": 5,
+      "ingredients": {
+        "진정초": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:솔솔 버섯 포자": {
+      "output": "솔솔 버섯 포자",
+      "yield": 15,
+      "ingredients": {
+        "솔솔 버섯": 30,
+        "종이": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:솔솔 버섯 진액": {
+      "output": "솔솔 버섯 진액",
+      "yield": 5,
+      "ingredients": {
+        "솔솔 버섯 포자": 10,
+        "새록 버섯 진액": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:봉인의 결정(황혼잠자리)": {
+      "output": "봉인의 결정(황혼잠자리)",
+      "yield": 3,
+      "ingredients": {
+        "황혼잠자리": 3,
+        "마나 허브": 10,
+        "점토": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:환영 가루": {
+      "output": "환영 가루",
+      "yield": 5,
+      "ingredients": {
+        "벼락 맞은 나뭇가지": 20,
+        "나비잠자리": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+    },
+    "alter:물에 불린 쌀": {
+      "output": "물에 불린 쌀",
+      "yield": 5,
+      "ingredients": {
+        "쌀": 30,
+        "물이 든 병": 6
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:밥": {
+      "output": "밥",
+      "yield": 3,
+      "ingredients": {
+        "물에 불린 쌀": 8,
+        "물이 든 병": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:말린 찻잎": {
+      "output": "말린 찻잎",
+      "yield": 3,
+      "ingredients": {
+        "찻잎": 30
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "alter:발효된 찻잎": {
+      "output": "발효된 찻잎",
+      "yield": 3,
+      "ingredients": {
+        "말린 찻잎": 5,
+        "옷감": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+    },
+    "craft:캠프파이어 키트": {
+      "output": "캠프파이어 키트",
+      "yield": 1,
+      "ingredients": {
+        "통나무": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+    },
+    "craft:못": {
+      "output": "못",
+      "yield": 10,
+      "ingredients": {
+        "철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+    },
+    "craft:숏소드": {
+      "output": "숏소드",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 3,
+        "목재": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이트 소드": {
+      "output": "그레이트 소드",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 3,
+        "목재": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:론 엣지소드": {
+      "output": "론 엣지소드",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 2,
+        "가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:플랫 대거": {
+      "output": "플랫 대거",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 2,
+        "가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라이트 너클": {
+      "output": "라이트 너클",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 2,
+        "가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:샤프 듀얼소드": {
+      "output": "샤프 듀얼소드",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 3,
+        "가죽": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:숏보우": {
+      "output": "숏보우",
+      "yield": 1,
+      "ingredients": {
+        "목재": 3,
+        "가죽": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라이트 크로스보우": {
+      "output": "라이트 크로스보우",
+      "yield": 1,
+      "ingredients": {
+        "목재": 2,
+        "철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라이트 롱보우": {
+      "output": "라이트 롱보우",
+      "yield": 1,
+      "ingredients": {
+        "목재": 3,
+        "가죽": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:켈틱 류트": {
+      "output": "켈틱 류트",
+      "yield": 1,
+      "ingredients": {
+        "목재": 3,
+        "철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:꽃잎 접부채": {
+      "output": "꽃잎 접부채",
+      "yield": 1,
+      "ingredients": {
+        "목재": 2,
+        "철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:커브드 하프": {
+      "output": "커브드 하프",
+      "yield": 1,
+      "ingredients": {
+        "목재": 3,
+        "철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:우드 완드": {
+      "output": "우드 완드",
+      "yield": 1,
+      "ingredients": {
+        "목재": 2,
+        "가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라운드헤드 케인": {
+      "output": "라운드헤드 케인",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 3,
+        "목재": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:스노우 오브": {
+      "output": "스노우 오브",
+      "yield": 1,
+      "ingredients": {
+        "목재": 2,
+        "철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라운드 코일": {
+      "output": "라운드 코일",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 3,
+        "가죽": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:마블 힐링 완드": {
+      "output": "마블 힐링 완드",
+      "yield": 1,
+      "ingredients": {
+        "목재": 2,
+        "철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:크리스탈 스태프": {
+      "output": "크리스탈 스태프",
+      "yield": 1,
+      "ingredients": {
+        "목재": 2,
+        "철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:블런트 쿼터스태프": {
+      "output": "블런트 쿼터스태프",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 3,
+        "목재": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:페리도트 링": {
+      "output": "페리도트 링",
+      "yield": 1,
+      "ingredients": {
+        "세공된 페리도트": 1,
+        "철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:페리도트 네크리스": {
+      "output": "페리도트 네크리스",
+      "yield": 1,
+      "ingredients": {
+        "세공된 페리도트": 1,
+        "철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:회복 물약": {
+      "output": "회복 물약",
+      "yield": 5,
+      "ingredients": {
+        "블러디 허브": 2,
+        "새록 버섯": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:붕대": {
+      "output": "붕대",
+      "yield": 10,
+      "ingredients": {
+        "옷감": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:여행자 간식": {
+      "output": "여행자 간식",
+      "yield": 1,
+      "ingredients": {
+        "달걀": 1,
+        "고기": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:비늘 갑옷 투구": {
+      "output": "비늘 갑옷 투구",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 2,
+        "가죽": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 상의": {
+      "output": "비늘 갑옷 상의",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 3,
+        "옷감": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 장갑": {
+      "output": "비늘 갑옷 장갑",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 2,
+        "실크": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 하의": {
+      "output": "비늘 갑옷 하의",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 2,
+        "옷감": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 신발": {
+      "output": "비늘 갑옷 신발",
+      "yield": 1,
+      "ingredients": {
+        "철괴": 2,
+        "가죽": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 투구": {
+      "output": "가죽 갑옷 투구",
+      "yield": 1,
+      "ingredients": {
+        "가죽": 2,
+        "철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 상의": {
+      "output": "가죽 갑옷 상의",
+      "yield": 1,
+      "ingredients": {
+        "가죽": 3,
+        "옷감": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 장갑": {
+      "output": "가죽 갑옷 장갑",
+      "yield": 1,
+      "ingredients": {
+        "가죽": 2,
+        "실크": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 하의": {
+      "output": "가죽 갑옷 하의",
+      "yield": 1,
+      "ingredients": {
+        "가죽": 2,
+        "옷감": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 신발": {
+      "output": "가죽 갑옷 신발",
+      "yield": 1,
+      "ingredients": {
+        "가죽": 2,
+        "철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 투구": {
+      "output": "전투복 투구",
+      "yield": 1,
+      "ingredients": {
+        "옷감": 2,
+        "가죽": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 상의": {
+      "output": "전투복 상의",
+      "yield": 1,
+      "ingredients": {
+        "옷감": 3,
+        "철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 장갑": {
+      "output": "전투복 장갑",
+      "yield": 1,
+      "ingredients": {
+        "옷감": 2,
+        "실크": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 하의": {
+      "output": "전투복 하의",
+      "yield": 1,
+      "ingredients": {
+        "옷감": 2,
+        "가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 신발": {
+      "output": "전투복 신발",
+      "yield": 1,
+      "ingredients": {
+        "옷감": 2,
+        "철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:염색약": {
+      "output": "염색약",
+      "yield": 1,
+      "ingredients": {
+        "물이 든 병": 3,
+        "염색약 베이스": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+    },
+    "craft:달걀프라이": {
+      "output": "달걀프라이",
+      "yield": 1,
+      "ingredients": {
+        "달걀": 1,
+        "소금": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:삶은 달걀": {
+      "output": "삶은 달걀",
+      "yield": 1,
+      "ingredients": {
+        "달걀": 1,
+        "물이 든 병": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:구운 고기": {
+      "output": "구운 고기",
+      "yield": 1,
+      "ingredients": {
+        "고기": 4,
+        "허브": 2,
+        "소금": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:통감자구이": {
+      "output": "통감자구이",
+      "yield": 1,
+      "ingredients": {
+        "감자": 4,
+        "허브": 2,
+        "설탕": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:사과 주스": {
+      "output": "사과 주스",
+      "yield": 1,
+      "ingredients": {
+        "사과": 4,
+        "허브": 2,
+        "물이 든 병": 1,
+        "설탕": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:마요네즈 고기볶음": {
+      "output": "마요네즈 고기볶음",
+      "yield": 1,
+      "ingredients": {
+        "고기": 4,
+        "양배추": 1,
+        "마요네즈": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:감자 샐러드": {
+      "output": "감자 샐러드",
+      "yield": 1,
+      "ingredients": {
+        "감자": 4,
+        "양배추": 2,
+        "마요네즈": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:사과 샐러드": {
+      "output": "사과 샐러드",
+      "yield": 1,
+      "ingredients": {
+        "사과": 4,
+        "양배추": 2,
+        "마요네즈": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:티어 가넷 링": {
+      "output": "티어 가넷 링",
+      "yield": 1,
+      "ingredients": {
+        "세공된 가넷": 1,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:티어 가넷 네크리스": {
+      "output": "티어 가넷 네크리스",
+      "yield": 1,
+      "ingredients": {
+        "세공된 가넷": 1,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:약초 괭이": {
+      "output": "약초 괭이",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "못": 3,
+        "도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:낫": {
+      "output": "낫",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "못": 3,
+        "도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:호미": {
+      "output": "호미",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "못": 3,
+        "도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:양털 가위": {
+      "output": "양털 가위",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "못": 3,
+        "도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:벌목 도끼": {
+      "output": "벌목 도끼",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "못": 6,
+        "도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:곡괭이": {
+      "output": "곡괭이",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "못": 6,
+        "도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:곤충 채집망": {
+      "output": "곤충 채집망",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 3,
+        "못": 6,
+        "도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:낚싯대": {
+      "output": "낚싯대",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 3,
+        "못": 6,
+        "도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:자동회복 물약": {
+      "output": "자동회복 물약",
+      "yield": 5,
+      "ingredients": {
+        "회복 물약": 5,
+        "분해된 장비 부품": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:상급 회복 물약": {
+      "output": "상급 회복 물약",
+      "yield": 5,
+      "ingredients": {
+        "블러디 허브": 6,
+        "새록 버섯 진액": 5,
+        "쑥쑥 버섯": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:숙련 캠프파이어 키트": {
+      "output": "숙련 캠프파이어 키트",
+      "yield": 1,
+      "ingredients": {
+        "나뭇가지": 5,
+        "상급 통나무": 4,
+        "돌멩이": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+    },
+    "craft:한손 도끼": {
+      "output": "한손 도끼",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 3,
+        "목재+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이트 클리버": {
+      "output": "그레이트 클리버",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 3,
+        "목재+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:크레센트 엣지소드": {
+      "output": "크레센트 엣지소드",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:스틸레토": {
+      "output": "스틸레토",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라운드 너클": {
+      "output": "라운드 너클",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그랜드 듀얼소드": {
+      "output": "그랜드 듀얼소드",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 3,
+        "가죽+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:콤포지트 보우": {
+      "output": "콤포지트 보우",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 3,
+        "가죽+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그랜드 크로스보우": {
+      "output": "그랜드 크로스보우",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 2,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그랜드 롱보우": {
+      "output": "그랜드 롱보우",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 3,
+        "가죽+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:플랫 류트": {
+      "output": "플랫 류트",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 3,
+        "강철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:앤티크 차크람": {
+      "output": "앤티크 차크람",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 2,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이스 하프": {
+      "output": "그레이스 하프",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 3,
+        "강철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:켈틱 완드": {
+      "output": "켈틱 완드",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 2,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:아크스피어 케인": {
+      "output": "아크스피어 케인",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 3,
+        "목재+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:글래시어 오브": {
+      "output": "글래시어 오브",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 2,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:마그네틱 코일": {
+      "output": "마그네틱 코일",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 3,
+        "가죽+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:로터스 힐링 완드": {
+      "output": "로터스 힐링 완드",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 2,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:홀리윙 스태프": {
+      "output": "홀리윙 스태프",
+      "yield": 1,
+      "ingredients": {
+        "목재+": 2,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:디바인 쿼터스태프": {
+      "output": "디바인 쿼터스태프",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 3,
+        "목재+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:블루 스피넬 링": {
+      "output": "블루 스피넬 링",
+      "yield": 1,
+      "ingredients": {
+        "세공된 블루 스피넬": 1,
+        "강철괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:블루 스피넬 펜던트": {
+      "output": "블루 스피넬 펜던트",
+      "yield": 1,
+      "ingredients": {
+        "세공된 블루 스피넬": 1,
+        "강철괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:사슬 갑옷 투구": {
+      "output": "사슬 갑옷 투구",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "가죽+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:사슬 갑옷 상의": {
+      "output": "사슬 갑옷 상의",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 3,
+        "옷감+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:사슬 갑옷 장갑": {
+      "output": "사슬 갑옷 장갑",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "실크": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:사슬 갑옷 하의": {
+      "output": "사슬 갑옷 하의",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "옷감+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:사슬 갑옷 신발": {
+      "output": "사슬 갑옷 신발",
+      "yield": 1,
+      "ingredients": {
+        "강철괴": 2,
+        "가죽+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 가죽 갑옷 투구": {
+      "output": "두꺼운 가죽 갑옷 투구",
+      "yield": 1,
+      "ingredients": {
+        "가죽+": 2,
+        "강철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 가죽 갑옷 상의": {
+      "output": "두꺼운 가죽 갑옷 상의",
+      "yield": 1,
+      "ingredients": {
+        "가죽+": 3,
+        "옷감+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 가죽 갑옷 장갑": {
+      "output": "두꺼운 가죽 갑옷 장갑",
+      "yield": 1,
+      "ingredients": {
+        "가죽+": 2,
+        "실크": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 가죽 갑옷 하의": {
+      "output": "두꺼운 가죽 갑옷 하의",
+      "yield": 1,
+      "ingredients": {
+        "가죽+": 2,
+        "옷감+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 가죽 갑옷 신발": {
+      "output": "두꺼운 가죽 갑옷 신발",
+      "yield": 1,
+      "ingredients": {
+        "가죽+": 2,
+        "강철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 전투복 투구": {
+      "output": "두꺼운 전투복 투구",
+      "yield": 1,
+      "ingredients": {
+        "옷감+": 2,
+        "가죽+": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 전투복 상의": {
+      "output": "두꺼운 전투복 상의",
+      "yield": 1,
+      "ingredients": {
+        "옷감+": 3,
+        "강촐괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 전투복 장갑": {
+      "output": "두꺼운 전투복 장갑",
+      "yield": 1,
+      "ingredients": {
+        "옷감+": 2,
+        "실크": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 전투복 하의": {
+      "output": "두꺼운 전투복 하의",
+      "yield": 1,
+      "ingredients": {
+        "옷감+": 2,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 전투복 신발": {
+      "output": "두꺼운 전투복 신발",
+      "yield": 1,
+      "ingredients": {
+        "옷감+": 2,
+        "강철괴": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:짜먹는 간식": {
+      "output": "짜먹는 간식",
+      "yield": 1,
+      "ingredients": {
+        "고기": 3,
+        "허브": 1,
+        "물이 든 병": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:궁극기 비약": {
+      "output": "궁극기 비약",
+      "yield": 3,
+      "ingredients": {
+        "끈기 풀": 10,
+        "쑥쑥 버섯 진액": 3,
+        "흰꽃나비": 6,
+        "연금술 부스러기": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:상급 자동회복 물약": {
+      "output": "상급 자동회복 물약",
+      "yield": 5,
+      "ingredients": {
+        "상급 회복 물약": 5,
+        "분해된 장비 부품": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:내열 붕대": {
+      "output": "내열 붕대",
+      "yield": 5,
+      "ingredients": {
+        "붕대": 5,
+        "튼튼 버섯 가루": 3,
+        "불꽃의 결정": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:방한 붕대": {
+      "output": "방한 붕대",
+      "yield": 5,
+      "ingredients": {
+        "붕대": 5,
+        "튼튼 버섯 가루": 3,
+        "얼음의 결정": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:절연 붕대": {
+      "output": "절연 붕대",
+      "yield": 5,
+      "ingredients": {
+        "붕대": 5,
+        "튼튼 버섯 가루": 3,
+        "전기의 결정": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:축복의 붕대": {
+      "output": "축복의 붕대",
+      "yield": 5,
+      "ingredients": {
+        "붕대": 5,
+        "튼튼 버섯 가루": 3,
+        "광휘의 결정": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:봉인의 붕대": {
+      "output": "봉인의 붕대",
+      "yield": 5,
+      "ingredients": {
+        "붕대": 5,
+        "튼튼 버섯 가루": 3,
+        "봉인의 결정": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:샤인 지르콘 링": {
+      "output": "샤인 지르콘 링",
+      "yield": 1,
+      "ingredients": {
+        "세공된 지르콘": 1,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:샤인 지르콘 네크리스": {
+      "output": "샤인 지르콘 네크리스",
+      "yield": 1,
+      "ingredients": {
+        "세공된 지르콘": 1,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:포크 인 밀크": {
+      "output": "포크 인 밀크",
+      "yield": 1,
+      "ingredients": {
+        "고기": 8,
+        "우유": 4,
+        "마늘": 2,
+        "허브": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:야채볶음": {
+      "output": "야채볶음",
+      "yield": 1,
+      "ingredients": {
+        "감자": 8,
+        "양파": 3,
+        "양배추": 6,
+        "허브": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:콘치즈": {
+      "output": "콘치즈",
+      "yield": 1,
+      "ingredients": {
+        "옥수수": 10,
+        "치즈": 2,
+        "허브": 2,
+        "설탕": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:치즈 퐁뒤": {
+      "output": "치즈 퐁뒤",
+      "yield": 1,
+      "ingredients": {
+        "고기": 8,
+        "치즈": 2,
+        "감자": 4,
+        "소금": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:리코타 치즈 샐러드": {
+      "output": "리코타 치즈 샐러드",
+      "yield": 1,
+      "ingredients": {
+        "양배추": 4,
+        "치즈": 2,
+        "마요네즈": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:사과 수플레": {
+      "output": "사과 수플레",
+      "yield": 1,
+      "ingredients": {
+        "사과": 8,
+        "밀가루": 2,
+        "달걀": 4,
+        "설탕": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:전문 캠프파이어 키트": {
+      "output": "전문 캠프파이어 키트",
+      "yield": 1,
+      "ingredients": {
+        "나뭇가지": 5,
+        "상급 통나무+": 4,
+        "돌멩이": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+    },
+    "craft:숏소드S": {
+      "output": "숏소드S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "목재+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이트 소드S": {
+      "output": "그레이트 소드S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "목재+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:론 엣지소드S": {
+      "output": "론 엣지소드S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "가죽+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:플랫 대거S": {
+      "output": "플랫 대거S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "가죽+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라이트 너클S": {
+      "output": "라이트 너클S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "가죽+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:샤프 듀얼소드S": {
+      "output": "샤프 듀얼소드S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:숏보우S": {
+      "output": "숏보우S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 4,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라이트 크로스보우S": {
+      "output": "라이트 크로스보우S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "강철괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라이트 롱보우S": {
+      "output": "라이트 롱보우S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 4,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:켈틱 류트S": {
+      "output": "켈틱 류트S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 4,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:꽃잎 접부채S": {
+      "output": "꽃잎 접부채S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "강철괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:커브드 하프S": {
+      "output": "커브드 하프S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 4,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:우드 완드S": {
+      "output": "우드 완드S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "가죽+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라운드헤드 케인S": {
+      "output": "라운드헤드 케인S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "목재+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:스노우 오브S": {
+      "output": "스노우 오브S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "강철괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라운드 코일S": {
+      "output": "라운드 코일S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:마블 힐링 완드S": {
+      "output": "마블 힐링 완드S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "강철괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:크리스탈 스태프S": {
+      "output": "크리스탈 스태프S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "강철괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:블런트 쿼터스태프S": {
+      "output": "블런트 쿼터스태프S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "목재+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:페리도트 링S": {
+      "output": "페리도트 링S",
+      "yield": 1,
+      "ingredients": {
+        "세공된 페리도트S": 1,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:페리도트 네크리스S": {
+      "output": "페리도트 네크리스S",
+      "yield": 1,
+      "ingredients": {
+        "세공된 페리도트S": 1,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:비늘 갑옷 투구S": {
+      "output": "비늘 갑옷 투구S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 상의S": {
+      "output": "비늘 갑옷 상의S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "옷감+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 장갑S": {
+      "output": "비늘 갑옷 장갑S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 2,
+        "실크": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 하의S": {
+      "output": "비늘 갑옷 하의S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "옷감+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 신발S": {
+      "output": "비늘 갑옷 신발S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 투구S": {
+      "output": "가죽 갑옷 투구S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽": 3,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 상의S": {
+      "output": "가죽 갑옷 상의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽": 4,
+        "옷감+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 장갑S": {
+      "output": "가죽 갑옷 장갑S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽": 2,
+        "실크": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 하의S": {
+      "output": "가죽 갑옷 하의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽": 3,
+        "옷감+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 신발S": {
+      "output": "가죽 갑옷 신발S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽": 3,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 투구S": {
+      "output": "전투복 투구S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감": 3,
+        "가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 상의S": {
+      "output": "전투복 상의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감": 4,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 장갑S": {
+      "output": "전투복 장갑S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감": 2,
+        "실크": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 하의S": {
+      "output": "전투복 하의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감": 3,
+        "가죽+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 신발S": {
+      "output": "전투복 신발S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감": 3,
+        "강철괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:피해 감소 비약": {
+      "output": "피해 감소 비약",
+      "yield": 3,
+      "ingredients": {
+        "블러디 허브": 10,
+        "쑥쑥 버섯 진액": 3,
+        "장수풍뎅이": 6,
+        "연금술 부스러기": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:이동 속도 비약": {
+      "output": "이동 속도 비약",
+      "yield": 3,
+      "ingredients": {
+        "화살꽃": 10,
+        "쑥쑥 버섯 진액": 3,
+        "똑딱 반딧불이": 6,
+        "연금술 부스러기": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:티어 가넷 링S": {
+      "output": "티어 가넷 링S",
+      "yield": 1,
+      "ingredients": {
+        "세공된 가넷S": 1,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:티어 가넷 네크리스S": {
+      "output": "티어 가넷 네크리스S",
+      "yield": 1,
+      "ingredients": {
+        "세공된 가넷S": 1,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:개량된 약초 괭이": {
+      "output": "개량된 약초 괭이",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 2,
+        "못": 3,
+        "개량된 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:개량된 낫": {
+      "output": "개량된 낫",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 2,
+        "못": 3,
+        "개량된 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:개량된 호미": {
+      "output": "개량된 호미",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 2,
+        "못": 3,
+        "개량된 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:개량된 양털 가위": {
+      "output": "개량된 양털 가위",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 2,
+        "못": 3,
+        "개량된 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:개량된 벌목 도끼": {
+      "output": "개량된 벌목 도끼",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 2,
+        "못": 6,
+        "개량된 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:개량된 곡괭이": {
+      "output": "개량된 곡괭이",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 2,
+        "못": 6,
+        "개량된 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:개량된 곤충 채집망": {
+      "output": "개량된 곤충 채집망",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "못": 6,
+        "개량된 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:개량된 낚싯대": {
+      "output": "개량된 낚싯대",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "못": 6,
+        "개량된 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:최상급 회복 물약": {
+      "output": "최상급 회복 물약",
+      "yield": 5,
+      "ingredients": {
+        "블러디 허브": 12,
+        "깔끔 버섯": 6,
+        "숨숨꽃": 6
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:상급 붕대": {
+      "output": "상급 붕대",
+      "yield": 10,
+      "ingredients": {
+        "상급 옷감": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:한손 도끼S": {
+      "output": "한손 도끼S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "상급 목재": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이트 클리버S": {
+      "output": "그레이트 클리버S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "상급 목재": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:크레센트 엣지소드S": {
+      "output": "크레센트 엣지소드S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "상급 가죽": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:스틸레토S": {
+      "output": "스틸레토S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "상급 가죽": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라운드 너클S": {
+      "output": "라운드 너클S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "상급 가죽": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그랜드 듀얼소드S": {
+      "output": "그랜드 듀얼소드S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:콤포지트 보우S": {
+      "output": "콤포지트 보우S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 4,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그랜드 크로스보우S": {
+      "output": "그랜드 크로스보우S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그랜드 롱보우S": {
+      "output": "그랜드 롱보우S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 4,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:플랫 류트S": {
+      "output": "플랫 류트S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 4,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:앤티크 차크람S": {
+      "output": "앤티크 차크람S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이스 하프S": {
+      "output": "그레이스 하프S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 4,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:켈틱 완드S": {
+      "output": "켈틱 완드S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "상급 가죽": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:아크스피어 케인S": {
+      "output": "아크스피어 케인S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "상급 목재": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:글래시어 오브S": {
+      "output": "글래시어 오브S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:마그네틱 코일S": {
+      "output": "마그네틱 코일S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:로터스 힐링 완드S": {
+      "output": "로터스 힐링 완드S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:홀리윙 스태프S": {
+      "output": "홀리윙 스태프S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재": 3,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:디바인 쿼터스태프S": {
+      "output": "디바인 쿼터스태프S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "상급 목재": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:블루 스피넬 링S": {
+      "output": "블루 스피넬 링S",
+      "yield": 1,
+      "ingredients": {
+        "세공된 블루 스피넬S": 1,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:블루 스피넬 펜던트S": {
+      "output": "블루 스피넬 펜던트S",
+      "yield": 1,
+      "ingredients": {
+        "세공된 블루 스피넬S": 1,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:사슬 갑옷 투구S": {
+      "output": "사슬 갑옷 투구S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:사슬 갑옷 상의S": {
+      "output": "사슬 갑옷 상의S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 4,
+        "상급 옷감": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:사슬 갑옷 장갑S": {
+      "output": "사슬 갑옷 장갑S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 2,
+        "상급 실크": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:사슬 갑옷 하의S": {
+      "output": "사슬 갑옷 하의S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "상급 옷감": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:사슬 갑옷 신발S": {
+      "output": "사슬 갑옷 신발S",
+      "yield": 1,
+      "ingredients": {
+        "합금강괴": 3,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 가죽 갑옷 투구S": {
+      "output": "두꺼운 가죽 갑옷 투구S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽": 3,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 가죽 갑옷 상의S": {
+      "output": "두꺼운 가죽 갑옷 상의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽": 4,
+        "상급 옷감": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 가죽 갑옷 장갑S": {
+      "output": "두꺼운 가죽 갑옷 장갑S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽": 2,
+        "상급 실크": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 가죽 갑옷 하의S": {
+      "output": "두꺼운 가죽 갑옷 하의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽": 3,
+        "상급 옷감": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 가죽 갑옷 신발S": {
+      "output": "두꺼운 가죽 갑옷 신발S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽": 3,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 전투복 투구S": {
+      "output": "두꺼운 전투복 투구S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감": 3,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 전투복 상의S": {
+      "output": "두꺼운 전투복 상의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감": 4,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 전투복 장갑S": {
+      "output": "두꺼운 전투복 장갑S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감": 2,
+        "상급 실크": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 전투복 하의S": {
+      "output": "두꺼운 전투복 하의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감": 3,
+        "상급 가죽": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:두꺼운 전투복 신발S": {
+      "output": "두꺼운 전투복 신발S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감": 3,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:상급 치명타 비약": {
+      "output": "상급 치명타 비약",
+      "yield": 3,
+      "ingredients": {
+        "치명타 비약": 9,
+        "깔끔 버섯 진액": 5,
+        "폐허의 마나석": 1,
+        "연금술 부스러기": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:상급 궁극기 비약": {
+      "output": "상급 궁극기 비약",
+      "yield": 3,
+      "ingredients": {
+        "궁극기 비약": 9,
+        "깔끔 버섯 진액": 5,
+        "폐허의 마나석": 1,
+        "연금술 부스러기": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:최상급 자동회복 물약": {
+      "output": "최상급 자동회복 물약",
+      "yield": 5,
+      "ingredients": {
+        "최상급 회복 물약": 5,
+        "분해된 장비 부품": 60
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:바스타드 소드S": {
+      "output": "바스타드 소드S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 목재": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:스톤애쉬 블레이드S": {
+      "output": "스톤애쉬 블레이드S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 목재": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:웨이브 엣지소드S": {
+      "output": "웨이브 엣지소드S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 가죽": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:페스카즈S": {
+      "output": "페스카즈S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 가죽": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:프라임 너클S": {
+      "output": "프라임 너클S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 가죽": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이트 듀얼소드S": {
+      "output": "그레이트 듀얼소드S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:리인포스드 보우S": {
+      "output": "리인포스드 보우S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:앤티크 크로스보우S": {
+      "output": "앤티크 크로스보우S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:헌터클랜 롱보우S": {
+      "output": "헌터클랜 롱보우S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:깃털 접부채S": {
+      "output": "깃털 접부채S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:클래식 하프S": {
+      "output": "클래식 하프S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:크리스탈 완드S": {
+      "output": "크리스탈 완드S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "상급 가죽": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:파이어플린트 케인S": {
+      "output": "파이어플린트 케인S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 목재": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:윈터브레스 오브S": {
+      "output": "윈터브레스 오브S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:아크 디바인 스태프S": {
+      "output": "아크 디바인 스태프S",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "합금강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:앤티크 쿼터스태프S": {
+      "output": "앤티크 쿼터스태프S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 목재": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:샤인 지르콘 링S": {
+      "output": "샤인 지르콘 링S",
+      "yield": 1,
+      "ingredients": {
+        "세공된 지르콘S": 1,
+        "특수강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:샤인 지르콘 네크리스S": {
+      "output": "샤인 지르콘 네크리스S",
+      "yield": 1,
+      "ingredients": {
+        "세공된 지르콘S": 1,
+        "특수강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:마법 유탄 부품": {
+      "output": "마법 유탄 부품",
+      "yield": 5,
+      "ingredients": {
+        "분해된 장비 부품": 50,
+        "마나 허브": 10,
+        "협곡의 마나석": 1,
+        "연금술 부스러기": 50
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+    },
+    "craft:판금 갑옷 투구S": {
+      "output": "판금 갑옷 투구S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:판금 갑옷 상의S": {
+      "output": "판금 갑옷 상의S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 옷감": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:판금 갑옷 장갑S": {
+      "output": "판금 갑옷 장갑S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 2,
+        "상급 실크": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:판금 갑옷 하의S": {
+      "output": "판금 갑옷 하의S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 옷감": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:판금 갑옷 신발S": {
+      "output": "판금 갑옷 신발S",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:열처리 가죽 갑옷 투구S": {
+      "output": "열처리 가죽 갑옷 투구S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽+": 3,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:열처리 가죽 갑옷 상의S": {
+      "output": "열처리 가죽 갑옷 상의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽+": 4,
+        "상급 옷감": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:열처리 가죽 갑옷 장갑S": {
+      "output": "열처리 가죽 갑옷 장갑S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽+": 2,
+        "상급 실크": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:열처리 가죽 갑옷 하의S": {
+      "output": "열처리 가죽 갑옷 하의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽+": 3,
+        "상급 옷감": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:열처리 가죽 갑옷 신발S": {
+      "output": "열처리 가죽 갑옷 신발S",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽+": 3,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:강화된 전투복 투구S": {
+      "output": "강화된 전투복 투구S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감+": 3,
+        "상급 가죽": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:강화된 전투복 상의S": {
+      "output": "강화된 전투복 상의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감+": 4,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:강화된 전투복 장갑S": {
+      "output": "강화된 전투복 장갑S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감+": 2,
+        "상급 실크": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:강화된 전투복 하의S": {
+      "output": "강화된 전투복 하의S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감+": 3,
+        "상급 가죽": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:강화된 전투복 신발S": {
+      "output": "강화된 전투복 신발S",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감+": 3,
+        "합금강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:뛰어난 회복 물약": {
+      "output": "뛰어난 회복 물약",
+      "yield": 5,
+      "ingredients": {
+        "블러디 허브": 16,
+        "깔끔 버섯 진액": 5,
+        "생명의 마나석": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:뛰어난 회복 물약S": {
+      "output": "뛰어난 회복 물약S",
+      "yield": 5,
+      "ingredients": {
+        "블러디 허브": 20,
+        "솔솔 버섯 진액": 5,
+        "생명의 마나석": 10
+      },
+      "source": "https://mobile.mabi.zip/ttwieonanhoebokmulyaks"
+    },
+    "craft:뛰어난 자동회복 물약S": {
+      "output": "뛰어난 자동회복 물약S",
+      "yield": 5,
+      "ingredients": {
+        "뛰어난 회복 물약S": 5,
+        "분해된 장비 부품": 180
+      },
+      "source": "https://mobile.mabi.zip/ttwieonanjadonghoebokmulyaks"
+    },
+    "craft:조개찜": {
+      "output": "조개찜",
+      "yield": 1,
+      "ingredients": {
+        "조개": 10,
+        "물이 든 병": 5,
+        "레몬": 4,
+        "허브": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:감자수프": {
+      "output": "감자수프",
+      "yield": 1,
+      "ingredients": {
+        "감자": 12,
+        "우유": 5,
+        "허브": 3,
+        "후추": 6
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:얼음 딸기주스": {
+      "output": "얼음 딸기주스",
+      "yield": 1,
+      "ingredients": {
+        "얼음": 10,
+        "딸기": 6,
+        "허브": 3,
+        "설탕": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:크림소스 스테이크": {
+      "output": "크림소스 스테이크",
+      "yield": 1,
+      "ingredients": {
+        "고기": 10,
+        "생크림": 2,
+        "마늘": 2,
+        "후추": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:알리오 올리오": {
+      "output": "알리오 올리오",
+      "yield": 1,
+      "ingredients": {
+        "마늘": 7,
+        "면": 2,
+        "양파": 2,
+        "후추": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:사과 생크림케이크": {
+      "output": "사과 생크림케이크",
+      "yield": 1,
+      "ingredients": {
+        "사과": 12,
+        "생크림": 2,
+        "밀가루": 4,
+        "설탕": 9
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:숏소드SS": {
+      "output": "숏소드SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 목재+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이트 소드SS": {
+      "output": "그레이트 소드SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 목재+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:론 엣지소드SS": {
+      "output": "론 엣지소드SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 가죽+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:플랫 대거SS": {
+      "output": "플랫 대거SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 가죽+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라이트 너클SS": {
+      "output": "라이트 너클SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 가죽+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:샤프 듀얼소드SS": {
+      "output": "샤프 듀얼소드SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:숏보우SS": {
+      "output": "숏보우SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "상급 가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라이트 크로스보우SS": {
+      "output": "라이트 크로스보우SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "특수강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라이트 롱보우SS": {
+      "output": "라이트 롱보우SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "상급 가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:켈틱 류트SS": {
+      "output": "켈틱 류트SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:꽃잎 접부채SS": {
+      "output": "꽃잎 접부채SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "특수강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:커브드 하프SS": {
+      "output": "커브드 하프SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:우드 완드SS": {
+      "output": "우드 완드SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "상급 가죽+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라운드헤드 케인SS": {
+      "output": "라운드헤드 케인SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 목재+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:스노우 오브SS": {
+      "output": "스노우 오브SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "특수강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라운드 코일SS": {
+      "output": "라운드 코일SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:마블 힐링 완드SS": {
+      "output": "마블 힐링 완드SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "특수강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:크리스탈 스태프SS": {
+      "output": "크리스탈 스태프SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 3,
+        "특수강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:블런트 쿼터스태프SS": {
+      "output": "블런트 쿼터스태프SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 목재+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:페리도트 링SS": {
+      "output": "페리도트 링SS",
+      "yield": 1,
+      "ingredients": {
+        "세공된 페리도트SS": 1,
+        "특수강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:페리도트 네크리스SS": {
+      "output": "페리도트 네크리스SS",
+      "yield": 1,
+      "ingredients": {
+        "세공된 페리도트SS": 1,
+        "특수강괴": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+    },
+    "craft:비늘 갑옷 투구SS": {
+      "output": "비늘 갑옷 투구SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 상의SS": {
+      "output": "비늘 갑옷 상의SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 옷감+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 장갑SS": {
+      "output": "비늘 갑옷 장갑SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 실크": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 하의SS": {
+      "output": "비늘 갑옷 하의SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 옷감+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:비늘 갑옷 신발SS": {
+      "output": "비늘 갑옷 신발SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 3,
+        "상급 가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 투구SS": {
+      "output": "가죽 갑옷 투구SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽+": 3,
+        "특수강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 상의SS": {
+      "output": "가죽 갑옷 상의SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽+": 4,
+        "상급 옷감+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 장갑SS": {
+      "output": "가죽 갑옷 장갑SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽+": 3,
+        "상급 실크": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 하의SS": {
+      "output": "가죽 갑옷 하의SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽+": 3,
+        "상급 옷감+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:가죽 갑옷 신발SS": {
+      "output": "가죽 갑옷 신발SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 가죽+": 3,
+        "특수강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 투구SS": {
+      "output": "전투복 투구SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감+": 3,
+        "상급 가죽+": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 상의SS": {
+      "output": "전투복 상의SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감+": 4,
+        "특수강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 장갑SS": {
+      "output": "전투복 장갑SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감+": 3,
+        "상급 실크": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 하의SS": {
+      "output": "전투복 하의SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감+": 3,
+        "상급 가죽+": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:전투복 신발SS": {
+      "output": "전투복 신발SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 옷감+": 3,
+        "특수강괴": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+    },
+    "craft:상급 피해 감소 비약": {
+      "output": "상급 피해 감소 비약",
+      "yield": 3,
+      "ingredients": {
+        "피해 감소 비약": 9,
+        "깔끔 버섯 진액": 5,
+        "폐허의 마나석": 1,
+        "연금술 부스러기": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:브로드 소드SS": {
+      "output": "브로드 소드SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 목재+": 2,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:자이언트 블레이드SS": {
+      "output": "자이언트 블레이드SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 목재+": 2,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:커브드 엣지소드SS": {
+      "output": "커브드 엣지소드SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 가죽+": 3,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:런들 대거SS": {
+      "output": "런들 대거SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 가죽+": 3,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:비스트 너클SS": {
+      "output": "비스트 너클SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 가죽+": 3,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:커브드 듀얼소드SS": {
+      "output": "커브드 듀얼소드SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 가죽+": 2,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:커브드 보우SS": {
+      "output": "커브드 보우SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 5,
+        "상급 가죽+": 2,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:켈틱 크로스보우SS": {
+      "output": "켈틱 크로스보우SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 3,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:콤파운드 롱보우SS": {
+      "output": "콤파운드 롱보우SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 5,
+        "상급 가죽+": 2,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:롱 류트SS": {
+      "output": "롱 류트SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 5,
+        "특수강괴": 2,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:스파이크 탬버린SS": {
+      "output": "스파이크 탬버린SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 3,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라운드 하프SS": {
+      "output": "라운드 하프SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 5,
+        "특수강괴": 2,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:커브드 완드SS": {
+      "output": "커브드 완드SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "상급 가죽+": 3,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:해머헤드 케인SS": {
+      "output": "해머헤드 케인SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 목재+": 2,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:프로스트 오브SS": {
+      "output": "프로스트 오브SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 3,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:썬더스톰 코일SS": {
+      "output": "썬더스톰 코일SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 가죽+": 2,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:커브드 힐링 완드SS": {
+      "output": "커브드 힐링 완드SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 3,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:심볼 크로스 스태프SS": {
+      "output": "심볼 크로스 스태프SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 3,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:클래식 쿼터스태프SS": {
+      "output": "클래식 쿼터스태프SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 목재+": 2,
+        "항마석 가루": 20
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:강타 강화 비약": {
+      "output": "강타 강화 비약",
+      "yield": 3,
+      "ingredients": {
+        "블러디 허브": 10,
+        "깔끔 버섯 진액": 3,
+        "장수풍뎅이": 10,
+        "연금술 부스러기": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:연타 강화 비약": {
+      "output": "연타 강화 비약",
+      "yield": 3,
+      "ingredients": {
+        "화살꽃": 10,
+        "깔끔 버섯 진액": 3,
+        "똑딱 반딧불이": 10,
+        "연금술 부스러기": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:광역 강화 비약": {
+      "output": "광역 강화 비약",
+      "yield": 3,
+      "ingredients": {
+        "마나 허브": 10,
+        "깔끔 버섯 진액": 3,
+        "흰꽃나비": 10,
+        "연금술 부스러기": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:한손 도끼SS": {
+      "output": "한손 도끼SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 목재+": 3,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이트 클리버SS": {
+      "output": "그레이트 클리버SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 목재+": 3,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:크레센트 엣지소드SS": {
+      "output": "크레센트 엣지소드SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 가죽+": 4,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:스틸레토SS": {
+      "output": "스틸레토SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 가죽+": 4,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:라운드 너클SS": {
+      "output": "라운드 너클SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 4,
+        "상급 가죽+": 4,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그랜드 듀얼소드SS": {
+      "output": "그랜드 듀얼소드SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 가죽+": 3,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:콤포지트 보우SS": {
+      "output": "콤포지트 보우SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 5,
+        "상급 가죽+": 3,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그랜드 크로스보우SS": {
+      "output": "그랜드 크로스보우SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 4,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그랜드 롱보우SS": {
+      "output": "그랜드 롱보우SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 5,
+        "상급 가죽+": 3,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:플랫 류트SS": {
+      "output": "플랫 류트SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 5,
+        "특수강괴": 3,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:앤티크 차크람SS": {
+      "output": "앤티크 차크람SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 4,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이스 하프SS": {
+      "output": "그레이스 하프SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 5,
+        "특수강괴": 3,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:켈틱 완드SS": {
+      "output": "켈틱 완드SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "상급 가죽+": 4,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:아크스피어 케인SS": {
+      "output": "아크스피어 케인SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 목재+": 3,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:글래시어 오브SS": {
+      "output": "글래시어 오브SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 4,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:마그네틱 코일SS": {
+      "output": "마그네틱 코일SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 가죽+": 3,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:로터스 힐링 완드SS": {
+      "output": "로터스 힐링 완드SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 4,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:홀리윙 스태프SS": {
+      "output": "홀리윙 스태프SS",
+      "yield": 1,
+      "ingredients": {
+        "상급 목재+": 4,
+        "특수강괴": 4,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:디바인 쿼터스태프SS": {
+      "output": "디바인 쿼터스태프SS",
+      "yield": 1,
+      "ingredients": {
+        "특수강괴": 5,
+        "상급 목재+": 3,
+        "항마석 가루": 60,
+        "지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:정교한 약초 괭이": {
+      "output": "정교한 약초 괭이",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 1,
+        "특수강괴": 2,
+        "못": 4,
+        "정교한 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:정교한 낫": {
+      "output": "정교한 낫",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 1,
+        "특수강괴": 2,
+        "못": 4,
+        "정교한 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:정교한 호미": {
+      "output": "정교한 호미",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 1,
+        "특수강괴": 2,
+        "못": 4,
+        "정교한 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:정교한 양털 가위": {
+      "output": "정교한 양털 가위",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 1,
+        "특수강괴": 2,
+        "못": 4,
+        "정교한 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:정교한 벌목 도끼": {
+      "output": "정교한 벌목 도끼",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 1,
+        "특수강괴": 2,
+        "못": 8,
+        "정교한 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:정교한 곡괭이": {
+      "output": "정교한 곡괭이",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 1,
+        "특수강괴": 2,
+        "못": 8,
+        "정교한 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:정교한 곤충 채집망": {
+      "output": "정교한 곤충 채집망",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 1,
+        "상급 목재+": 3,
+        "못": 8,
+        "정교한 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:정교한 낚싯대": {
+      "output": "정교한 낚싯대",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 1,
+        "상급 목재+": 3,
+        "못": 8,
+        "정교한 도구 부품": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+    },
+    "craft:샤와르마": {
+      "output": "샤와르마",
+      "yield": 1,
+      "ingredients": {
+        "담백한 고기": 10,
+        "콩": 12,
+        "밀가루": 3,
+        "양배추": 5,
+        "레몬": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:두부 스테이크": {
+      "output": "두부 스테이크",
+      "yield": 1,
+      "ingredients": {
+        "두부": 5,
+        "파스닙": 6,
+        "마늘": 4,
+        "후추": 3,
+        "식용유": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:두유 빙수": {
+      "output": "두유 빙수",
+      "yield": 1,
+      "ingredients": {
+        "두유": 4,
+        "얼음": 10,
+        "레몬": 2,
+        "설탕": 6,
+        "허브": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:미트 파르미자나": {
+      "output": "미트 파르미자나",
+      "yield": 1,
+      "ingredients": {
+        "담백한 고기": 10,
+        "치즈": 3,
+        "토마토": 1,
+        "후추": 1,
+        "소금": 1
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:두부 국수": {
+      "output": "두부 국수",
+      "yield": 1,
+      "ingredients": {
+        "두부": 5,
+        "물이 든 병": 5,
+        "양파": 5,
+        "무": 1,
+        "소금": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:두유 파스닙 케이크": {
+      "output": "두유 파스닙 케이크",
+      "yield": 1,
+      "ingredients": {
+        "두유": 4,
+        "파스닙": 6,
+        "생크림": 2,
+        "밀가루": 4,
+        "설탕": 9
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:바스타드 소드SS": {
+      "output": "바스타드 소드SS",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 4,
+        "상급 목재+": 3,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:스톤애쉬 블레이드SS": {
+      "output": "스톤애쉬 블레이드SS",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 4,
+        "상급 목재+": 3,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:웨이브 엣지소드SS": {
+      "output": "웨이브 엣지소드SS",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 3,
+        "특수강괴": 1,
+        "상급 가죽+": 4,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:페스카즈SS": {
+      "output": "페스카즈SS",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 3,
+        "특수강괴": 1,
+        "상급 가죽+": 4,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:프라임 너클SS": {
+      "output": "프라임 너클SS",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 3,
+        "특수강괴": 1,
+        "상급 가죽+": 4,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:그레이트 듀얼소드SS": {
+      "output": "그레이트 듀얼소드SS",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 4,
+        "상급 가죽+": 3,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:리인포스드 보우SS": {
+      "output": "리인포스드 보우SS",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 4,
+        "상급 가죽+": 3,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:앤티크 크로스보우SS": {
+      "output": "앤티크 크로스보우SS",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 3,
+        "상급 목재+": 1,
+        "특수강괴": 4,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:헌터클랜 롱보우SS": {
+      "output": "헌터클랜 롱보우SS",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 4,
+        "상급 가죽+": 3,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:깃털 접부채SS": {
+      "output": "깃털 접부채SS",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 3,
+        "상급 목재+": 1,
+        "특수강괴": 4,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:클래식 하프SS": {
+      "output": "클래식 하프SS",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 4,
+        "특수강괴": 3,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:크리스탈 완드SS": {
+      "output": "크리스탈 완드SS",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 3,
+        "상급 목재+": 1,
+        "상급 가죽+": 4,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:파이어플린트 케인SS": {
+      "output": "파이어플린트 케인SS",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 4,
+        "상급 목재+": 3,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:윈터브레스 오브SS": {
+      "output": "윈터브레스 오브SS",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 3,
+        "상급 목재+": 1,
+        "특수강괴": 4,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:크리스탈 힐링 완드SS": {
+      "output": "크리스탈 힐링 완드SS",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 3,
+        "상급 목재+": 1,
+        "특수강괴": 4,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:아크 디바인 스태프SS": {
+      "output": "아크 디바인 스태프SS",
+      "yield": 1,
+      "ingredients": {
+        "최상급 목재": 3,
+        "상급 목재+": 1,
+        "특수강괴": 4,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:앤티크 쿼터스태프SS": {
+      "output": "앤티크 쿼터스태프SS",
+      "yield": 1,
+      "ingredients": {
+        "은합금괴": 4,
+        "상급 목재+": 3,
+        "상급 항마석 가루": 60,
+        "상급 지배의 도안 (무기)": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+    },
+    "craft:흰살생선 뫼니에르": {
+      "output": "흰살생선 뫼니에르",
+      "yield": 1,
+      "ingredients": {
+        "브리흐네 잉어": 5,
+        "은붕어": 3,
+        "감자": 5,
+        "밀가루": 3,
+        "레몬": 5,
+        "소금": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:부야베스": {
+      "output": "부야베스",
+      "yield": 1,
+      "ingredients": {
+        "무지개 송어": 4,
+        "은어": 4,
+        "토마토": 6,
+        "조개": 5,
+        "양파": 2,
+        "마늘": 4
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:고등어와 연어 스테이크": {
+      "output": "고등어와 연어 스테이크",
+      "yield": 1,
+      "ingredients": {
+        "고등어": 5,
+        "연어": 3,
+        "마요네즈": 2,
+        "아스파라거스": 4,
+        "소금": 2,
+        "후추": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:메기 피시 앤 칩스": {
+      "output": "메기 피시 앤 칩스",
+      "yield": 1,
+      "ingredients": {
+        "메기": 6,
+        "감자": 6,
+        "밀가루": 3,
+        "완두콩": 4,
+        "레몬": 2,
+        "소금": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    },
+    "craft:뛰어난 붕대": {
+      "output": "뛰어난 붕대",
+      "yield": 5,
+      "ingredients": {
+        "상급 옷감": 5,
+        "생채기꽃 가루": 6,
+        "불꽃의 결정": 10,
+        "얼음의 결정": 10,
+        "전기의 결정": 10
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+    },
+    "craft:상급 화염 마법 유탄": {
+      "output": "상급 화염 마법 유탄",
+      "yield": 3,
+      "ingredients": {
+        "불꽃의 결정": 9,
+        "상급 마법 유탄 부품": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+    },
+    "craft:상급 번개 마법 유탄": {
+      "output": "상급 번개 마법 유탄",
+      "yield": 3,
+      "ingredients": {
+        "전기의 결정": 9,
+        "상급 마법 유탄 부품": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+    },
+    "craft:상급 바람 마법 유탄": {
+      "output": "상급 바람 마법 유탄",
+      "yield": 3,
+      "ingredients": {
+        "응축된 바람": 9,
+        "상급 마법 유탄 부품": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+    },
+    "craft:상급 산성 마법 유탄": {
+      "output": "상급 산성 마법 유탄",
+      "yield": 3,
+      "ingredients": {
+        "독주머니": 9,
+        "상급 마법 유탄 부품": 3
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+    },
+    "craft:농어 매운탕": {
+      "output": "농어 매운탕",
+      "yield": 1,
+      "ingredients": {
+        "농어": 6,
+        "무": 4,
+        "양파": 6,
+        "물이 든 병": 5,
+        "고춧가루": 4,
+        "후추": 2
+      },
+      "source": "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+    }
+  }
+}

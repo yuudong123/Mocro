@@ -1,0 +1,15 @@
+# 사용자별 설정 및 실행 기록
+workshop/settings.json
+workshop/logs/
+
+# Python 생성 파일
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# 개인 가상환경 및 편집기 설정
+.venv/
+venv/
+.idea/
+.vscode/

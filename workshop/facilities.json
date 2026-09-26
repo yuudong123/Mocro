@@ -1,0 +1,3153 @@
+{
+  "checked": "2026-09-25",
+  "counts": {
+    "alter": {
+      "rows": 91,
+      "mapped": 78
+    },
+    "craft": {
+      "rows": 1834,
+      "mapped": 514
+    }
+  },
+  "items": {
+    "alter:철괴(광석)": {
+      "facility": "금속 가공 시설",
+      "sources": [
+        "user screenshot: metal processing Lv.6"
+      ]
+    },
+    "alter:철괴(철 광석)": {
+      "facility": "금속 가공 시설",
+      "sources": [
+        "user screenshot: metal processing Lv.6"
+      ]
+    },
+    "alter:목재": {
+      "facility": "목재 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+      ]
+    },
+    "alter:목재+": {
+      "facility": "목재 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+      ]
+    },
+    "alter:옷감": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:실크": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:옷감+": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:가죽": {
+      "facility": "가죽 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+      ]
+    },
+    "alter:가죽+": {
+      "facility": "가죽 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+      ]
+    },
+    "alter:새록 버섯 진액": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:튼튼 버섯 가루": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:튼튼 버섯 진액": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:광휘의 결정(유령 반딧불이)": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:마요네즈": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:합금강괴": {
+      "facility": "금속 가공 시설",
+      "sources": [
+        "user screenshot: metal processing Lv.6"
+      ]
+    },
+    "alter:타르": {
+      "facility": "금속 가공 시설",
+      "sources": [
+        "user screenshot: metal processing Lv.6"
+      ]
+    },
+    "alter:상급 목재": {
+      "facility": "목재 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+      ]
+    },
+    "alter:상급 옷감": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:두꺼운 옷감": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:상급 실크": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:상급 가죽": {
+      "facility": "가죽 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+      ]
+    },
+    "alter:새록 버섯 포자": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:튼튼 버섯 포자": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:쑥쑥 버섯 포자": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:쑥쑥 버섯 진액": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:불꽃의 결정(석양나비)": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:아교": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:밀가루": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:치즈": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:특수강괴": {
+      "facility": "금속 가공 시설",
+      "sources": [
+        "user screenshot: metal processing Lv.6"
+      ]
+    },
+    "alter:상급 목재+": {
+      "facility": "목재 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+      ]
+    },
+    "alter:부드러운 목재": {
+      "facility": "목재 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+      ]
+    },
+    "alter:단단한 목재": {
+      "facility": "목재 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+      ]
+    },
+    "alter:상급 옷감+": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:식물 섬유": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:밧줄": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:상급 가죽+": {
+      "facility": "가죽 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+      ]
+    },
+    "alter:숨숨꽃 가루": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:깔끔 버섯 포자": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:깔끔 버섯 진액": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:얼음의 결정(흰얼음풍뎅이)": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:마력 기폭제": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:봉인된 분노의 파편": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:봉인된 망각의 파편": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:봉인된 야성의 파편": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:면": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:생크림": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:은합금괴": {
+      "facility": "금속 가공 시설",
+      "sources": [
+        "user screenshot: metal processing Lv.6"
+      ]
+    },
+    "alter:최상급 목재": {
+      "facility": "목재 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+      ]
+    },
+    "alter:최상급 옷감": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:최상급 실크": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:튼튼한 밧줄": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:최상급 가죽": {
+      "facility": "가죽 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+      ]
+    },
+    "alter:생채기꽃 가루": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:증폭 버섯 포자": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:증폭 버섯 진액": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:전기의 결정(낙엽나방)": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:물에 불린 콩": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:두부": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:두유": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:숙성된 커다란 고기": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:운철괴": {
+      "facility": "금속 가공 시설",
+      "sources": [
+        "user screenshot: metal processing Lv.6"
+      ]
+    },
+    "alter:최상급 목재+": {
+      "facility": "목재 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=125&comeidx=6366"
+      ]
+    },
+    "alter:최상급 옷감+": {
+      "facility": "옷감 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=127&comeidx=6366"
+      ]
+    },
+    "alter:최상급 가죽+": {
+      "facility": "가죽 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=126&comeidx=6366"
+      ]
+    },
+    "alter:진정초 가루": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:솔솔 버섯 포자": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:솔솔 버섯 진액": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:봉인의 결정(황혼잠자리)": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:환영 가루": {
+      "facility": "약품 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=128&comeidx=6366"
+      ]
+    },
+    "alter:물에 불린 쌀": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:밥": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:말린 찻잎": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "alter:발효된 찻잎": {
+      "facility": "식재료 가공 시설",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=129&comeidx=6366"
+      ]
+    },
+    "craft:못": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:숏소드": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이트 소드": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:론 엣지소드": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:플랫 대거": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라이트 너클": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:샤프 듀얼소드": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:숏보우": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라이트 크로스보우": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라이트 롱보우": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:켈틱 류트": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:꽃잎 접부채": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:커브드 하프": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:우드 완드": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라운드헤드 케인": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:스노우 오브": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라운드 코일": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:마블 힐링 완드": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:크리스탈 스태프": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:블런트 쿼터스태프": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:페리도트 링": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:페리도트 네크리스": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 투구": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 상의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 장갑": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 하의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 신발": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 투구": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 상의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 장갑": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 하의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 신발": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 투구": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 상의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 장갑": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 하의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 신발": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:염색약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:달걀프라이": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:삶은 달걀": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:구운 고기": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:통감자구이": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:사과 주스": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:마요네즈 고기볶음": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:감자 샐러드": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:사과 샐러드": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:티어 가넷 링": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:티어 가넷 네크리스": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:약초 괭이": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:낫": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:호미": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:양털 가위": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:벌목 도끼": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:곡괭이": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:곤충 채집망": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:낚싯대": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:자동회복 물약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 회복 물약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:숙련 캠프파이어 키트": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:한손 도끼": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이트 클리버": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:크레센트 엣지소드": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:스틸레토": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라운드 너클": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그랜드 듀얼소드": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:콤포지트 보우": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그랜드 크로스보우": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그랜드 롱보우": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:플랫 류트": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:앤티크 차크람": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이스 하프": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:켈틱 완드": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:아크스피어 케인": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:글래시어 오브": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:마그네틱 코일": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:로터스 힐링 완드": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:홀리윙 스태프": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:디바인 쿼터스태프": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:블루 스피넬 링": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:블루 스피넬 펜던트": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 투구": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 상의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 장갑": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 하의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 신발": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 투구": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 상의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 장갑": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 하의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 신발": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 투구": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 상의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 장갑": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 하의": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 신발": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:짜먹는 간식": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366",
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:치명타 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:궁극기 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 자동회복 물약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:내열 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:방한 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:절연 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:축복의 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:봉인의 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:샤인 지르콘 링": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:샤인 지르콘 네크리스": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:포크 인 밀크": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:야채볶음": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:콘치즈": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:치즈 퐁뒤": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:리코타 치즈 샐러드": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:사과 수플레": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:전문 캠프파이어 키트": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:숏소드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이트 소드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:론 엣지소드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:플랫 대거S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라이트 너클S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:샤프 듀얼소드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:숏보우S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라이트 크로스보우S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라이트 롱보우S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:켈틱 류트S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:꽃잎 접부채S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:커브드 하프S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:우드 완드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라운드헤드 케인S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:스노우 오브S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라운드 코일S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:마블 힐링 완드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:크리스탈 스태프S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:블런트 쿼터스태프S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:페리도트 링S": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:페리도트 네크리스S": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 투구S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 상의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 장갑S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 하의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 신발S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 투구S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 상의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 장갑S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 하의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 신발S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 투구S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 상의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 장갑S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 하의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 신발S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:피해 감소 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:이동 속도 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:티어 가넷 링S": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:티어 가넷 네크리스S": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:개량된 약초 괭이": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:개량된 낫": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:개량된 호미": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:개량된 양털 가위": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:개량된 벌목 도끼": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:개량된 곡괭이": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:개량된 곤충 채집망": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:개량된 낚싯대": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:최상급 회복 물약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:한손 도끼S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이트 클리버S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:크레센트 엣지소드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:스틸레토S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라운드 너클S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그랜드 듀얼소드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:콤포지트 보우S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그랜드 크로스보우S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그랜드 롱보우S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:플랫 류트S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:앤티크 차크람S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이스 하프S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:켈틱 완드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:아크스피어 케인S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:글래시어 오브S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:마그네틱 코일S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:로터스 힐링 완드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:홀리윙 스태프S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:디바인 쿼터스태프S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:블루 스피넬 링S": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:블루 스피넬 펜던트S": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 투구S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 상의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 장갑S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 하의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 신발S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 투구S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 상의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 장갑S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 하의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 신발S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 투구S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 상의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 장갑S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 하의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 신발S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:상급 치명타 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 궁극기 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:최상급 자동회복 물약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 내열 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 방한 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 절연 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 축복의 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 봉인의 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:바스타드 소드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:스톤애쉬 블레이드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:웨이브 엣지소드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:페스카즈S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:프라임 너클S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이트 듀얼소드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:리인포스드 보우S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:앤티크 크로스보우S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:헌터클랜 롱보우S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:깃털 접부채S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:클래식 하프S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:크리스탈 완드S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:파이어플린트 케인S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:윈터브레스 오브S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:아크 디바인 스태프S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:앤티크 쿼터스태프S": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:샤인 지르콘 링S": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:샤인 지르콘 네크리스S": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:마법 유탄 부품": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:화염 마법 유탄": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:번개 마법 유탄": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:바람 마법 유탄": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:산성 마법 유탄": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:판금 갑옷 투구S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:판금 갑옷 상의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:판금 갑옷 장갑S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:판금 갑옷 하의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:판금 갑옷 신발S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:열처리 가죽 갑옷 투구S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:열처리 가죽 갑옷 상의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:열처리 가죽 갑옷 장갑S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:열처리 가죽 갑옷 하의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:열처리 가죽 갑옷 신발S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강화된 전투복 투구S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강화된 전투복 상의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강화된 전투복 장갑S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강화된 전투복 하의S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강화된 전투복 신발S": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:뛰어난 회복 물약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:조개찜": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:감자수프": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:얼음 딸기주스": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:크림소스 스테이크": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:알리오 올리오": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:사과 생크림케이크": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:숏소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이트 소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:론 엣지소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:플랫 대거SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라이트 너클SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:샤프 듀얼소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:숏보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라이트 크로스보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라이트 롱보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:켈틱 류트SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:꽃잎 접부채SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:커브드 하프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:우드 완드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라운드헤드 케인SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:스노우 오브SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라운드 코일SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:마블 힐링 완드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:크리스탈 스태프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:블런트 쿼터스태프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:페리도트 링SS": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:페리도트 네크리스SS": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:비늘 갑옷 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:가죽 갑옷 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:전투복 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:상급 피해 감소 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:브로드 소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:자이언트 블레이드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:커브드 엣지소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:런들 대거SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:비스트 너클SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:커브드 듀얼소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:커브드 보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:켈틱 크로스보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:콤파운드 롱보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:롱 류트SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:스파이크 탬버린SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라운드 하프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:커브드 완드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:해머헤드 케인SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:프로스트 오브SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:썬더스톰 코일SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:커브드 힐링 완드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:심볼 크로스 스태프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:클래식 쿼터스태프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:티어 가넷 링SS": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:티어 가넷 네크리스SS": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:철판 갑옷 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:철판 갑옷 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:철판 갑옷 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:철판 갑옷 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:철판 갑옷 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:징박은 가죽 갑옷 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:징박은 가죽 갑옷 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:징박은 가죽 갑옷 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:징박은 가죽 갑옷 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:징박은 가죽 갑옷 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:누비 전투복 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:누비 전투복 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:누비 전투복 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:누비 전투복 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:누비 전투복 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강타 강화 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:연타 강화 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:광역 강화 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:한손 도끼SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이트 클리버SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:크레센트 엣지소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:스틸레토SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:라운드 너클SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그랜드 듀얼소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:콤포지트 보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그랜드 크로스보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그랜드 롱보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:플랫 류트SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:앤티크 차크람SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이스 하프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:켈틱 완드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:아크스피어 케인SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:글래시어 오브SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:마그네틱 코일SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:로터스 힐링 완드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:홀리윙 스태프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:디바인 쿼터스태프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:블루 스피넬 링SS": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:블루 스피넬 펜던트SS": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:사슬 갑옷 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 가죽 갑옷 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:두꺼운 전투복 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:뛰어난 자동회복 물약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:정교한 약초 괭이": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:정교한 낫": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:정교한 호미": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:정교한 양털 가위": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:정교한 벌목 도끼": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:정교한 곡괭이": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:정교한 곤충 채집망": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:정교한 낚싯대": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=133&comeidx=6366"
+      ]
+    },
+    "craft:샤와르마": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:두부 스테이크": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:두유 빙수": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:미트 파르미자나": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:두부 국수": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:두유 파스닙 케이크": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:혼합 강화 비약(산사태)": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:혼합 강화 비약(폭풍우)": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:혼합 강화 비약(성난 파도)": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:바스타드 소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:스톤애쉬 블레이드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:웨이브 엣지소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:페스카즈SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:프라임 너클SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:그레이트 듀얼소드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:리인포스드 보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:앤티크 크로스보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:헌터클랜 롱보우SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:티어드롭 류트SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:깃털 접부채SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:클래식 하프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:크리스탈 완드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:파이어플린트 케인SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:윈터브레스 오브SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:크리스탈 힐링 완드SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:아크 디바인 스태프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:앤티크 쿼터스태프SS": {
+      "facility": "무기 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=130&comeidx=6366"
+      ]
+    },
+    "craft:샤인 지르콘 링SS": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:샤인 지르콘 네크리스SS": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=132&comeidx=6366"
+      ]
+    },
+    "craft:판금 갑옷 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:판금 갑옷 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:판금 갑옷 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:판금 갑옷 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:판금 갑옷 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:열처리 가죽 갑옷 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:열처리 가죽 갑옷 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:열처리 가죽 갑옷 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:열처리 가죽 갑옷 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:열처리 가죽 갑옷 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강화된 전투복 투구SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강화된 전투복 상의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강화된 전투복 장갑SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강화된 전투복 하의SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:강화된 전투복 신발SS": {
+      "facility": "방어구 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=131&comeidx=6366"
+      ]
+    },
+    "craft:원형 나무 소환 의자 상자(브라운)": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:원형 나무 소환 의자 상자(베이지)": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:흰살생선 뫼니에르": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:부야베스": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:고등어와 연어 스테이크": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:메기 피시 앤 칩스": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:뛰어난 붕대": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 강타 강화 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 연타 강화 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 광역 강화 비약": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 혼합 강화 비약(산사태)": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 혼합 강화 비약(폭풍우)": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:상급 혼합 강화 비약(성난 파도)": {
+      "facility": "약품 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=135&comeidx=6366"
+      ]
+    },
+    "craft:클래식 나무 소환 의자 상자(브라운)": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:클래식 나무 소환 의자 상자(레드)": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:클래식 나무 소환 의자 상자(블루)": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:상급 마법 유탄 부품": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:상급 화염 마법 유탄": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:상급 번개 마법 유탄": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:상급 바람 마법 유탄": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:상급 산성 마법 유탄": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:농어 매운탕": {
+      "facility": "음식 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=134&comeidx=6366"
+      ]
+    },
+    "craft:달콤한 흔들흔들 소환 의자 상자": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:편안한 흔들흔들 소환 의자 상자": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "craft:상쾌한 흔들흔들 소환 의자 상자": {
+      "facility": "다목적 제작대",
+      "sources": [
+        "https://mabimo.inven.co.kr/dataninfo/craft/?boardidx=466&comeidx=6366"
+      ]
+    },
+    "alter:강철괴": {
+      "facility": "금속 가공 시설",
+      "sources": [
+        "user screenshot: metal processing Lv.6"
+      ]
+    },
+    "alter:백금강괴": {
+      "facility": "금속 가공 시설",
+      "sources": [
+        "user screenshot: metal processing Lv.6"
+      ]
+    },
+    "craft:데코 트로피 상자(동)": {
+      "facility": "데코 제작대",
+      "sources": [
+        "https://mabinogimobile.nexon.com/News/Update/3521707"
+      ]
+    },
+    "craft:데코 트로피 상자(은)": {
+      "facility": "데코 제작대",
+      "sources": [
+        "https://mabinogimobile.nexon.com/News/Update/3521707"
+      ]
+    },
+    "craft:데코 트로피 상자(금)": {
+      "facility": "데코 제작대",
+      "sources": [
+        "https://mabinogimobile.nexon.com/News/Update/3521707"
+      ]
+    }
+  },
+  "metal_order": [
+    "철괴(광석)",
+    "철괴(철 광석)",
+    "강철괴",
+    "합금강괴",
+    "타르",
+    "특수강괴",
+    "은합금괴",
+    "운철괴",
+    "백금강괴"
+  ]
+}
