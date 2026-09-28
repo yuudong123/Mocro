@@ -111,6 +111,7 @@ class Scheduler:
         self.craft_limits = {}
         self.facility_aliases = {}
         self.recipe_facilities = {}
+        self.untracked_outputs = set()
         self.current_facility = None
         self.no_progress = 0
         self.last_wait = None
@@ -279,7 +280,12 @@ class Scheduler:
             self.warn_once(('missing', key), f'{exact}: 전체 레시피 미등록 · 확인되는 부족 재료를 계획에 추가합니다.')
         facility = facility_for(kind, exact)
         if facility in ('무기 제작대', '방어구 제작대'):
-            raise self.Halt(f'{exact}: 장비는 CLI 가방 수량 조회가 지원되지 않아 최종 보유량을 검증할 수 없습니다.')
+            # Equipment is deliberately absent from get_items.  Treat its goal
+            # as the amount to make in this run and count only acknowledged
+            # execute_crafting completions.
+            self.untracked_outputs.add(output)
+            self.warn_once(('untracked', output),
+                           f'{output}: 장비 보유량은 조회할 수 없어 이번 실행의 신규 제작 수량으로 진행합니다.')
         if kind == 'alter':
             live = next((w.get('FacilityName') for w in self.works
                          if w.get('DisplayName') == exact and w.get('FacilityName')), None)
@@ -338,6 +344,8 @@ class Scheduler:
                 output = product_name(exact)
                 pending[output] = pending.get(output, 0) + int(row.get('ProducedPerWork', 1))
         self.recipe_cache = {}
+        for name in self.untracked_outputs:
+            bag[name] = self.engine.untracked_produced.get(name, 0)
         self.bag, self.storage, self.pending = bag, storage, pending
         self.log('DEBUG', 'scheduler.snapshot', bag=bag, storage=storage,
                  works=self.works, pending=pending, groups={k: len(v) for k, v in self.groups.items()})
@@ -583,6 +591,12 @@ class Scheduler:
                     engine.emit(f'{recipe.facility}: 제작 요청 상한 {limit}회 반영')
                     self.snapshot()
                     continue
+                if recipe.output in self.untracked_outputs:
+                    made = count * recipe.produced
+                    engine.untracked_produced[recipe.output] = (
+                        engine.untracked_produced.get(recipe.output, 0) + made)
+                    self.log('INFO', 'craft.untracked_progress', output=recipe.output,
+                             made=made, total=engine.untracked_produced[recipe.output])
                 self.current_facility = recipe.facility
                 last_action_state = state
                 self.snapshot()

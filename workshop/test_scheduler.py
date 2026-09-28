@@ -173,6 +173,28 @@ class Scheduling(unittest.TestCase):
         self.assertEqual(game.actions, [('craft', '시험품', 5)])
         self.assertEqual(game.bag['시험품'], 5)
 
+    def test_equipment_uses_acknowledged_crafts_when_inventory_omits_it(self):
+        name = '비늘 갑옷 상의'
+
+        class EquipmentGame(Game):
+            def call(self, command, body=None):
+                result = super().call(command, body)
+                if command == 'get_items':
+                    return [row for row in result if row['DisplayName'] != name]
+                return result
+
+        game = EquipmentGame({'철괴': 6},
+                             {name: ('craft', 1, {'철괴': 3}, '방어구 제작대')})
+        messages = []
+        engine = SimEngine(game, messages.append, Clock(game), budget=10000,
+                           known_recipes=game.recipe_data())
+        engine.run({name: 2})
+
+        self.assertEqual(game.actions, [('craft', name, 2)])
+        self.assertEqual(game.bag[name], 2)
+        self.assertEqual(engine.untracked_produced[name], 2)
+        self.assertTrue(any('신규 제작 수량' in message for message in messages))
+
     def test_partial_queue_gathers_missing_logs_before_bulk_resin(self):
         game = Game({'최상급 통나무': 7, '나무 진액': 319},
                     {'목재': ('alter', 3, {'최상급 통나무': 20, '나무 진액': 16}, WOOD)})

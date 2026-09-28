@@ -152,6 +152,9 @@ class Engine:
         self.reconnect_seconds = 15
         self.gather_probe_seconds = 15
         self.resin_empty_batches = 0
+        # get_items intentionally omits equipment.  Keep successful equipment
+        # crafts here so the scheduler can still finish the current run.
+        self.untracked_produced = {}
         self.on_charge = None
         try:
             self.known_recipes = json.loads(RECIPE_DATA.read_text(encoding='utf-8'))['recipes']
