@@ -13,3 +13,7 @@ __pycache__/
 venv/
 .idea/
 .vscode/
+
+# 던전 기록기 출력
+dungeon/recordings/
+dungeon/logs/

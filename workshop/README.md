@@ -1,6 +1,6 @@
 # 마비노기 모바일 생활 도우미
 
-상위 폴더의 `start.bat`으로 PySide6 화면을 실행합니다. Python·설정·데이터·문서는 모두 `workshop` 폴더 안에 있습니다. Python 3.11 이상이 필요하며, `workshop` 폴더에서 `python -m pip install -r requirements.txt`로 의존성을 설치합니다. 게임에 입장한 뒤 품목과 수량을 담고 시작합니다. 게임 조작은 CLI만 사용하며 OCR·화면 좌표 클릭은 사용하지 않습니다.
+상위 폴더의 `생활.bat`으로 PySide6 화면을 실행합니다. Python·설정·데이터·문서는 모두 `workshop` 폴더 안에 있습니다. Python 3.11 이상이 필요하며, `workshop` 폴더에서 `python -m pip install -r requirements.txt`로 의존성을 설치합니다. 게임에 입장한 뒤 품목과 수량을 담고 시작합니다. 게임 조작은 CLI만 사용하며 OCR·화면 좌표 클릭은 사용하지 않습니다.
 
 앱 아이콘은 `assets/workshop-128.png`(128×128)와 `assets/workshop.ico`에 있습니다. 창과 작업 표시줄에 ICO를 적용합니다. BAT 파일 자체의 탐색기 아이콘은 Windows 기본 아이콘이며, 필요하면 바로가기 아이콘으로 ICO를 선택할 수 있습니다.
 
