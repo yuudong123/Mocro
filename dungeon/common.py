@@ -148,10 +148,14 @@ class Game:
 
     def capture(self):
         _, _, width, height = client_rect(self.hwnd)
-        image = print_window(self.hwnd, width, height)
-        if image is None:
-            raise RuntimeError('게임 화면을 캡처하지 못했습니다. 관리자 권한으로 실행했는지 확인하세요.')
-        return image
+        # 로딩 화면은 완전히 검어서 print_window가 None을 준다. 잠깐 다시 찍어 보고 그래도 검으면
+        # 검은 화면으로 본다(관리자 권한은 시작할 때 확인한다).
+        for _ in range(3):
+            image = print_window(self.hwnd, width, height)
+            if image is not None:
+                return image
+            time.sleep(0.3)
+        return Image.new('RGB', (width, height))
 
     @staticmethod
     def has_template(name):

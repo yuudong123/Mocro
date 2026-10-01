@@ -97,6 +97,7 @@ class Macro:
         self.max_runs, self.use_wings, self.start = max_runs, use_wings, start
         self.runs = 0
         self.done_slots = set()  # 이번 실행에서 끝낸 캐릭터 카드 번호
+        self.done_ids = set()    # 끝낸 캐릭터의 서버·직업·타이틀(카드와 다르게 접속됐는지 확인)
 
     # ---- 상태 확인 ----
     def check(self):
@@ -388,6 +389,8 @@ class Macro:
 
     def switch_character(self):
         """Mark the current character done and log in to the next level-100 one; False if none is left."""
+        before = self.me()
+        self.done_ids.add(before['id'])
         self.to_character_select()
         self.game.scroll(400, 300, 10)  # 목록 맨 위로
         self.wait(1)
@@ -405,20 +408,36 @@ class Macro:
                    lambda: self.cards(self.game.capture())[card['slot']]['selected'],
                    lambda: self.game.click(*card['center']), every=2, first=True)
         self.done_slots.add(card['slot'])
+        self.log(f'{card["slot"] + 1}번 카드 선택 · 화면 {self.screenshot("select")}')
         # 접속하면 CLI가 응답한다. 선택 화면이 그대로면 게임 시작을 다시 누른다.
         self.until('캐릭터 접속', self.in_game,
                    lambda: self.game.find('select_title') and self.game.click(*GAME_START), every=8, first=True)
         self.wait(3)
-        info = cli('get_my_info')
-        level = info.get('Level') if isinstance(info, dict) else None
-        level = level.get('Value') if isinstance(level, dict) else level
-        job = info.get('EnabledCombatJobDisplayName') if isinstance(info, dict) else None
-        job = job.get('Value') if isinstance(job, dict) else job
-        self.log(f'{card["slot"] + 1}번 캐릭터 접속 · {job} {level}레벨 · 재화 {currencies()}')
-        if level != 100:
+        now = self.me()
+        self.log(f'{card["slot"] + 1}번 캐릭터 접속 · {now["realm"]} {now["job"]} {now["level"]}레벨 · '
+                 f'재화 {currencies()}')
+        if now['id'] in self.done_ids:
+            self.log(f'이미 끝낸 캐릭터로 접속됨({now["realm"]} {now["job"]}) · 다음 캐릭터로 넘어갑니다.')
+            return self.switch_character()
+        if now['level'] != 100:
             self.log('100레벨이 아니라 건너뜁니다.')
             return self.switch_character()
         return True
+
+    def me(self):
+        """Who is logged in: level, job, realm and an id to tell characters apart (CLI has no name)."""
+        def read():
+            i = cli('get_my_info')
+            return i if isinstance(i, dict) and 'error' not in i and i.get('Level') is not None else None
+        info = self.wait_for('캐릭터 정보', read, 60, interval=1)
+
+        def value(key):
+            v = info.get(key)
+            return v.get('Value') if isinstance(v, dict) else v
+        out = {'level': value('Level'), 'job': value('EnabledCombatJobDisplayName'),
+               'realm': value('RealmName'), 'title': value('Title')}
+        out['id'] = (out['realm'], out['job'], out['title'])
+        return out
 
     def next_route(self, route):
         nxt = self.other(route)
