@@ -110,6 +110,7 @@ class Macro:
         self.slot = None         # 지금 캐릭터의 카드 번호(0부터). 모르면 선택 화면에서 알아낸다
         self.ident = None
         self.done_ids = set()    # 이번 실행에서 끝낸 캐릭터(카드와 다르게 접속됐는지 확인)
+        self.map_opened = False  # 이번 이동에서 M으로 지도를 열었다
         self.skip_slots = set()  # 100레벨 표시였지만 접속해 보니 아니었던 카드
 
     # ---- 상태 확인 ----
@@ -271,20 +272,26 @@ class Macro:
                    for name, region in HUD_ANCHORS.items())
 
     def map_open(self, image=None):
-        """지도 왼쪽 위 "울라 대륙"이 보이면 지도가 열린 것이다.
+        """지도가 열려 있다.
 
-        뒤 배경이 지도 무늬라 지도를 옮기면 달라지므로 밝은 글자 픽셀만 비교한다.
+        이번 이동에서 M으로 지도를 열었고 필드 표시(ESC·Space·Ctrl+Z)가 모두 가려져 있으면 열린 것으로 본다.
+        지도 왼쪽 위 "울라 대륙"도 보지만 보조로만 쓴다: 흰 글자라 지도 배경이 밝은 곳(눈밭 등)에서는
+        어떤 방식으로도 알아보기 어렵다.
         """
         image = image if image is not None else self.game.capture()
-        left, top, right, bottom = CRUMB_REGION
+        if self.map_opened and not self.hud(image):
+            return True
+        return self.crumb(image)
 
-        def bright(a):
-            return (cv2.cvtColor(np.asarray(a), cv2.COLOR_RGB2GRAY) > 200).astype(np.float32)
-        frame = bright(image.crop((left, top, right, bottom)))
-        needle = bright(Image.open(TEMPLATES / 'map_crumb.png').convert('RGB'))
-        if frame.max() == 0:
-            return False
-        return cv2.minMaxLoc(cv2.matchTemplate(frame, needle, cv2.TM_CCOEFF_NORMED))[1] >= 0.7
+    def crumb(self, image):
+        """지도 왼쪽 위 "울라 대륙". 밝은 픽셀 비교와 주변보다 밝은 획 비교 중 하나라도 맞으면."""
+        left, top, right, bottom = CRUMB_REGION
+        frame = cv2.cvtColor(np.asarray(image.crop((left, top, right, bottom)).convert('RGB')), cv2.COLOR_RGB2GRAY)
+        needle = cv2.cvtColor(np.asarray(Image.open(TEMPLATES / 'map_crumb.png').convert('RGB')), cv2.COLOR_RGB2GRAY)
+        frame, needle = (frame > 200).astype(np.float32), (needle > 200).astype(np.float32)
+        if frame.max() > 0 and cv2.minMaxLoc(cv2.matchTemplate(frame, needle, cv2.TM_CCOEFF_NORMED))[1] >= 0.7:
+            return True
+        return bool(self.find_text('map_crumb', image, region=CRUMB_REGION, normalize=True))
 
     def wait_for(self, what, predicate, timeout, interval=0.7):
         deadline = time.monotonic() + timeout
@@ -693,28 +700,25 @@ class Macro:
         return self.wait_arrival(route)
 
     def open_map(self):
-        """M으로 지도를 연다. 지도가 열리면 필드 HUD("ESC")가 가려진다.
+        """M으로 지도를 연다. 지도가 열리면 필드 표시(ESC·Space·Ctrl+Z)가 모두 가려진다.
 
-        알림 창에 M이 먹히지 않으면 다시 누른다. HUD가 가려졌는데 "울라 대륙"이 안 보인다고 ESC로
-        닫으면, "울라 대륙" 인식이 빗나갔을 때 지도를 열자마자 닫게 되므로 그러지 않는다.
+        알림 창에 M이 먹히지 않으면 필드 표시가 그대로 보이므로 다시 누른다.
+        이미 연 지도는 M을 또 눌러 닫지 않는다.
         """
         if self.map_open():
             return
-        if self.map_opened and not self.hud():
-            return  # 이번 이동에서 연 지도가 그대로 있다("울라 대륙"을 못 알아봐도 M을 또 눌러 닫지 않는다)
         if not self.hud() and not getattr(self, 'hud_reported', False):
-            # 필드 화면인데 "ESC"를 못 알아보면 M을 다시 누를 때를 판단할 수 없다. 원인을 볼 수 있게 남긴다.
+            # 필드인데 필드 표시를 못 알아보면 M이 먹혔는지 판단할 수 없다. 원인을 볼 수 있게 남긴다.
             self.hud_reported = True
-            self.log(f'필드 화면 "ESC" 표시를 확인하지 못함 · 화면 {self.screenshot("hud")}')
-        # "ESC" 인식과 상관없이 한 번은 누른다. 다시 누르는 것만 "ESC"가 보일 때(M이 먹히지 않았을 때) 한다.
+            self.log(f'필드 표시(ESC·Space·Ctrl+Z)를 확인하지 못함 · 화면 {self.screenshot("hud")}')
         self.game.key(VK_M)
         self.wait(1.5)
         self.until('지도 열기', lambda: not self.hud(), lambda: self.hud() and self.game.key(VK_M), every=5)
         self.map_opened = True
         self.wait(1)
-        if not self.map_open() and not getattr(self, 'crumb_reported', False):
-            self.crumb_reported = True
-            self.log(f'지도 왼쪽 위 "울라 대륙"을 확인하지 못함(왼쪽 위 클릭·지도 옮기기는 하지 않음) · '
+        if not self.crumb(self.game.capture()) and not getattr(self, 'crumb_reported', False):
+            self.crumb_reported = True  # 진행에는 지장 없다. 템플릿을 실제 화면으로 고칠 수 있게 남긴다
+            self.log(f'지도 왼쪽 위 "울라 대륙"은 못 알아봄(필드 표시가 가려져 지도로 보고 진행) · '
                      f'화면 {self.screenshot("map")}')
 
     def pick_on_map(self, route, space):
