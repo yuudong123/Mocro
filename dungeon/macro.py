@@ -404,7 +404,7 @@ class Macro:
         """ESC 메뉴 → 게임 종료 → 캐릭터 선택 화면으로. 로딩 중(검은 화면)에는 아무것도 누르지 않는다."""
         def step():
             image = self.game.capture()
-            button = self.game.find('menu_quit', image, region=MENU_QUIT_REGION)
+            button = self.find_text('menu_quit', image, region=MENU_QUIT_REGION)
             if self.game.find('quit_title', image):
                 self.game.click(*TO_SELECT)
             elif button:
@@ -531,6 +531,26 @@ class Macro:
         """주변보다 확실히 밝은 픽셀(글자)만 1로. 반투명 버튼 뒤 배경이 달라도 글자 모양은 같다."""
         gray = cv2.cvtColor(np.asarray(image.convert('RGB')), cv2.COLOR_RGB2GRAY).astype(np.int16)
         return ((gray - cv2.blur(gray, (15, 15))) > 35).astype(np.float32)
+
+    def find_text(self, name, image=None, region=None, threshold=0.7):
+        """Like Game.find but compares only the bright strokes (text, icons) of the template.
+
+        반투명 창(ESC 메뉴 등)은 뒤 게임 화면이 비쳐 일반 비교로는 일치도가 들쭉날쭉하다.
+        """
+        if not hasattr(self, 'text_needles'):
+            self.text_needles = {}
+        if name not in self.text_needles:
+            self.text_needles[name] = self.text_mask(Image.open(TEMPLATES / f'{name}.png'))
+        needle = self.text_needles[name]
+        image = image if image is not None else self.game.capture()
+        left, top, right, bottom = region or (0, 0, *image.size)
+        frame = self.text_mask(image.crop((left, top, right, bottom)))
+        if frame.max() == 0 or frame.shape[0] < needle.shape[0] or frame.shape[1] < needle.shape[1]:
+            return None
+        _, score, _, (x, y) = cv2.minMaxLoc(cv2.matchTemplate(frame, needle, cv2.TM_CCOEFF_NORMED))
+        if score < threshold:
+            return None
+        return left + x + needle.shape[1] // 2, top + y + needle.shape[0] // 2
 
     def skip_scene(self, image=None):
         """Press any "… 넘기기" button (장면·대화·이야기) at the top right.
