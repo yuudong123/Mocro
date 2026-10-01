@@ -13,13 +13,14 @@ from dataclasses import dataclass, field
 from datetime import datetime
 
 import win32con
+from PIL import ImageStat
 from pynput import keyboard
 
 from common import (EXPECTED_SIZE, ROOT, TEMPLATES, Game, cli, currencies, find_game, is_admin,
                     relaunch_as_admin, summarize_activity, summarize_env)
 
 LOGS = ROOT / 'logs'
-VK_M, VK_T, VK_ESC, VK_SPACE = 0x4D, 0x54, win32con.VK_ESCAPE, win32con.VK_SPACE
+VK_I, VK_M, VK_T, VK_ESC, VK_SPACE = 0x49, 0x4D, 0x54, win32con.VK_ESCAPE, win32con.VK_SPACE
 SKIP_REGION = (600, 0, 800, 60)  # 오른쪽 위 "장면 넘기기"
 CLEAR_TOUCH = (600, 300)        # 클리어 후 "화면을 터치해 주세요"
 QUEST_TRACKER = (764, 138)      # 자동 진행이 안 켜질 때 누르는 퀘스트 추적 제목
@@ -28,8 +29,16 @@ DOUBLE_REGION = (230, 290, 360, 350)
 MAP_CONTINENT = (55, 24)        # 지도 왼쪽 위 "울라 대륙": 대륙 지도로 나간다
 MAP_EAST, MAP_SOUTH = (46, 570), (111, 570)  # 이멘마하 지도 왼쪽 아래 동부/남부 탭
 MAP_LIST_REGION = (0, 380, 160, 560)         # 지도 왼쪽 던전 목록
-# 가방 무게가 한도를 넘으면 자동 진행이 멈춘다. 한 판 전리품만큼 여유를 두고 입장을 멈춘다.
+# 가방 무게가 한도를 넘으면 자동 진행이 멈춘다. 한 판 전리품만큼 여유를 두고 가방을 정리한다.
 WEIGHT_LIMIT = 0.98
+TIDY_BUTTON = (735, 509)        # 가방 오른쪽 아래 무게 옆 "정리"
+# "간단히 정리하기" 창의 항목 체크 표시. 간단한 정리(장비 분해·재료 판매)만 켠다.
+TIDY_OPTIONS = {'간단한 정리': (277, 313), '무거운 재료': (419, 313),
+                '미스틱 다이스': (277, 392), '확실한 정리': (419, 392)}
+TIDY_KEEP = '간단한 정리'
+TIDY_START = (455, 539)         # "N개 정리하기"
+TIDY_CONFIRM = (400, 563)       # "정리 대상"의 정리하기, "정리 완료"의 확인
+BAG_CLOSE = (770, 18)
 
 
 @dataclass
@@ -132,6 +141,15 @@ class Macro:
         return (f'가방 무게 {current:.0f}/{maximum:.0f} ({current / maximum:.1%}) · 여유 부족. '
                 '보관함에 옮기거나 정리한 뒤 다시 실행하세요.')
 
+    def make_room(self, limit=WEIGHT_LIMIT):
+        """Tidy the bag when it is nearly full; Stop if that did not free enough weight."""
+        if not self.overweight(limit):
+            return
+        self.tidy_bag()
+        heavy = self.overweight(limit)
+        if heavy:
+            raise Stop(f'가방 정리 후에도 {heavy}')
+
     def route_in(self, env):
         for route in ROUTES:
             if (env.get('space') or '').startswith(route.dungeon_space):
@@ -154,6 +172,44 @@ class Macro:
             return path
         except Exception as error:  # noqa: BLE001 - best effort diagnostics
             self.log(f'스크린샷 실패: {error}')
+
+    def tidy_checked(self, spot, image):
+        # 켜진 항목은 주황 원(R-B 약 +120), 꺼진 항목은 회색(약 -20)이다.
+        x, y = spot
+        r, _, b = ImageStat.Stat(image.crop((x - 8, y - 8, x + 8, y + 8))).mean
+        return r - b > 60
+
+    def tidy_bag(self):
+        """가방(I)의 "간단히 정리하기"로 장비를 분해하고 재료를 판다. 무거운 재료·미스틱 다이스는 끈다."""
+        before, maximum = self.weight()
+        self.log(f'가방 무게 {before:.0f}/{maximum:.0f} · 간단히 정리하기')
+        self.game.key(VK_I)
+        # 무게를 넘긴 상태에서는 가방을 열면 정리 창이 바로 뜬다. 안 뜨면 "정리"를 누른다.
+        try:
+            self.wait_for('정리 창', lambda: self.game.find('tidy_title'), 3)
+        except Stop:
+            self.check()
+            self.game.click(*TIDY_BUTTON)
+            self.wait_for('정리 창', lambda: self.game.find('tidy_title'), 5)
+        for name, spot in TIDY_OPTIONS.items():
+            want = name == TIDY_KEEP
+            if self.tidy_checked(spot, self.game.capture()) != want:
+                self.game.click(*spot)
+                self.wait(0.6)
+                if self.tidy_checked(spot, self.game.capture()) != want:
+                    raise Stop(f'정리 항목 "{name}"을 {"켜지" if want else "끄지"} 못했습니다.')
+        self.game.click(*TIDY_START)
+        self.wait_for('정리 대상 화면', lambda: self.game.find('tidy_targets'), 10)
+        self.wait(0.8)  # 화면이 서서히 나타나는 동안에는 버튼이 눌리지 않는다
+        self.game.click(*TIDY_CONFIRM)
+        self.wait_for('정리 완료 화면', lambda: self.game.find('tidy_done'), 30)
+        self.wait(0.8)
+        self.game.click(*TIDY_CONFIRM)
+        self.wait(1.5)
+        self.game.click(*BAG_CLOSE)
+        self.wait(1.5)
+        after, _ = self.weight()
+        self.log(f'가방 정리 완료 · 무게 {before:.0f} → {after:.0f}')
 
     def wait_for(self, what, predicate, timeout, interval=0.7):
         deadline = time.monotonic() + timeout
@@ -216,10 +272,9 @@ class Macro:
                 if self.max_runs and self.runs >= self.max_runs:
                     self.leave_reward()
                     raise Stop(f'목표 {self.max_runs}회 완료')
-                heavy = self.overweight()
-                if heavy:
-                    self.leave_reward()
-                    raise Stop(heavy)
+                if self.overweight():
+                    self.leave_reward()  # 밖에서 가방을 정리하고 다시 들어간다
+                    continue
                 if self.affordable(route):
                     self.game.click(*self.game.find('reward_retry'))
                     self.confirm_entry(route)
@@ -234,9 +289,7 @@ class Macro:
                 self.wait(2)
                 continue
             else:
-                heavy = self.overweight()
-                if heavy:
-                    raise Stop(heavy)
+                self.make_room()
                 if not self.affordable(route):
                     route = self.next_route(route)
                 self.enter_from_field(route)
@@ -250,7 +303,7 @@ class Macro:
 
     def wait_clear(self, route):
         self.log(f'{route.name} 진행 중 · 클리어 대기')
-        started = time.monotonic()
+        started = waiting = time.monotonic()
         nudged = False
         while True:
             a = self.activity()
@@ -262,18 +315,20 @@ class Macro:
             if a['dead']:
                 self.log('사망 감지 · 30초 동안 부활 대기')
                 self.wait_for('부활', lambda: not self.activity()['dead'], 30, interval=2)
-            elapsed = time.monotonic() - started
+            elapsed = time.monotonic() - waiting
             if a['dungeon'] == 'InProgress' and not a['auto'] and not a['boss']:
-                heavy = elapsed > 20 and self.overweight(limit=1)
-                if heavy:
-                    raise Stop(f'자동 진행이 멈춤 · {heavy}')
+                if elapsed > 20 and self.overweight(limit=1):
+                    self.log('가방 무게 초과로 자동 진행이 멈춤')
+                    self.make_room(limit=1)
+                    waiting, nudged = time.monotonic(), False  # 정리 후 다시 켜지는지 지켜본다
+                    continue
                 if elapsed > 20 and not nudged:
                     self.log('자동 진행이 꺼져 있음 · 퀘스트 추적을 눌러 시작')
                     self.game.click(*QUEST_TRACKER)
                     nudged = True
                 elif elapsed > 60 and not a['combat']:
                     raise Stop('자동 진행이 시작되지 않습니다.')
-            if elapsed > 900:
+            if time.monotonic() - started > 900:
                 raise Stop('15분 동안 클리어되지 않았습니다.')
             if not a['combat'] and self.skip_scene():
                 self.log('연출 장면 넘기기')
