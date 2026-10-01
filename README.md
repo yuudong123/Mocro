@@ -11,11 +11,13 @@
 - 마비노기 모바일 설치 및 게임 캐릭터 접속
 - 게임 설치 폴더의 `MabinogiMobile_CLI.exe`
 
-처음 한 번 PowerShell에서 이 폴더로 이동해 의존성을 설치합니다.
+생활 도우미는 처음 한 번 PowerShell에서 이 폴더로 이동해 의존성을 설치합니다.
 
 ```powershell
-python -m pip install -r .\workshop\requirements.txt -r .\dungeon\requirements.txt
+python -m pip install -r .\workshop\requirements.txt
 ```
+
+`던전.bat`은 따로 준비할 필요가 없습니다. 처음 실행할 때 Python 3.11이 없으면 winget으로 설치하고, `dungeon\.venv` 가상환경을 만들어 `dungeon\requirements.txt` 패키지를 설치합니다. `requirements.txt`가 바뀌면 다음 실행 때 다시 설치합니다.
 
 기본 CLI 위치는 `C:\Nexon\MabinogiMobile\MabinogiMobile_CLI.exe`입니다. 다른 위치에 설치했다면 실행 후 설정에서 CLI 경로를 변경하세요.
 
