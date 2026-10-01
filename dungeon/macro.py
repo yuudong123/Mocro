@@ -734,6 +734,8 @@ def main():
     parser.add_argument('--check', action='store_true', help='조작 없이 현재 위치·재화·화면 인식 결과만 출력')
     parser.add_argument('--no-wings', action='store_true', help='던전 간 이동에 정령의 날개(T)를 쓰지 않음')
     parser.add_argument('--no-switch', action='store_true', help='재화가 떨어져도 다른 캐릭터로 바꾸지 않고 종료')
+    parser.add_argument('--story', type=int, nargs='?', const=98, metavar='LEVEL',
+                        help='던전 대신 스토리 퀘스트를 넘기며 이 레벨(기본 98)까지 키움')
     args = parser.parse_args()
     sys.stdout.reconfigure(encoding='utf-8')
     if not is_admin():
@@ -755,14 +757,18 @@ def main():
         hwnd = find_game()
         if not hwnd:
             raise Stop('마비노기 모바일 창을 찾지 못했습니다.')
-        log('던전 매크로 시작 · F12 중지')
+        log(('스토리' if args.story else '던전') + ' 매크로 시작 · F12 중지')
         macro = Macro(Game(hwnd), stop, log, max_runs=args.runs, use_wings=not args.no_wings,
                       start=args.start)
         if args.check:
             macro.report()
             return
         try:
-            macro.run_all(switch=not args.no_switch)
+            if args.story:
+                from story import Story
+                Story(macro, args.story).run()
+            else:
+                macro.run_all(switch=not args.no_switch)
         except Stop as reason:
             if not stop.is_set() and '완료' not in str(reason) and '부족' not in str(reason):
                 log(f'중단 당시 화면: {macro.screenshot("stop")}')
