@@ -20,6 +20,7 @@ from pynput import keyboard
 
 from common import (EXPECTED_SIZE, ROOT, TEMPLATES, Game, cli, currencies, find_game, is_admin,
                     relaunch_as_admin, summarize_activity, summarize_env)
+from roster import Roster, clock
 
 LOGS = ROOT / 'logs'
 VK_I, VK_M, VK_T, VK_ESC, VK_SPACE = 0x49, 0x4D, 0x54, win32con.VK_ESCAPE, win32con.VK_SPACE
@@ -101,8 +102,11 @@ class Macro:
         self.game, self.stop, self.log = game, stop, log
         self.max_runs, self.use_wings, self.start = max_runs, use_wings, start
         self.runs = 0
-        self.done_slots = set()  # 이번 실행에서 끝낸 캐릭터 카드 번호
-        self.done_ids = set()    # 끝낸 캐릭터의 서버·직업·타이틀(카드와 다르게 접속됐는지 확인)
+        self.roster = Roster()   # 카드별 마지막으로 본 재화(dungeon/characters.json)
+        self.slot = None         # 지금 캐릭터의 카드 번호(0부터). 모르면 선택 화면에서 알아낸다
+        self.ident = None
+        self.done_ids = set()    # 이번 실행에서 끝낸 캐릭터(카드와 다르게 접속됐는지 확인)
+        self.skip_slots = set()  # 100레벨 표시였지만 접속해 보니 아니었던 카드
 
     # ---- 상태 확인 ----
     def check(self):
@@ -315,6 +319,7 @@ class Macro:
                 current, maximum = self.weight()
                 self.log(f'{route.name} {self.runs}회 클리어 · 남은 {route.currency} {self.balance(route)}'
                          f' · 가방 {current:.0f}/{maximum:.0f}')
+                self.remember()
                 if self.max_runs and self.runs >= self.max_runs:
                     self.leave_reward()
                     raise Stop(f'목표 {self.max_runs}회 완료')
@@ -340,8 +345,16 @@ class Macro:
                 self.make_room()
                 self.enter_from_field(route)
 
+    def remember(self, money=None):
+        if self.slot is not None and self.ident:
+            self.roster.record(self.slot, self.ident, money or currencies())
+
     def run_all(self, switch=True):
         """run() each level-100 character in turn until every one is out of currency."""
+        self.ident = self.me()['id']
+        self.slot = self.roster.slot_of(self.ident)
+        if self.slot is not None:
+            self.log(f'지금 캐릭터는 기록상 {self.slot + 1}번 카드')
         while True:
             try:
                 self.run()
@@ -351,8 +364,7 @@ class Macro:
                     raise
                 self.log(f'{reason} 다음 캐릭터로 바꿉니다.')
             self.start = None
-            if not self.switch_character():
-                raise Stop('모든 100레벨 캐릭터의 은동전·마족 공물이 부족합니다. 종료합니다.')
+            self.switch_character()
 
     # ---- 캐릭터 변경 ----
     def cards(self, image):
@@ -393,26 +405,33 @@ class Macro:
         return isinstance(a, dict) and 'error' not in a and a.get('dungeon') is not None
 
     def switch_character(self):
-        """Mark the current character done and log in to the next level-100 one; False if none is left."""
-        before = self.me()
+        """Save the current character's currencies and log in to a level-100 one that can run a dungeon.
+
+        재화는 카드별로 파일에 남기고 충전 속도로 지금 양을 추정해, 돌 수 없는 캐릭터는 접속하지 않는다.
+        """
+        before, money = self.me(), currencies()
         self.done_ids.add(before['id'])
         self.to_character_select()
         self.game.scroll(400, 300, 10)  # 목록 맨 위로
         self.wait(1)
         cards = self.cards(self.game.capture())
         current = next((c['slot'] for c in cards if c['selected']), None)
-        if current is not None:
-            self.done_slots.add(current)
-        todo = [c for c in cards if c['lv100'] and c['slot'] not in self.done_slots]
-        self.log(f'캐릭터 선택 · 100레벨 {[c["slot"] + 1 for c in cards if c["lv100"]]}번 카드 · '
-                 f'끝낸 카드 {sorted(s + 1 for s in self.done_slots)}')
+        self.slot, self.ident = (current if current is not None else self.slot), before['id']
+        if isinstance(money, dict) and 'error' not in money:
+            self.remember(money)
+        costs = {route.currency: route.cost for route in ROUTES}
+        candidates = [c for c in cards if c['lv100'] and c['slot'] not in self.skip_slots]
+        self.log('캐릭터 선택 · ' + ' / '.join(self.roster.describe(c['slot'], costs) for c in candidates))
+        todo = [c for c in candidates if self.roster.ready_at(c['slot'], costs) <= self.roster.now()]
         if not todo:
-            return False
+            soonest = min(candidates, key=lambda c: self.roster.ready_at(c['slot'], costs), default=None)
+            when = (f' 가장 빠른 것은 {soonest["slot"] + 1}번 캐릭터, '
+                    f'{clock(self.roster.ready_at(soonest["slot"], costs))}쯤부터입니다.') if soonest else ''
+            raise Stop(f'모든 100레벨 캐릭터의 은동전·마족 공물이 부족합니다.{when} 종료합니다.')
         card = todo[0]
         self.until(f'{card["slot"] + 1}번 캐릭터 카드 선택',
                    lambda: self.cards(self.game.capture())[card['slot']]['selected'],
                    lambda: self.game.click(*card['center']), every=2, first=True)
-        self.done_slots.add(card['slot'])
         self.log(f'{card["slot"] + 1}번 카드 선택 · 화면 {self.screenshot("select")}')
         # 접속하면 CLI가 응답한다. 선택 화면이 그대로면 게임 시작을 다시 누른다.
         self.until('캐릭터 접속', self.in_game,
@@ -422,12 +441,15 @@ class Macro:
         self.log(f'{card["slot"] + 1}번 캐릭터 접속 · {now["realm"]} {now["job"]} {now["level"]}레벨 · '
                  f'재화 {currencies()}')
         if now['id'] in self.done_ids:
+            # 고른 카드와 다른 캐릭터다. 기록하지 않고 선택 화면에서 다시 고른다.
             self.log(f'이미 끝낸 캐릭터로 접속됨({now["realm"]} {now["job"]}) · 다음 캐릭터로 넘어갑니다.')
             return self.switch_character()
+        self.slot, self.ident = card['slot'], now['id']
+        self.remember()
         if now['level'] != 100:
             self.log('100레벨이 아니라 건너뜁니다.')
+            self.skip_slots.add(card['slot'])
             return self.switch_character()
-        return True
 
     def me(self):
         """Who is logged in: level, job, realm and an id to tell characters apart (CLI has no name)."""

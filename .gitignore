@@ -17,3 +17,4 @@ venv/
 # 던전 기록기 출력
 dungeon/recordings/
 dungeon/logs/
+dungeon/characters.json
