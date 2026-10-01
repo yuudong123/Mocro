@@ -679,18 +679,19 @@ class Macro:
         return self.wait_arrival(route)
 
     def open_map(self):
-        """M으로 지도를 연다. 알림 창에 M이 먹히지 않으면 다시 누르고, 다른 창이 열려 있으면 ESC로 닫는다."""
-        def press():
-            image = self.game.capture()
-            if self.map_open(image):
-                return
-            if self.hud(image):
-                self.game.key(VK_M)
-            elif np.asarray(image).mean() > 10:  # 로딩(검은 화면)이 아니면 캐릭터 창 같은 다른 창이다
-                self.game.key(VK_ESC)
+        """M으로 지도를 연다. 지도가 열리면 필드 HUD("ESC")가 가려진다.
 
-        self.until('지도 열기', self.map_open, press, first=True)
-        self.wait(1)
+        알림 창에 M이 먹히지 않으면 다시 누른다. HUD가 가려졌는데 "울라 대륙"이 안 보인다고 ESC로
+        닫으면, "울라 대륙" 인식이 빗나갔을 때 지도를 열자마자 닫게 되므로 그러지 않는다.
+        """
+        if self.hud():
+            self.game.key(VK_M)
+            self.until('지도 열기', lambda: not self.hud(), lambda: self.hud() and self.game.key(VK_M), every=5)
+            self.wait(1)
+        if not self.map_open() and not getattr(self, 'crumb_reported', False):
+            self.crumb_reported = True
+            self.log(f'지도 왼쪽 위 "울라 대륙"을 확인하지 못함(왼쪽 위 클릭·지도 옮기기는 하지 않음) · '
+                     f'화면 {self.screenshot("map")}')
 
     def pick_on_map(self, route, space):
         """지도에서 던전을 고른다. 이멘마하는 동부/남부 탭 목록, 그 밖은 목록에 없으면 대륙 지도에서 고른다."""
