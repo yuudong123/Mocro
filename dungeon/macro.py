@@ -13,6 +13,7 @@ import time
 from dataclasses import dataclass, field
 from datetime import datetime
 
+import numpy as np
 import win32con
 from PIL import ImageStat
 from pynput import keyboard
@@ -30,6 +31,8 @@ DOUBLE_REGION = (230, 290, 360, 350)
 MAP_CONTINENT = (55, 24)        # 지도 왼쪽 위 "울라 대륙": 대륙 지도로 나간다
 MAP_EAST, MAP_SOUTH = (46, 570), (111, 570)  # 이멘마하 지도 왼쪽 아래 동부/남부 탭
 MAP_LIST_REGION = (0, 380, 160, 560)         # 지도 왼쪽 던전 목록
+# 대륙 지도를 왼쪽 위 끝으로 옮기는 드래그(지도 내용을 오른쪽 아래로 끈다). 끝에서는 룬다·페카가 다 보인다.
+MAP_PAN = ((120, 110), (680, 480))
 HUD_REGION = (500, 0, 640, 60)  # 필드 오른쪽 위 "Home". 지도처럼 화면을 덮는 창이 열리면 가려진다.
 # 레벨업·시즌 스킬·스킬 획득 알림 창이 떠 있으면 조작이 먹히지 않는다. 화면 조작은 이만큼 다시 시도한다.
 PATIENCE = 180
@@ -619,8 +622,25 @@ class Macro:
             self.game.click(*MAP_CONTINENT)  # "울라 대륙"
             self.wait(2)
             label = self.game.find(route.world_template, threshold=0.9)
+        if not label:
+            # 던전이 화면 밖이면 지도를 왼쪽 위 끝까지 옮긴다. 거기서는 룬다와 페카가 다 보인다.
+            self.pan_map_top_left()
+            label = self.game.find(route.world_template, threshold=0.9)
+            if not label:
+                self.log(f'대륙 지도에서 {route.name}을 찾지 못함 · 화면 {self.screenshot("map")}')
         if label:
             self.game.click(label[0] + route.world_offset[0], label[1] + route.world_offset[1])
+
+    def pan_map_top_left(self, limit=8):
+        """Drag the map until it stops moving (its top-left edge)."""
+        before = np.asarray(self.game.capture(), dtype=np.int16)
+        for _ in range(limit):
+            self.game.drag(*MAP_PAN)
+            self.wait(0.5)
+            after = np.asarray(self.game.capture(), dtype=np.int16)
+            if np.abs(after - before).mean() < 2:  # 그대로면 끝에 닿았다
+                return
+            before = after
 
     def wait_arrival(self, route):
         """Watch the auto travel through the CLI only.

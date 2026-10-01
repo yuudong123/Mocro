@@ -211,6 +211,23 @@ class Game:
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
         time.sleep(0.25)
 
+    def drag(self, start, end, seconds=0.5):
+        """Left-drag from start to end (client coords), easing in so the map does not fling."""
+        self.focus()
+        left, top, _, _ = client_rect(self.hwnd)
+        win32api.SetCursorPos((left + start[0], top + start[1]))
+        time.sleep(0.08)
+        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
+        steps = 20
+        for i in range(1, steps + 1):
+            x = start[0] + (end[0] - start[0]) * i // steps
+            y = start[1] + (end[1] - start[1]) * i // steps
+            win32api.SetCursorPos((left + x, top + y))
+            time.sleep(seconds / steps)
+        time.sleep(0.2)  # 멈춘 뒤 놓아야 관성으로 더 밀리지 않는다
+        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
+        time.sleep(0.4)
+
     def scroll(self, x, y, clicks):
         """Mouse wheel over (x, y): positive scrolls up, negative down."""
         self.focus()
