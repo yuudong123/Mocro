@@ -29,6 +29,7 @@ DOUBLE_REGION = (230, 290, 360, 350)
 MAP_CONTINENT = (55, 24)        # 지도 왼쪽 위 "울라 대륙": 대륙 지도로 나간다
 MAP_EAST, MAP_SOUTH = (46, 570), (111, 570)  # 이멘마하 지도 왼쪽 아래 동부/남부 탭
 MAP_LIST_REGION = (0, 380, 160, 560)         # 지도 왼쪽 던전 목록
+HUD_REGION = (500, 0, 640, 60)  # 필드 오른쪽 위 "Home". 지도처럼 화면을 덮는 창이 열리면 가려진다.
 # 가방 무게가 한도를 넘으면 자동 진행이 멈춘다. 한 판 전리품만큼 여유를 두고 가방을 정리한다.
 WEIGHT_LIMIT = 0.98
 TIDY_BUTTON = (735, 509)        # 가방 오른쪽 아래 무게 옆 "정리"
@@ -426,12 +427,11 @@ class Macro:
         """
         self.log(f'{route.name} 입구로 이동')
         space = self.environment().get('space')
-        self.game.key(VK_M)
-        self.wait(1.5)
+        self.open_map()
+        self.wait(1)
         item = self.game.find(route.map_template, region=MAP_LIST_REGION)
         if not item and space == '이멘마하':
-            self.game.click(*route.map_tab)
-            item = self.wait_for('지도 목록', lambda: self.game.find(route.map_template, region=MAP_LIST_REGION), 5)
+            item = self.wait_for('지도 목록', lambda: self.map_list_item(route), 30, interval=2)
         if item:
             self.game.click(*item)
         else:
@@ -452,6 +452,34 @@ class Macro:
             self.wait(1.5)
             self.game.key(VK_T)
         return self.wait_arrival(route)
+
+    def open_map(self, timeout=60):
+        """Press M until the map covers the field HUD.
+
+        레벨업 직후 미스틱 다이스 창 같은 것이 떠 있으면 M이 먹히지 않는다. 창이 닫힐 때까지 다시 누른다.
+        """
+        deadline = time.monotonic() + timeout
+        while True:
+            self.game.key(VK_M)
+            try:
+                self.wait_for('지도', lambda: not self.game.find('hud_home', region=HUD_REGION), 5)
+                return
+            except Stop:
+                self.check()
+            if time.monotonic() > deadline:
+                raise Stop(f'지도를 {timeout}초 동안 열지 못했습니다.')
+            self.log('지도가 열리지 않음 · 다른 창이 닫히길 기다렸다가 다시 열기')
+
+    def map_list_item(self, route):
+        """이멘마하 지도 목록에서 던전을 찾는다. 지도가 닫혀 있으면 다시 열고, 아니면 탭을 다시 누른다."""
+        item = self.game.find(route.map_template, region=MAP_LIST_REGION)
+        if item:
+            return item
+        if self.game.find('hud_home', region=HUD_REGION):
+            self.open_map()
+            self.wait(1)
+        self.game.click(*route.map_tab)
+        return None
 
     def wait_arrival(self, route):
         """Watch the auto travel through the CLI only.
