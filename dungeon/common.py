@@ -73,8 +73,8 @@ def summarize_activity(a):
     if not isinstance(a, dict) or 'error' in a:
         return a
     return {
-        'dungeon': a.get('Dungeon', {}).get('State'),
-        'boss': a.get('Dungeon', {}).get('IsBossBattleInProgress'),
+        'dungeon': (a.get('Dungeon') or {}).get('State'),
+        'boss': (a.get('Dungeon') or {}).get('IsBossBattleInProgress'),
         'auto': a.get('IsAutoPlaying'),
         'auto_target': a.get('AutoPlayTarget'),
         'travel': a.get('IsAutoTraveling'),
@@ -83,10 +83,10 @@ def summarize_activity(a):
         'combat': a.get('IsInCombat'),
         'dialogue': a.get('IsDialoguePlaying'),
         'selecting': a.get('IsWaitingForSelection'),
-        'target': a.get('Interaction', {}).get('TargetKind'),
-        'interaction': a.get('Interaction', {}).get('AvailableInteractionType'),
-        'last_interaction': a.get('Interaction', {}).get('LastRunningInteractionType'),
-        'main_button': a.get('Mode', {}).get('MainButtonState'),
+        'target': (a.get('Interaction') or {}).get('TargetKind'),
+        'interaction': (a.get('Interaction') or {}).get('AvailableInteractionType'),
+        'last_interaction': (a.get('Interaction') or {}).get('LastRunningInteractionType'),
+        'main_button': (a.get('Mode') or {}).get('MainButtonState'),
     }
 
 

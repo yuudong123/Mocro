@@ -113,7 +113,7 @@ class Macro:
         while True:
             self.check()
             a = summarize_activity(cli('get_activity'))
-            if isinstance(a, dict) and 'error' not in a:
+            if self.ready(a):
                 return a
             if time.monotonic() > deadline:
                 raise Stop(f'게임 상태를 읽지 못했습니다: {a}')
@@ -379,8 +379,12 @@ class Macro:
         self.wait(2)  # 카드가 다 그려질 때까지
 
     def in_game(self):
-        a = summarize_activity(cli('get_activity'))
-        return isinstance(a, dict) and 'error' not in a
+        return self.ready(summarize_activity(cli('get_activity')))
+
+    @staticmethod
+    def ready(a):
+        # 접속·이동 로딩 중에는 not_in_game 오류나, 던전 상태 같은 항목이 비어 있는 응답이 온다.
+        return isinstance(a, dict) and 'error' not in a and a.get('dungeon') is not None
 
     def switch_character(self):
         """Mark the current character done and log in to the next level-100 one; False if none is left."""
