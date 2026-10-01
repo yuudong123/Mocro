@@ -13,9 +13,10 @@ import time
 from dataclasses import dataclass, field
 from datetime import datetime
 
+import cv2
 import numpy as np
 import win32con
-from PIL import ImageStat
+from PIL import Image, ImageStat
 from pynput import keyboard
 
 from common import (EXPECTED_SIZE, ROOT, TEMPLATES, Game, cli, currencies, find_game, is_admin,
@@ -35,8 +36,10 @@ MAP_LIST_REGION = (0, 380, 160, 560)         # 지도 왼쪽 던전 목록
 # 대륙 지도를 왼쪽 위 끝으로 옮기는 드래그(지도 내용을 오른쪽 아래로 끈다). 끝에서는 룬다·페카가 다 보인다.
 # 가장자리의 버튼을 잘못 누르지 않게 화면 중앙에서 짧게 여러 번 끈다.
 MAP_PAN = ((400, 300), (560, 420))
-MAP_OPEN_REGION = (300, 400, 800, 600)       # 대륙 지도 아래 패널(지도·퀘스트·아르바이트·이벤트)
-HUD_REGION = (500, 0, 640, 60)  # 필드 오른쪽 위 "Home". 지도처럼 화면을 덮는 창이 열리면 가려진다.
+# 필드 오른쪽 위 미니맵 옆 "ESC". 지도·가방·메뉴처럼 화면을 덮는 창이 열리면 가려진다.
+# ("Home"은 알림 아이콘이 늘면 왼쪽으로 밀려서 쓰지 않는다.)
+HUD_REGION = (600, 0, 720, 60)
+CRUMB_REGION = (0, 0, 160, 60)  # 지도 왼쪽 위 "울라 대륙". 지도가 열렸을 때만 있다
 # 레벨업·시즌 스킬·스킬 획득 알림 창이 떠 있으면 조작이 먹히지 않는다. 화면 조작은 이만큼 다시 시도한다.
 PATIENCE = 180
 # 가방 무게가 한도를 넘으면 자동 진행이 멈춘다. 한 판 전리품만큼 여유를 두고 가방을 정리한다.
@@ -257,9 +260,25 @@ class Macro:
                 last = time.monotonic()
             self.wait(0.7)
 
-    def hud(self):
+    def hud(self, image=None):
         """True while the field HUD shows, i.e. no full-screen window (map, bag, menu) is open."""
-        return bool(self.game.find('hud_home', region=HUD_REGION))
+        return bool(self.game.find('hud_esc', image, region=HUD_REGION))
+
+    def map_open(self, image=None):
+        """지도 왼쪽 위 "울라 대륙"이 보이면 지도가 열린 것이다.
+
+        뒤 배경이 지도 무늬라 지도를 옮기면 달라지므로 밝은 글자 픽셀만 비교한다.
+        """
+        image = image if image is not None else self.game.capture()
+        left, top, right, bottom = CRUMB_REGION
+
+        def bright(a):
+            return (cv2.cvtColor(np.asarray(a), cv2.COLOR_RGB2GRAY) > 200).astype(np.float32)
+        frame = bright(image.crop((left, top, right, bottom)))
+        needle = bright(Image.open(TEMPLATES / 'map_crumb.png').convert('RGB'))
+        if frame.max() == 0:
+            return False
+        return cv2.minMaxLoc(cv2.matchTemplate(frame, needle, cv2.TM_CCOEFF_NORMED))[1] >= 0.7
 
     def wait_for(self, what, predicate, timeout, interval=0.7):
         deadline = time.monotonic() + timeout
@@ -390,7 +409,7 @@ class Macro:
                 self.game.click(*TO_SELECT)
             elif button:
                 self.game.click(*button)
-            elif self.game.find('hud_home', image, region=HUD_REGION):
+            elif self.hud(image):
                 self.game.key(VK_ESC)
 
         self.until('캐릭터 선택 화면', lambda: self.game.find('select_title'), step, first=True)
@@ -623,15 +642,23 @@ class Macro:
         return self.wait_arrival(route)
 
     def open_map(self):
-        """Press M until the map covers the field HUD (M is swallowed while a notice window is up)."""
-        if not self.hud():
-            return
-        self.game.key(VK_M)
-        self.until('지도 열기', lambda: not self.hud(), lambda: self.hud() and self.game.key(VK_M), every=5)
+        """M으로 지도를 연다. 알림 창에 M이 먹히지 않으면 다시 누르고, 다른 창이 열려 있으면 ESC로 닫는다."""
+        def press():
+            image = self.game.capture()
+            if self.map_open(image):
+                return
+            if self.hud(image):
+                self.game.key(VK_M)
+            elif np.asarray(image).mean() > 10:  # 로딩(검은 화면)이 아니면 캐릭터 창 같은 다른 창이다
+                self.game.key(VK_ESC)
+
+        self.until('지도 열기', self.map_open, press, first=True)
         self.wait(1)
 
     def pick_on_map(self, route, space):
         """지도에서 던전을 고른다. 이멘마하는 동부/남부 탭 목록, 그 밖은 목록에 없으면 대륙 지도에서 고른다."""
+        # 지도 위의 자리를 누르는 것이라 지도가 열려 있을 때만 누른다. 필드에서 누르면
+        # 왼쪽 위 "울라 대륙" 자리는 캐릭터 초상화라 캐릭터 창이 열린다.
         self.open_map()
         item = self.game.find(route.map_template, region=MAP_LIST_REGION)
         if not item and space == '이멘마하':
@@ -643,6 +670,8 @@ class Macro:
             return
         label = self.game.find(route.world_template, threshold=0.9)
         if not label:
+            if not self.map_open():
+                return  # 그사이 지도가 닫혔다. 다음 시도에서 다시 연다
             self.game.click(*MAP_CONTINENT)  # "울라 대륙"
             self.wait(2)
             label = self.game.find(route.world_template, threshold=0.9)
@@ -659,9 +688,9 @@ class Macro:
         """Drag the map until it stops moving (its top-left edge)."""
         before = np.asarray(self.game.capture(), dtype=np.int16)
         for _ in range(limit):
-            # 대륙 지도 아래 패널의 "지도" 탭이 보일 때만 끈다. 다른 창 위에서 끌면 엉뚱한 것을 누른다.
-            if not self.game.find('map_open', region=MAP_OPEN_REGION, threshold=0.8):
-                self.log('대륙 지도가 열려 있지 않아 지도 옮기기를 멈춤')
+            # 지도가 열려 있을 때만 끈다. 다른 창 위에서 끌면 엉뚱한 것을 누른다.
+            if not self.map_open():
+                self.log('지도가 열려 있지 않아 지도 옮기기를 멈춤')
                 return
             self.game.drag(*MAP_PAN)
             self.wait(0.5)
