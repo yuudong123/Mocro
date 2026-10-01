@@ -31,6 +31,8 @@ MAP_CONTINENT = (55, 24)        # 지도 왼쪽 위 "울라 대륙": 대륙 지�
 MAP_EAST, MAP_SOUTH = (46, 570), (111, 570)  # 이멘마하 지도 왼쪽 아래 동부/남부 탭
 MAP_LIST_REGION = (0, 380, 160, 560)         # 지도 왼쪽 던전 목록
 HUD_REGION = (500, 0, 640, 60)  # 필드 오른쪽 위 "Home". 지도처럼 화면을 덮는 창이 열리면 가려진다.
+# 레벨업·시즌 스킬·스킬 획득 알림 창이 떠 있으면 조작이 먹히지 않는다. 화면 조작은 이만큼 다시 시도한다.
+PATIENCE = 180
 # 가방 무게가 한도를 넘으면 자동 진행이 멈춘다. 한 판 전리품만큼 여유를 두고 가방을 정리한다.
 WEIGHT_LIMIT = 0.98
 TIDY_BUTTON = (735, 509)        # 가방 오른쪽 아래 무게 옆 "정리"
@@ -195,33 +197,59 @@ class Macro:
         """가방(I)의 "간단히 정리하기"로 장비를 분해하고 재료를 판다. 무거운 재료·미스틱 다이스는 끈다."""
         before, maximum = self.weight()
         self.log(f'가방 무게 {before:.0f}/{maximum:.0f} · 간단히 정리하기')
-        self.game.key(VK_I)
-        # 무게를 넘긴 상태에서는 가방을 열면 정리 창이 바로 뜬다. 안 뜨면 "정리"를 누른다.
-        try:
-            self.wait_for('정리 창', lambda: self.game.find('tidy_title'), 3)
-        except Stop:
-            self.check()
-            self.game.click(*TIDY_BUTTON)
-            self.wait_for('정리 창', lambda: self.game.find('tidy_title'), 5)
+        def open_tidy():
+            # 무게를 넘긴 상태에서는 가방을 열면 정리 창이 바로 뜬다. 가방만 열렸으면 "정리"를 누른다.
+            if self.hud():
+                self.game.key(VK_I)
+            else:
+                self.game.click(*TIDY_BUTTON)
+
+        def click_if(name, spot):
+            return lambda: self.game.find(name) and self.game.click(*spot)
+
+        self.until('정리 창', lambda: self.game.find('tidy_title'), open_tidy, first=True)
         for name, spot in TIDY_OPTIONS.items():
             want = name == TIDY_KEEP
-            if self.tidy_checked(spot, self.game.capture()) != want:
-                self.game.click(*spot)
-                self.wait(0.6)
-                if self.tidy_checked(spot, self.game.capture()) != want:
-                    raise Stop(f'정리 항목 "{name}"을 {"켜지" if want else "끄지"} 못했습니다.')
-        self.game.click(*TIDY_START)
-        self.wait_for('정리 대상 화면', lambda: self.game.find('tidy_targets'), 10)
+            self.until(f'정리 항목 "{name}" {"켜기" if want else "끄기"}',
+                       lambda: self.tidy_checked(spot, self.game.capture()) == want,
+                       lambda: self.game.click(*spot), every=2, first=True)
+        self.until('정리 대상 화면', lambda: self.game.find('tidy_targets'),
+                   click_if('tidy_title', TIDY_START), first=True)
         self.wait(0.8)  # 화면이 서서히 나타나는 동안에는 버튼이 눌리지 않는다
-        self.game.click(*TIDY_CONFIRM)
-        self.wait_for('정리 완료 화면', lambda: self.game.find('tidy_done'), 30)
+        self.until('정리 완료 화면', lambda: self.game.find('tidy_done'),
+                   click_if('tidy_targets', TIDY_CONFIRM), every=6, first=True)
         self.wait(0.8)
-        self.game.click(*TIDY_CONFIRM)
-        self.wait(1.5)
-        self.game.click(*BAG_CLOSE)
-        self.wait(1.5)
+        self.until('정리 완료 닫기', lambda: not self.game.find('tidy_done'),
+                   lambda: self.game.click(*TIDY_CONFIRM), first=True)
+        self.wait(1)
+        self.until('가방 닫기', self.hud, lambda: self.game.click(*BAG_CLOSE), first=True)
         after, _ = self.weight()
         self.log(f'가방 정리 완료 · 무게 {before:.0f} → {after:.0f}')
+
+    def until(self, what, done, retry, timeout=PATIENCE, every=4, first=False):
+        """Wait for done(), calling retry() every `every` seconds meanwhile (right away if `first`).
+
+        레벨업·시즌 스킬·스킬 획득 같은 알림 창이 떠 있는 동안에는 클릭과 키가 먹히지 않는다.
+        창이 사라질 때까지 같은 조작을 다시 시도한다. retry는 현재 화면을 보고 필요한 것만 해야 한다.
+        """
+        deadline = time.monotonic() + timeout
+        last = None if first else time.monotonic()
+        while True:
+            self.check()
+            result = done()
+            if result:
+                return result
+            now = time.monotonic()
+            if now > deadline:
+                raise Stop(f'{what}: {timeout}초 동안 확인되지 않았습니다.')
+            if last is None or now - last >= every:
+                retry()
+                last = time.monotonic()
+            self.wait(0.7)
+
+    def hud(self):
+        """True while the field HUD shows, i.e. no full-screen window (map, bag, menu) is open."""
+        return bool(self.game.find('hud_home', region=HUD_REGION))
 
     def wait_for(self, what, predicate, timeout, interval=0.7):
         deadline = time.monotonic() + timeout
@@ -336,20 +364,23 @@ class Macro:
         return found
 
     def to_character_select(self):
-        for _ in range(3):
-            self.game.key(VK_ESC)
-            try:
-                button = self.wait_for('메뉴', lambda: self.game.find('menu_quit', region=MENU_QUIT_REGION), 3)
-                break
-            except Stop:
-                self.check()  # 다른 창이 먼저 닫혔을 수 있어 다시 누른다
-        else:
-            raise Stop('ESC 메뉴를 열지 못했습니다.')
-        self.game.click(*button)
-        self.wait_for('플레이 중단 창', lambda: self.game.find('quit_title'), 5)
-        self.game.click(*TO_SELECT)
-        self.wait_for('캐릭터 선택 화면', lambda: self.game.find('select_title'), 90)
+        """ESC 메뉴 → 게임 종료 → 캐릭터 선택 화면으로. 로딩 중(검은 화면)에는 아무것도 누르지 않는다."""
+        def step():
+            image = self.game.capture()
+            button = self.game.find('menu_quit', image, region=MENU_QUIT_REGION)
+            if self.game.find('quit_title', image):
+                self.game.click(*TO_SELECT)
+            elif button:
+                self.game.click(*button)
+            elif self.game.find('hud_home', image, region=HUD_REGION):
+                self.game.key(VK_ESC)
+
+        self.until('캐릭터 선택 화면', lambda: self.game.find('select_title'), step, first=True)
         self.wait(2)  # 카드가 다 그려질 때까지
+
+    def in_game(self):
+        a = summarize_activity(cli('get_activity'))
+        return isinstance(a, dict) and 'error' not in a
 
     def switch_character(self):
         """Mark the current character done and log in to the next level-100 one; False if none is left."""
@@ -366,13 +397,13 @@ class Macro:
         if not todo:
             return False
         card = todo[0]
-        self.game.click(*card['center'])
-        self.wait(1)
-        if not self.cards(self.game.capture())[card['slot']]['selected']:
-            raise Stop(f'{card["slot"] + 1}번 캐릭터 카드를 선택하지 못했습니다.')
+        self.until(f'{card["slot"] + 1}번 캐릭터 카드 선택',
+                   lambda: self.cards(self.game.capture())[card['slot']]['selected'],
+                   lambda: self.game.click(*card['center']), every=2, first=True)
         self.done_slots.add(card['slot'])
-        self.game.click(*GAME_START)
-        self.activity(patience=120)  # 접속하면 CLI가 응답한다
+        # 접속하면 CLI가 응답한다. 선택 화면이 그대로면 게임 시작을 다시 누른다.
+        self.until('캐릭터 접속', self.in_game,
+                   lambda: self.game.find('select_title') and self.game.click(*GAME_START), every=8, first=True)
         self.wait(3)
         info = cli('get_my_info')
         level = info.get('Level') if isinstance(info, dict) else None
@@ -395,7 +426,7 @@ class Macro:
     def wait_clear(self, route):
         self.log(f'{route.name} 진행 중 · 클리어 대기')
         started = waiting = time.monotonic()
-        nudged = False
+        nudged = 0
         while True:
             a = self.activity()
             if a['dungeon'] == 'Cleared':
@@ -411,14 +442,15 @@ class Macro:
                 if elapsed > 20 and self.overweight(limit=1):
                     self.log('가방 무게 초과로 자동 진행이 멈춤')
                     self.make_room(limit=1)
-                    waiting, nudged = time.monotonic(), False  # 정리 후 다시 켜지는지 지켜본다
+                    waiting, nudged = time.monotonic(), 0  # 정리 후 다시 켜지는지 지켜본다
                     continue
-                if elapsed > 20 and not nudged:
+                # 알림 창에 클릭이 막힐 수 있어 20초마다 다시 누른다.
+                if elapsed > PATIENCE and not a['combat']:
+                    raise Stop(f'자동 진행이 {PATIENCE}초 동안 시작되지 않습니다.')
+                if elapsed > 20 and time.monotonic() - nudged > 20:
                     self.log('자동 진행이 꺼져 있음 · 퀘스트 추적을 눌러 시작')
                     self.game.click(*QUEST_TRACKER)
-                    nudged = True
-                elif elapsed > 60 and not a['combat']:
-                    raise Stop('자동 진행이 시작되지 않습니다.')
+                    nudged = time.monotonic()
             if time.monotonic() - started > 900:
                 raise Stop('15분 동안 클리어되지 않았습니다.')
             if not a['combat'] and self.skip_scene():
@@ -437,7 +469,7 @@ class Macro:
 
     def to_reward_screen(self):
         """Click through "화면을 터치해 주세요" and the chest scene up to the reward list."""
-        deadline = time.monotonic() + 90
+        deadline = time.monotonic() + PATIENCE
         last_click = time.monotonic()
         while time.monotonic() < deadline:
             self.check()
@@ -453,31 +485,44 @@ class Macro:
         raise Stop('보상 화면(나가기/다시 하기)을 찾지 못했습니다.')
 
     def leave_reward(self):
-        exit_button = self.game.find('reward_exit')
-        if exit_button:
-            self.game.click(*exit_button)
-        else:
-            self.game.key(VK_ESC)
-        self.wait_for('던전 퇴장', lambda: self.activity()['dungeon'] == 'NotInDungeon', 60, interval=1.5)
+        def press_exit():
+            exit_button = self.game.find('reward_exit')
+            if exit_button:
+                self.game.click(*exit_button)
+            elif self.hud():
+                self.game.key(VK_ESC)
+
+        self.until('던전 퇴장', lambda: self.activity()['dungeon'] == 'NotInDungeon', press_exit,
+                   every=8, first=True)
         self.wait(2)
 
     def confirm_entry(self, route):
         """On the entry screen: set double looting, press 입장하기, verify the charge."""
-        button = self.wait_for('입장 화면', lambda: self.game.find(route.enter_template), 15)
+        def nudge():
+            # 선택 창의 Space("n층 n구역 진입")나 보상 화면의 다시 하기가 먹히지 않았으면 다시 누른다.
+            image = self.game.capture()
+            retry = self.game.find('reward_retry', image)
+            if self.game.find(route.panel_template, image):
+                self.game.key(VK_SPACE)
+            elif retry:
+                self.game.click(*retry)
+
+        button = self.until('입장 화면', lambda: self.game.find(route.enter_template), nudge, every=5)
         if route.double_cost:
             want = self.balance(route) >= route.double_cost
             have = bool(self.game.find('double_on', region=DOUBLE_REGION))
             if want != have:
                 self.log('더블 루팅 ' + ('켜기' if want else '끄기 (은동전 20개 미만)'))
-                self.game.click(*DOUBLE_BUTTON)
-                self.wait(0.8)
-                if bool(self.game.find('double_on', region=DOUBLE_REGION)) != want:
-                    raise Stop('더블 루팅 상태를 바꾸지 못했습니다.')
+                self.until('더블 루팅 ' + ('켜기' if want else '끄기'),
+                           lambda: bool(self.game.find('double_on', region=DOUBLE_REGION)) == want,
+                           lambda: self.game.click(*DOUBLE_BUTTON), every=2, first=True)
             button = self.game.find(route.enter_template) or button
         before = self.balance(route)
         self.game.click(*button)
         # 입장 중에는 Entering → NotInDungeon → InProgress 순서로 잠깐 밖으로 보인다.
-        self.wait_for('던전 입장', lambda: self.activity()['dungeon'] == 'InProgress', 60, interval=1)
+        # 입장 화면이 그대로 남아 있으면 입장하기를 다시 누른다.
+        self.until('던전 입장', lambda: self.activity()['dungeon'] == 'InProgress',
+                   lambda: (spot := self.game.find(route.enter_template)) and self.game.click(*spot), every=8)
         spent = before - self.balance(route)
         self.log(f'{route.name} 입장 · {route.currency} {spent}개 사용')
         # 기다리면 자동 진행이 켜지지만 Space로 바로 시작하면 몇 초 아낀다.
@@ -503,7 +548,8 @@ class Macro:
                     self.log(f'입구 도착을 확인하지 못함 · 다시 이동 ({attempt + 1}/3)')
                 else:
                     raise Stop(f'{route.name} 입구로 이동하지 못했습니다.')
-            self.wait_for(f'{route.name} 선택 창', lambda: self.game.find(route.panel_template), 20)
+            self.until(f'{route.name} 선택 창', lambda: self.game.find(route.panel_template),
+                       lambda: self.activity()['interaction'] == 'EnterDungeon' and self.game.key(VK_SPACE))
         for x, y in route.panel_clicks:
             self.game.click(x, y)
             self.wait(0.8)
@@ -517,59 +563,41 @@ class Macro:
         """
         self.log(f'{route.name} 입구로 이동')
         space = self.environment().get('space')
-        self.open_map()
-        self.wait(1)
-        item = self.game.find(route.map_template, region=MAP_LIST_REGION)
-        if not item and space == '이멘마하':
-            item = self.wait_for('지도 목록', lambda: self.map_list_item(route), 30, interval=2)
-        if item:
-            self.game.click(*item)
-        else:
-            # 지도가 열리는 중에는 "울라 대륙" 클릭이 먹히지 않을 수 있어 몇 번 다시 누른다.
-            for _ in range(3):
-                self.game.click(*MAP_CONTINENT)
-                try:
-                    label = self.wait_for('대륙 지도', lambda: self.game.find(route.world_template, threshold=0.9), 4)
-                    break
-                except Stop:
-                    self.check()
-            else:
-                raise Stop('대륙 지도로 나가지 못했습니다.')
-            self.game.click(label[0] + route.world_offset[0], label[1] + route.world_offset[1])
-        go = self.wait_for('여기로 가기', lambda: self.game.find('map_go'), 10)
+        # 알림 창에 막혀 지도가 닫히거나 클릭이 빠지면 지도 열기부터 다시 고른다.
+        go = self.until('여기로 가기', lambda: self.game.find('map_go'),
+                        lambda: self.pick_on_map(route, space), every=8, first=True)
         self.game.click(*go)
         if space != route.field_space and self.use_wings:
             self.wait(1.5)
             self.game.key(VK_T)
         return self.wait_arrival(route)
 
-    def open_map(self, timeout=60):
-        """Press M until the map covers the field HUD.
+    def open_map(self):
+        """Press M until the map covers the field HUD (M is swallowed while a notice window is up)."""
+        if not self.hud():
+            return
+        self.game.key(VK_M)
+        self.until('지도 열기', lambda: not self.hud(), lambda: self.hud() and self.game.key(VK_M), every=5)
+        self.wait(1)
 
-        레벨업 직후 미스틱 다이스 창 같은 것이 떠 있으면 M이 먹히지 않는다. 창이 닫힐 때까지 다시 누른다.
-        """
-        deadline = time.monotonic() + timeout
-        while True:
-            self.game.key(VK_M)
-            try:
-                self.wait_for('지도', lambda: not self.game.find('hud_home', region=HUD_REGION), 5)
-                return
-            except Stop:
-                self.check()
-            if time.monotonic() > deadline:
-                raise Stop(f'지도를 {timeout}초 동안 열지 못했습니다.')
-            self.log('지도가 열리지 않음 · 다른 창이 닫히길 기다렸다가 다시 열기')
-
-    def map_list_item(self, route):
-        """이멘마하 지도 목록에서 던전을 찾는다. 지도가 닫혀 있으면 다시 열고, 아니면 탭을 다시 누른다."""
+    def pick_on_map(self, route, space):
+        """지도에서 던전을 고른다. 이멘마하는 동부/남부 탭 목록, 그 밖은 목록에 없으면 대륙 지도에서 고른다."""
+        self.open_map()
         item = self.game.find(route.map_template, region=MAP_LIST_REGION)
+        if not item and space == '이멘마하':
+            self.game.click(*route.map_tab)
+            self.wait(1.5)
+            item = self.game.find(route.map_template, region=MAP_LIST_REGION)
         if item:
-            return item
-        if self.game.find('hud_home', region=HUD_REGION):
-            self.open_map()
-            self.wait(1)
-        self.game.click(*route.map_tab)
-        return None
+            self.game.click(*item)
+            return
+        label = self.game.find(route.world_template, threshold=0.9)
+        if not label:
+            self.game.click(*MAP_CONTINENT)  # "울라 대륙"
+            self.wait(2)
+            label = self.game.find(route.world_template, threshold=0.9)
+        if label:
+            self.game.click(label[0] + route.world_offset[0], label[1] + route.world_offset[1])
 
     def wait_arrival(self, route):
         """Watch the auto travel through the CLI only.
@@ -588,13 +616,14 @@ class Macro:
                 if a['interaction'] == 'EnterDungeon' or time.monotonic() - idle_since > 4:
                     break
             self.wait(1.5)
-        for _ in range(4):
-            if self.game.find(route.panel_template):
-                return True
-            if self.activity()['interaction'] == 'EnterDungeon':
-                self.game.key(VK_SPACE)
-            self.wait(1.5)
-        return False
+        try:
+            self.until(f'{route.name} 선택 창', lambda: self.game.find(route.panel_template),
+                       lambda: self.activity()['interaction'] == 'EnterDungeon' and self.game.key(VK_SPACE),
+                       timeout=60, first=True)
+            return True
+        except Stop:
+            self.check()
+            return False
 
 
 def main():
