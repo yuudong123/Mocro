@@ -262,7 +262,8 @@ class Macro:
 
     def hud(self, image=None):
         """True while the field HUD shows, i.e. no full-screen window (map, bag, menu) is open."""
-        return bool(self.game.find('hud_esc', image, region=HUD_REGION))
+        # 밝은 획만 비교해 알림 배지가 일부 겹쳐도 알아본다(필드 0.88 이상, 다른 화면 0.45 이하).
+        return bool(self.find_text('hud_esc', image, region=HUD_REGION, threshold=0.65))
 
     def map_open(self, image=None):
         """지도 왼쪽 위 "울라 대륙"이 보이면 지도가 열린 것이다.
@@ -669,6 +670,7 @@ class Macro:
         """
         self.log(f'{route.name} 입구로 이동')
         space = self.environment().get('space')
+        self.map_opened = False
         # 알림 창에 막혀 지도가 닫히거나 클릭이 빠지면 지도 열기부터 다시 고른다.
         go = self.until('여기로 가기', lambda: self.game.find('map_go'),
                         lambda: self.pick_on_map(route, space), every=8, first=True)
@@ -684,10 +686,20 @@ class Macro:
         알림 창에 M이 먹히지 않으면 다시 누른다. HUD가 가려졌는데 "울라 대륙"이 안 보인다고 ESC로
         닫으면, "울라 대륙" 인식이 빗나갔을 때 지도를 열자마자 닫게 되므로 그러지 않는다.
         """
-        if self.hud():
-            self.game.key(VK_M)
-            self.until('지도 열기', lambda: not self.hud(), lambda: self.hud() and self.game.key(VK_M), every=5)
-            self.wait(1)
+        if self.map_open():
+            return
+        if self.map_opened and not self.hud():
+            return  # 이번 이동에서 연 지도가 그대로 있다("울라 대륙"을 못 알아봐도 M을 또 눌러 닫지 않는다)
+        if not self.hud() and not getattr(self, 'hud_reported', False):
+            # 필드 화면인데 "ESC"를 못 알아보면 M을 다시 누를 때를 판단할 수 없다. 원인을 볼 수 있게 남긴다.
+            self.hud_reported = True
+            self.log(f'필드 화면 "ESC" 표시를 확인하지 못함 · 화면 {self.screenshot("hud")}')
+        # "ESC" 인식과 상관없이 한 번은 누른다. 다시 누르는 것만 "ESC"가 보일 때(M이 먹히지 않았을 때) 한다.
+        self.game.key(VK_M)
+        self.wait(1.5)
+        self.until('지도 열기', lambda: not self.hud(), lambda: self.hud() and self.game.key(VK_M), every=5)
+        self.map_opened = True
+        self.wait(1)
         if not self.map_open() and not getattr(self, 'crumb_reported', False):
             self.crumb_reported = True
             self.log(f'지도 왼쪽 위 "울라 대륙"을 확인하지 못함(왼쪽 위 클릭·지도 옮기기는 하지 않음) · '
