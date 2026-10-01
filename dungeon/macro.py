@@ -36,9 +36,10 @@ MAP_LIST_REGION = (0, 380, 160, 560)         # 지도 왼쪽 던전 목록
 # 대륙 지도를 왼쪽 위 끝으로 옮기는 드래그(지도 내용을 오른쪽 아래로 끈다). 끝에서는 룬다·페카가 다 보인다.
 # 가장자리의 버튼을 잘못 누르지 않게 화면 중앙에서 짧게 여러 번 끈다.
 MAP_PAN = ((400, 300), (560, 420))
-# 필드 오른쪽 위 미니맵 옆 "ESC". 지도·가방·메뉴처럼 화면을 덮는 창이 열리면 가려진다.
-# ("Home"은 알림 아이콘이 늘면 왼쪽으로 밀려서 쓰지 않는다.)
-HUD_REGION = (600, 0, 720, 60)
+# 필드 화면에만 있는 표시: 미니맵 옆 "ESC", 나침반 "Space", 채팅창 "Ctrl+Z".
+# 지도·가방·메뉴처럼 화면을 덮는 창이 열리면 모두 가려진다. 알림이 뜨면 위쪽만 어두워지거나
+# 접속 직후엔 일부만 보이므로 하나라도 보이면 필드로 본다. ("Home"은 알림 아이콘이 늘면 밀려서 쓰지 않는다.)
+HUD_ANCHORS = {'hud_esc': (600, 0, 720, 60), 'hud_space': (700, 530, 800, 600), 'hud_chat': (100, 530, 260, 600)}
 CRUMB_REGION = (0, 0, 160, 60)  # 지도 왼쪽 위 "울라 대륙". 지도가 열렸을 때만 있다
 # 레벨업·시즌 스킬·스킬 획득 알림 창이 떠 있으면 조작이 먹히지 않는다. 화면 조작은 이만큼 다시 시도한다.
 PATIENCE = 180
@@ -261,9 +262,13 @@ class Macro:
             self.wait(0.7)
 
     def hud(self, image=None):
-        """True while the field HUD shows, i.e. no full-screen window (map, bag, menu) is open."""
-        # 밝은 획만 비교해 알림 배지가 일부 겹쳐도 알아본다(필드 0.88 이상, 다른 화면 0.45 이하).
-        return bool(self.find_text('hud_esc', image, region=HUD_REGION, threshold=0.65))
+        """True while the field HUD shows, i.e. no full-screen window (map, bag, menu) is open.
+
+        녹화 화면 기준 필드는 셋 중 최고 0.88 이상, 지도·메뉴·가방·선택 화면은 0.45 이하.
+        """
+        image = image if image is not None else self.game.capture()
+        return any(self.find_text(name, image, region=region, threshold=0.65, normalize=True)
+                   for name, region in HUD_ANCHORS.items())
 
     def map_open(self, image=None):
         """지도 왼쪽 위 "울라 대륙"이 보이면 지도가 열린 것이다.
@@ -528,24 +533,31 @@ class Macro:
             self.wait(2)
 
     @staticmethod
-    def text_mask(image):
-        """주변보다 확실히 밝은 픽셀(글자)만 1로. 반투명 버튼 뒤 배경이 달라도 글자 모양은 같다."""
-        gray = cv2.cvtColor(np.asarray(image.convert('RGB')), cv2.COLOR_RGB2GRAY).astype(np.int16)
+    def text_mask(image, normalize=False):
+        """주변보다 확실히 밝은 픽셀(글자)만 1로. 반투명 버튼 뒤 배경이 달라도 글자 모양은 같다.
+
+        normalize: 영역의 밝기를 먼저 0~255로 편다. 알림 창이 화면을 어둡게 덮어도 글자를 찾는다.
+        """
+        gray = cv2.cvtColor(np.asarray(image.convert('RGB')), cv2.COLOR_RGB2GRAY).astype(np.float32)
+        if normalize:
+            low, high = np.percentile(gray, 1), np.percentile(gray, 99.5)
+            gray = np.clip((gray - low) / max(high - low, 1) * 255, 0, 255)
+        gray = gray.astype(np.int16)
         return ((gray - cv2.blur(gray, (15, 15))) > 35).astype(np.float32)
 
-    def find_text(self, name, image=None, region=None, threshold=0.7):
+    def find_text(self, name, image=None, region=None, threshold=0.7, normalize=False):
         """Like Game.find but compares only the bright strokes (text, icons) of the template.
 
         반투명 창(ESC 메뉴 등)은 뒤 게임 화면이 비쳐 일반 비교로는 일치도가 들쭉날쭉하다.
         """
         if not hasattr(self, 'text_needles'):
             self.text_needles = {}
-        if name not in self.text_needles:
-            self.text_needles[name] = self.text_mask(Image.open(TEMPLATES / f'{name}.png'))
-        needle = self.text_needles[name]
+        if (name, normalize) not in self.text_needles:
+            self.text_needles[name, normalize] = self.text_mask(Image.open(TEMPLATES / f'{name}.png'), normalize)
+        needle = self.text_needles[name, normalize]
         image = image if image is not None else self.game.capture()
         left, top, right, bottom = region or (0, 0, *image.size)
-        frame = self.text_mask(image.crop((left, top, right, bottom)))
+        frame = self.text_mask(image.crop((left, top, right, bottom)), normalize)
         if frame.max() == 0 or frame.shape[0] < needle.shape[0] or frame.shape[1] < needle.shape[1]:
             return None
         _, score, _, (x, y) = cv2.minMaxLoc(cv2.matchTemplate(frame, needle, cv2.TM_CCOEFF_NORMED))
