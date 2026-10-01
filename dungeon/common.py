@@ -207,6 +207,15 @@ class Game:
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
         time.sleep(0.25)
 
+    def scroll(self, x, y, clicks):
+        """Mouse wheel over (x, y): positive scrolls up, negative down."""
+        self.focus()
+        left, top, _, _ = client_rect(self.hwnd)
+        win32api.SetCursorPos((left + x, top + y))
+        time.sleep(0.08)
+        win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, 0, 0, clicks * win32con.WHEEL_DELTA)
+        time.sleep(0.25)
+
     def key(self, vk):
         self.hold([vk], 0.06)
 

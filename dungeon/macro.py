@@ -2,6 +2,7 @@
 
 게임 상태는 CLI로 확인하고, 입장·재도전·이동 조작만 화면 인식과 클릭으로 한다.
 현재 캐릭터가 있는 던전부터 돌고, 그 재화가 떨어지면 다른 던전으로 이동한다.
+두 재화가 모두 떨어지면 아직 안 한 100레벨 캐릭터로 바꿔 계속한다.
 F12로 중지한다. 게임이 관리자 권한이라 이 스크립트도 관리자 권한으로 다시 실행된다.
 """
 import argparse
@@ -40,6 +41,11 @@ TIDY_KEEP = '간단한 정리'
 TIDY_START = (455, 539)         # "N개 정리하기"
 TIDY_CONFIRM = (400, 563)       # "정리 대상"의 정리하기, "정리 완료"의 확인
 BAG_CLOSE = (770, 18)
+MENU_QUIT_REGION = (700, 500, 800, 600)  # ESC 메뉴 오른쪽 아래 "게임 종료"
+TO_SELECT = (400, 426)          # 플레이 중단 창의 "캐릭터 선택 화면으로"
+GAME_START = (400, 563)
+# 캐릭터 선택 화면 카드: 4열 2줄. 2번째 줄도 위쪽(레벨 표시)은 스크롤 없이 보인다.
+CARD_LEFTS, CARD_TOPS, CARD_WIDTH = (57, 231, 405, 579), (93, 374), 164
 
 
 @dataclass
@@ -79,11 +85,16 @@ class Stop(Exception):
     pass
 
 
+class Exhausted(Stop):
+    """이 캐릭터의 은동전·마족 공물이 모두 부족하다."""
+
+
 class Macro:
     def __init__(self, game, stop, log, max_runs=None, use_wings=True, start=None):
         self.game, self.stop, self.log = game, stop, log
         self.max_runs, self.use_wings, self.start = max_runs, use_wings, start
         self.runs = 0
+        self.done_slots = set()  # 이번 실행에서 끝낸 캐릭터 카드 번호
 
     # ---- 상태 확인 ----
     def check(self):
@@ -290,15 +301,94 @@ class Macro:
                 self.wait(2)
                 continue
             else:
-                self.make_room()
                 if not self.affordable(route):
                     route = self.next_route(route)
+                self.make_room()
                 self.enter_from_field(route)
+
+    def run_all(self, switch=True):
+        """run() each level-100 character in turn until every one is out of currency."""
+        while True:
+            try:
+                self.run()
+                return
+            except Exhausted as reason:
+                if not switch:
+                    raise
+                self.log(f'{reason} 다음 캐릭터로 바꿉니다.')
+            self.start = None
+            if not self.switch_character():
+                raise Stop('모든 100레벨 캐릭터의 은동전·마족 공물이 부족합니다. 종료합니다.')
+
+    # ---- 캐릭터 변경 ----
+    def cards(self, image):
+        """Character select cards: slot, level 100 or not, selected (yellow frame) or not."""
+        found = []
+        for row, top in enumerate(CARD_TOPS):
+            for col, left in enumerate(CARD_LEFTS):
+                r, _, b = ImageStat.Stat(image.crop((left, top + 20, left + 3, top + 150))).mean
+                found.append({
+                    'slot': row * len(CARD_LEFTS) + col,
+                    'lv100': bool(self.game.find('lv100', image, region=(left, top, left + 110, top + 40))),
+                    'selected': r - b > 40,  # 선택 카드 테두리 노랑(약 +80), 나머지 0 근처
+                    'center': (left + CARD_WIDTH // 2, top + (120 if row == 0 else 90)),
+                })
+        return found
+
+    def to_character_select(self):
+        for _ in range(3):
+            self.game.key(VK_ESC)
+            try:
+                button = self.wait_for('메뉴', lambda: self.game.find('menu_quit', region=MENU_QUIT_REGION), 3)
+                break
+            except Stop:
+                self.check()  # 다른 창이 먼저 닫혔을 수 있어 다시 누른다
+        else:
+            raise Stop('ESC 메뉴를 열지 못했습니다.')
+        self.game.click(*button)
+        self.wait_for('플레이 중단 창', lambda: self.game.find('quit_title'), 5)
+        self.game.click(*TO_SELECT)
+        self.wait_for('캐릭터 선택 화면', lambda: self.game.find('select_title'), 90)
+        self.wait(2)  # 카드가 다 그려질 때까지
+
+    def switch_character(self):
+        """Mark the current character done and log in to the next level-100 one; False if none is left."""
+        self.to_character_select()
+        self.game.scroll(400, 300, 10)  # 목록 맨 위로
+        self.wait(1)
+        cards = self.cards(self.game.capture())
+        current = next((c['slot'] for c in cards if c['selected']), None)
+        if current is not None:
+            self.done_slots.add(current)
+        todo = [c for c in cards if c['lv100'] and c['slot'] not in self.done_slots]
+        self.log(f'캐릭터 선택 · 100레벨 {[c["slot"] + 1 for c in cards if c["lv100"]]}번 카드 · '
+                 f'끝낸 카드 {sorted(s + 1 for s in self.done_slots)}')
+        if not todo:
+            return False
+        card = todo[0]
+        self.game.click(*card['center'])
+        self.wait(1)
+        if not self.cards(self.game.capture())[card['slot']]['selected']:
+            raise Stop(f'{card["slot"] + 1}번 캐릭터 카드를 선택하지 못했습니다.')
+        self.done_slots.add(card['slot'])
+        self.game.click(*GAME_START)
+        self.activity(patience=120)  # 접속하면 CLI가 응답한다
+        self.wait(3)
+        info = cli('get_my_info')
+        level = info.get('Level') if isinstance(info, dict) else None
+        level = level.get('Value') if isinstance(level, dict) else level
+        job = info.get('EnabledCombatJobDisplayName') if isinstance(info, dict) else None
+        job = job.get('Value') if isinstance(job, dict) else job
+        self.log(f'{card["slot"] + 1}번 캐릭터 접속 · {job} {level}레벨 · 재화 {currencies()}')
+        if level != 100:
+            self.log('100레벨이 아니라 건너뜁니다.')
+            return self.switch_character()
+        return True
 
     def next_route(self, route):
         nxt = self.other(route)
         if not self.affordable(nxt):
-            raise Stop(f'{route.currency}·{nxt.currency} 모두 부족합니다. 종료합니다.')
+            raise Exhausted(f'{route.currency}·{nxt.currency} 모두 부족합니다.')
         self.log(f'{route.currency} 부족 → {nxt.name}로 이동')
         return nxt
 
@@ -514,6 +604,7 @@ def main():
                         help='던전 밖에서 시작할 때 이 던전부터 진행 (runda/peka)')
     parser.add_argument('--check', action='store_true', help='조작 없이 현재 위치·재화·화면 인식 결과만 출력')
     parser.add_argument('--no-wings', action='store_true', help='던전 간 이동에 정령의 날개(T)를 쓰지 않음')
+    parser.add_argument('--no-switch', action='store_true', help='재화가 떨어져도 다른 캐릭터로 바꾸지 않고 종료')
     args = parser.parse_args()
     sys.stdout.reconfigure(encoding='utf-8')
     if not is_admin():
@@ -542,7 +633,7 @@ def main():
             macro.report()
             return
         try:
-            macro.run()
+            macro.run_all(switch=not args.no_switch)
         except Stop as reason:
             if not stop.is_set() and '완료' not in str(reason) and '부족' not in str(reason):
                 log(f'중단 당시 화면: {macro.screenshot("stop")}')
