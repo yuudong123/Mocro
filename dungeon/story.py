@@ -36,8 +36,15 @@ class Story:
                     raise Stop(f'{self.target}레벨 도달 · 완료')
                 last_level = now
             a = m.activity()
+            # "장면·대화·이야기 넘기기"가 보이면 무조건 누른다. 이동 중에는 캡처가 자동 이동을 끊을 수
+            # 있어 보지 않는다(이동 중에는 이 버튼이 나오지 않는다).
+            if not a['travel'] and m.skip_scene():
+                m.log('넘기기')
+                idle_since, reported = None, False
+                m.wait(1)
+                continue
             if a['dialogue'] or a['selecting']:
-                # 대화 넘기기와 선택지(첫 번째·기본 선택)는 Space로 된다.
+                # 넘기기 버튼이 없는 대화와 선택지(첫 번째·기본 선택)는 Space로 넘긴다.
                 if a['dialogue_next'] or a['selecting']:
                     m.game.key(VK_SPACE)
                 idle_since, reported = None, False
@@ -52,10 +59,7 @@ class Story:
                 m.wait(2)
                 continue
             image = m.game.capture()
-            if m.skip_scene(image):
-                m.log('연출 장면 넘기기')
-                idle_since = None
-            elif a['dungeon'] == 'Cleared' or m.game.find('touch_screen', image):
+            if a['dungeon'] == 'Cleared' or m.game.find('touch_screen', image):
                 m.game.click(*CLEAR_TOUCH)
                 idle_since = None
             elif not a['sequence']:

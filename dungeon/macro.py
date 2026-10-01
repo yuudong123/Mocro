@@ -25,7 +25,7 @@ from roster import Roster, clock
 
 LOGS = ROOT / 'logs'
 VK_I, VK_M, VK_T, VK_ESC, VK_SPACE = 0x49, 0x4D, 0x54, win32con.VK_ESCAPE, win32con.VK_SPACE
-SKIP_REGION = (600, 0, 800, 60)  # 오른쪽 위 "장면 넘기기"
+SKIP_REGION = (480, 0, 800, 70)  # 오른쪽 위 "장면 넘기기"·"대화 넘기기"·"이야기 넘기기"
 CLEAR_TOUCH = (600, 300)        # 클리어 후 "화면을 터치해 주세요"
 QUEST_TRACKER = (764, 138)      # 자동 진행이 안 켜질 때 누르는 퀘스트 추적 제목
 DOUBLE_BUTTON = (294, 321)      # 룬다 입장 화면의 더블 루팅 선택 버튼
@@ -526,13 +526,30 @@ class Macro:
                 self.log('연출 장면 넘기기')
             self.wait(2)
 
+    @staticmethod
+    def text_mask(image):
+        """주변보다 확실히 밝은 픽셀(글자)만 1로. 반투명 버튼 뒤 배경이 달라도 글자 모양은 같다."""
+        gray = cv2.cvtColor(np.asarray(image.convert('RGB')), cv2.COLOR_RGB2GRAY).astype(np.int16)
+        return ((gray - cv2.blur(gray, (15, 15))) > 35).astype(np.float32)
+
     def skip_scene(self, image=None):
-        """Press the translucent "장면 넘기기" button; light and dark backgrounds need separate images."""
+        """Press any "… 넘기기" button (장면·대화·이야기) at the top right.
+
+        버튼마다 앞 글자가 달라서 공통인 "넘기기" 글자 모양만 비교한다.
+        """
+        if not hasattr(self, 'skip_masks'):
+            # 밝은·어두운 배경의 "장면 넘기기" 버튼에서 "넘기기" 부분만 쓴다.
+            self.skip_masks = [self.text_mask(Image.open(TEMPLATES / f'{n}.png'))[4:22, 40:78]
+                               for n in ('skip_scene', 'skip_scene_dark')]
         image = image if image is not None else self.game.capture()
-        for name in ('skip_scene', 'skip_scene_dark'):
-            spot = self.game.find(name, image, region=SKIP_REGION, threshold=0.8)
-            if spot:
-                self.game.click(*spot)
+        left, top, right, bottom = SKIP_REGION
+        frame = self.text_mask(image.crop((left, top, right, bottom)))
+        if frame.max() == 0:
+            return False
+        for needle in self.skip_masks:
+            _, score, _, (x, y) = cv2.minMaxLoc(cv2.matchTemplate(frame, needle, cv2.TM_CCOEFF_NORMED))
+            if score >= 0.75:
+                self.game.click(left + x + needle.shape[1] // 2, top + y + needle.shape[0] // 2)
                 return True
         return False
 
