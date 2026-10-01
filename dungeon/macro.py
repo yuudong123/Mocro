@@ -32,7 +32,9 @@ MAP_CONTINENT = (55, 24)        # 지도 왼쪽 위 "울라 대륙": 대륙 지�
 MAP_EAST, MAP_SOUTH = (46, 570), (111, 570)  # 이멘마하 지도 왼쪽 아래 동부/남부 탭
 MAP_LIST_REGION = (0, 380, 160, 560)         # 지도 왼쪽 던전 목록
 # 대륙 지도를 왼쪽 위 끝으로 옮기는 드래그(지도 내용을 오른쪽 아래로 끈다). 끝에서는 룬다·페카가 다 보인다.
-MAP_PAN = ((120, 110), (680, 480))
+# 가장자리의 버튼을 잘못 누르지 않게 화면 중앙에서 짧게 여러 번 끈다.
+MAP_PAN = ((400, 300), (560, 420))
+MAP_OPEN_REGION = (300, 400, 800, 600)       # 대륙 지도 아래 패널(지도·퀘스트·아르바이트·이벤트)
 HUD_REGION = (500, 0, 640, 60)  # 필드 오른쪽 위 "Home". 지도처럼 화면을 덮는 창이 열리면 가려진다.
 # 레벨업·시즌 스킬·스킬 획득 알림 창이 떠 있으면 조작이 먹히지 않는다. 화면 조작은 이만큼 다시 시도한다.
 PATIENCE = 180
@@ -631,10 +633,14 @@ class Macro:
         if label:
             self.game.click(label[0] + route.world_offset[0], label[1] + route.world_offset[1])
 
-    def pan_map_top_left(self, limit=8):
+    def pan_map_top_left(self, limit=20):
         """Drag the map until it stops moving (its top-left edge)."""
         before = np.asarray(self.game.capture(), dtype=np.int16)
         for _ in range(limit):
+            # 대륙 지도 아래 패널의 "지도" 탭이 보일 때만 끈다. 다른 창 위에서 끌면 엉뚱한 것을 누른다.
+            if not self.game.find('map_open', region=MAP_OPEN_REGION, threshold=0.8):
+                self.log('대륙 지도가 열려 있지 않아 지도 옮기기를 멈춤')
+                return
             self.game.drag(*MAP_PAN)
             self.wait(0.5)
             after = np.asarray(self.game.capture(), dtype=np.int16)
