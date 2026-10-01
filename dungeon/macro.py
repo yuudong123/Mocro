@@ -28,6 +28,8 @@ DOUBLE_REGION = (230, 290, 360, 350)
 MAP_CONTINENT = (55, 24)        # 지도 왼쪽 위 "울라 대륙": 대륙 지도로 나간다
 MAP_EAST, MAP_SOUTH = (46, 570), (111, 570)  # 이멘마하 지도 왼쪽 아래 동부/남부 탭
 MAP_LIST_REGION = (0, 380, 160, 560)         # 지도 왼쪽 던전 목록
+# 가방 무게가 한도를 넘으면 자동 진행이 멈춘다. 한 판 전리품만큼 여유를 두고 입장을 멈춘다.
+WEIGHT_LIMIT = 0.98
 
 
 @dataclass
@@ -114,6 +116,22 @@ class Macro:
     def affordable(self, route):
         return self.balance(route) >= route.cost
 
+    def weight(self):
+        for _ in range(90):
+            data = cli('get_inventory')
+            if isinstance(data, dict) and 'error' not in data:
+                return float(data['CurrentInventoryWeight']), float(data['MaxInventoryWeight'])
+            self.wait(1)
+        raise Stop(f'가방 무게를 읽지 못했습니다: {data}')
+
+    def overweight(self, limit=WEIGHT_LIMIT):
+        """Stop reason when the bag is too heavy to run another dungeon, else None."""
+        current, maximum = self.weight()
+        if current < maximum * limit:
+            return None
+        return (f'가방 무게 {current:.0f}/{maximum:.0f} ({current / maximum:.1%}) · 여유 부족. '
+                '보관함에 옮기거나 정리한 뒤 다시 실행하세요.')
+
     def route_in(self, env):
         for route in ROUTES:
             if (env.get('space') or '').startswith(route.dungeon_space):
@@ -149,7 +167,8 @@ class Macro:
 
     def report(self):
         """--check: 조작 없이 판단 근거만 출력한다."""
-        self.log(f'게임 화면 {tuple(self.game.size())} · 재화 {currencies()}')
+        current, maximum = self.weight()
+        self.log(f'게임 화면 {tuple(self.game.size())} · 재화 {currencies()} · 가방 {current:.0f}/{maximum:.0f}')
         self.log(f'상태 {self.activity()} · 위치 {self.environment()}')
         self.starting_route()
         image = self.game.capture()
@@ -191,10 +210,16 @@ class Macro:
             elif state == 'Cleared':
                 self.to_reward_screen()
                 self.runs += 1
-                self.log(f'{route.name} {self.runs}회 클리어 · 남은 {route.currency} {self.balance(route)}')
+                current, maximum = self.weight()
+                self.log(f'{route.name} {self.runs}회 클리어 · 남은 {route.currency} {self.balance(route)}'
+                         f' · 가방 {current:.0f}/{maximum:.0f}')
                 if self.max_runs and self.runs >= self.max_runs:
                     self.leave_reward()
                     raise Stop(f'목표 {self.max_runs}회 완료')
+                heavy = self.overweight()
+                if heavy:
+                    self.leave_reward()
+                    raise Stop(heavy)
                 if self.affordable(route):
                     self.game.click(*self.game.find('reward_retry'))
                     self.confirm_entry(route)
@@ -209,6 +234,9 @@ class Macro:
                 self.wait(2)
                 continue
             else:
+                heavy = self.overweight()
+                if heavy:
+                    raise Stop(heavy)
                 if not self.affordable(route):
                     route = self.next_route(route)
                 self.enter_from_field(route)
@@ -236,6 +264,9 @@ class Macro:
                 self.wait_for('부활', lambda: not self.activity()['dead'], 30, interval=2)
             elapsed = time.monotonic() - started
             if a['dungeon'] == 'InProgress' and not a['auto'] and not a['boss']:
+                heavy = elapsed > 20 and self.overweight(limit=1)
+                if heavy:
+                    raise Stop(f'자동 진행이 멈춤 · {heavy}')
                 if elapsed > 20 and not nudged:
                     self.log('자동 진행이 꺼져 있음 · 퀘스트 추적을 눌러 시작')
                     self.game.click(*QUEST_TRACKER)
