@@ -259,9 +259,30 @@ class Macro:
             if now > deadline:
                 raise Stop(f'{what}: {timeout}초 동안 확인되지 않았습니다.')
             if last is None or now - last >= every:
-                retry()
+                # 대화가 끼어들었으면(심층 뒤 몰리 등) 그것부터 넘긴다. 대화 중에는 다른 조작이 먹히지 않는다.
+                if not self.skip_dialogue(summarize_activity(cli('get_activity'))):
+                    retry()
                 last = time.monotonic()
             self.wait(0.7)
+
+    def in_dialogue(self):
+        a = summarize_activity(cli('get_activity'))
+        return isinstance(a, dict) and bool(a.get('dialogue') or a.get('selecting'))
+
+    def clear_dialogue(self):
+        """끼어든 대화가 끝날 때까지 넘긴다(넘기기는 until의 재시도 차례에 한다)."""
+        self.until('대화 넘기기', lambda: not self.in_dialogue(), lambda: None, every=3, first=True)
+
+    def skip_dialogue(self, a):
+        """If the CLI says a dialogue or choice is up, press "대화 넘기기" (or Space); True if it did."""
+        if not isinstance(a, dict) or not (a.get('dialogue') or a.get('selecting')):
+            return False
+        if self.skip_scene():
+            self.log('대화 넘기기')
+        else:
+            self.game.key(VK_SPACE)  # 넘기기 버튼이 없는 대화와 선택지(기본 선택)
+        self.wait(1)
+        return True
 
     def hud(self, image=None):
         """True while the field HUD shows, i.e. no full-screen window (map, bag, menu) is open.
@@ -280,8 +301,8 @@ class Macro:
         어떤 방식으로도 알아보기 어렵다.
         """
         image = image if image is not None else self.game.capture()
-        if self.map_opened and not self.hud(image):
-            return True
+        if self.map_opened and not self.hud(image) and not self.in_dialogue():
+            return True  # 대화 장면도 필드 표시를 가리므로 대화 중이 아닐 때만
         return self.crumb(image)
 
     def crumb(self, image):
@@ -339,7 +360,10 @@ class Macro:
         loading_since = None
         while True:
             self.check()
-            state = self.activity()['dungeon']
+            a = self.activity()
+            if a['dungeon'] == 'NotInDungeon' and self.skip_dialogue(a):
+                continue  # 던전에서 나온 뒤 끼어든 대화(심층 뒤 몰리 등)
+            state = a['dungeon']
             env = self.environment()
             route = self.route_in(env) or route
             if state != 'NotInDungeon':
@@ -745,6 +769,7 @@ class Macro:
         알림 창에 M이 먹히지 않으면 필드 표시가 그대로 보이므로 다시 누른다.
         이미 연 지도는 M을 또 눌러 닫지 않는다.
         """
+        self.clear_dialogue()  # 대화 중에는 M이 먹히지 않고, 대화 화면이 필드 표시를 가려 지도로 오인한다
         if self.map_open():
             return
         if not self.hud() and not getattr(self, 'hud_reported', False):
@@ -753,7 +778,8 @@ class Macro:
             self.log(f'필드 표시(ESC·Space·Ctrl+Z)를 확인하지 못함 · 화면 {self.screenshot("hud")}')
         self.game.key(VK_M)
         self.wait(1.5)
-        self.until('지도 열기', lambda: not self.hud(), lambda: self.hud() and self.game.key(VK_M), every=5)
+        self.until('지도 열기', lambda: not self.hud() and not self.in_dialogue(),
+                   lambda: self.hud() and self.game.key(VK_M), every=5)
         self.map_opened = True
         self.wait(1)
         if not self.crumb(self.game.capture()) and not getattr(self, 'crumb_reported', False):
@@ -815,6 +841,9 @@ class Macro:
         idle_since = None
         while time.monotonic() < deadline:
             a = self.activity()
+            if self.skip_dialogue(a):
+                idle_since = None
+                continue
             if a['travel'] or a['auto']:
                 idle_since = None
             else:
