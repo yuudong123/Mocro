@@ -41,6 +41,7 @@ MAP_PAN = ((400, 300), (560, 420))
 # 접속 직후엔 일부만 보이므로 하나라도 보이면 필드로 본다. ("Home"은 알림 아이콘이 늘면 밀려서 쓰지 않는다.)
 HUD_ANCHORS = {'hud_esc': (600, 0, 720, 60), 'hud_space': (700, 530, 800, 600), 'hud_chat': (100, 530, 260, 600)}
 CRUMB_REGION = (0, 0, 160, 60)  # 지도 왼쪽 위 "울라 대륙". 지도가 열렸을 때만 있다
+NOTICE_CLOSE_REGION = (320, 220, 480, 380)  # 레벨업 다이스 획득 같은 알림 가운데의 X
 # 레벨업·시즌 스킬·스킬 획득 알림 창이 떠 있으면 조작이 먹히지 않는다. 화면 조작은 이만큼 다시 시도한다.
 PATIENCE = 180
 # 가방 무게가 한도를 넘으면 자동 진행이 멈춘다. 한 판 전리품만큼 여유를 두고 가방을 정리한다.
@@ -259,8 +260,9 @@ class Macro:
             if now > deadline:
                 raise Stop(f'{what}: {timeout}초 동안 확인되지 않았습니다.')
             if last is None or now - last >= every:
-                # 대화가 끼어들었으면(심층 뒤 몰리 등) 그것부터 넘긴다. 대화 중에는 다른 조작이 먹히지 않는다.
-                if not self.skip_dialogue(summarize_activity(cli('get_activity'))):
+                # 대화(심층 뒤 몰리 등)나 알림 창(레벨업 다이스 등)이 끼어들었으면 그것부터 넘긴다.
+                # 그동안에는 다른 조작이 먹히지 않는다.
+                if not self.skip_dialogue(summarize_activity(cli('get_activity'))) and not self.close_notice():
                     retry()
                 last = time.monotonic()
             self.wait(0.7)
@@ -272,6 +274,19 @@ class Macro:
     def clear_dialogue(self):
         """끼어든 대화가 끝날 때까지 넘긴다(넘기기는 until의 재시도 차례에 한다)."""
         self.until('대화 넘기기', lambda: not self.in_dialogue(), lambda: None, every=3, first=True)
+
+    def close_notice(self, image=None):
+        """Close a notice window (e.g. level-up dice reward) with the X in the middle; True if it did.
+
+        알림이 화면을 어둡게 덮으므로 밝기를 펴서 밝은 획만 비교한다(녹화의 다른 화면은 0.41 이하).
+        """
+        spot = self.find_text('notice_close', image, region=NOTICE_CLOSE_REGION, threshold=0.6, normalize=True)
+        if not spot:
+            return False
+        self.log('알림 창 닫기')
+        self.game.click(*spot)
+        self.wait(1)
+        return True
 
     def skip_dialogue(self, a):
         """If the CLI says a dialogue or choice is up, press "대화 넘기기" (or Space); True if it did."""
@@ -363,6 +378,8 @@ class Macro:
             a = self.activity()
             if a['dungeon'] == 'NotInDungeon' and self.skip_dialogue(a):
                 continue  # 던전에서 나온 뒤 끼어든 대화(심층 뒤 몰리 등)
+            if a['dungeon'] == 'NotInDungeon' and not a['travel'] and self.close_notice():
+                continue  # 레벨업 다이스 같은 알림 창
             state = a['dungeon']
             env = self.environment()
             route = self.route_in(env) or route
@@ -585,6 +602,8 @@ class Macro:
                 self.wait_for('부활', lambda: not self.activity()['dead'], 30, interval=2)
             elapsed = time.monotonic() - waiting
             if a['dungeon'] == 'InProgress' and not a['auto'] and not a['boss']:
+                if self.close_notice():
+                    continue  # 알림 창이 자동 진행을 막고 있었다
                 if elapsed > 20 and self.overweight(limit=1):
                     self.log('가방 무게 초과로 자동 진행이 멈춤')
                     self.make_room(limit=1)
