@@ -112,6 +112,7 @@ class Macro:
         self.done_ids = set()    # 이번 실행에서 끝낸 캐릭터(카드와 다르게 접속됐는지 확인)
         self.map_opened = False  # 이번 이동에서 M으로 지도를 열었다
         self.skip_slots = set()  # 100레벨 표시였지만 접속해 보니 아니었던 카드
+        self.fresh = False       # 방금 접속해서 아직 한 판도 안 돌았다(재화를 잘못 읽었을 수 있다)
 
     # ---- 상태 확인 ----
     def check(self):
@@ -348,6 +349,7 @@ class Macro:
             elif state == 'Cleared':
                 self.to_reward_screen()
                 self.runs += 1
+                self.fresh = False
                 current, maximum = self.weight()
                 self.log(f'{route.name} {self.runs}회 클리어 · 남은 {route.currency} {self.balance(route)}'
                          f' · 가방 {current:.0f}/{maximum:.0f}')
@@ -392,11 +394,48 @@ class Macro:
                 self.run()
                 return
             except Exhausted as reason:
+                if self.fresh and self.recheck():
+                    continue  # 접속 직후 덜 읽힌 재화였다. 이 캐릭터로 계속 돈다
                 if not switch:
                     raise
                 self.log(f'{reason} 다음 캐릭터로 바꿉니다.')
             self.start = None
             self.switch_character()
+
+    def recheck(self, tries=3):
+        """Re-read currencies a few times; True if this character can still run a dungeon."""
+        for attempt in range(tries):
+            self.wait(10)
+            money = currencies()
+            if not isinstance(money, dict) or 'error' in money:
+                continue
+            if any(money.get(route.currency, 0) >= route.cost for route in ROUTES):
+                self.log(f'재화를 다시 읽으니 {money} · 이 캐릭터로 계속')
+                self.remember(money)
+                self.fresh = False
+                return True
+        return False
+
+    def settled_currencies(self, quiet=6, least=10, timeout=40):
+        """접속 직후 CLI 재화는 한동안 덜 읽힌 값이 온다(마법사 은동전 100·공물 4가 5·0으로 읽힌 적 있다).
+
+        접속 후 least초가 지나고 값이 quiet초 동안 그대로일 때 돌려준다.
+        """
+        started = time.monotonic()
+        last, since, money = None, None, {}
+        while True:
+            reading = currencies()
+            now = time.monotonic()
+            if isinstance(reading, dict) and 'error' not in reading:
+                money = reading
+                key = tuple(reading.get(route.currency, 0) for route in ROUTES)
+                if key != last:
+                    last, since = key, now
+                elif now - since >= quiet and now - started >= least:
+                    return money
+            if now - started > timeout:
+                return money
+            self.wait(2)
 
     # ---- 캐릭터 변경 ----
     def cards(self, image):
@@ -468,16 +507,17 @@ class Macro:
         # 접속하면 CLI가 응답한다. 선택 화면이 그대로면 게임 시작을 다시 누른다.
         self.until('캐릭터 접속', self.in_game,
                    lambda: self.game.find('select_title') and self.game.click(*GAME_START), every=8, first=True)
-        self.wait(3)
         now = self.me()
+        money = self.settled_currencies()
         self.log(f'{card["slot"] + 1}번 캐릭터 접속 · {now["realm"]} {now["job"]} {now["level"]}레벨 · '
-                 f'재화 {currencies()}')
+                 f'재화 {money}')
         if now['id'] in self.done_ids:
             # 고른 카드와 다른 캐릭터다. 기록하지 않고 선택 화면에서 다시 고른다.
             self.log(f'이미 끝낸 캐릭터로 접속됨({now["realm"]} {now["job"]}) · 다음 캐릭터로 넘어갑니다.')
             return self.switch_character()
         self.slot, self.ident = card['slot'], now['id']
-        self.remember()
+        self.remember(money)
+        self.fresh = True
         if now['level'] != 100:
             self.log('100레벨이 아니라 건너뜁니다.')
             self.skip_slots.add(card['slot'])
