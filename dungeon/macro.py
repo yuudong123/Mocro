@@ -25,6 +25,7 @@ from roster import Roster, clock
 
 LOGS = ROOT / 'logs'
 VK_I, VK_M, VK_T, VK_ESC, VK_SPACE = 0x49, 0x4D, 0x54, win32con.VK_ESCAPE, win32con.VK_SPACE
+VK_A, VK_E, VK_Q, VK_S, VK_W = 0x41, 0x45, 0x51, 0x53, 0x57
 SKIP_REGION = (480, 0, 800, 70)  # 오른쪽 위 "장면 넘기기"·"대화 넘기기"·"이야기 넘기기"
 CLEAR_TOUCH = (600, 300)        # 클리어 후 "화면을 터치해 주세요"
 QUEST_TRACKER = (764, 138)      # 자동 진행이 안 켜질 때 누르는 퀘스트 추적 제목
@@ -59,6 +60,19 @@ TO_SELECT = (400, 426)          # 플레이 중단 창의 "캐릭터 선택 화�
 GAME_START = (400, 563)
 # 캐릭터 선택 화면 카드: 4열 2줄. 2번째 줄도 위쪽(레벨 표시)은 스크롤 없이 보인다.
 CARD_LEFTS, CARD_TOPS, CARD_WIDTH = (57, 231, 405, 579), (93, 374), 164
+# 자세히 가방 정리 화면(녹화 20261005-154846, 룬 분해 20261005-160805). 탭은 W/S, 칸은 Q/E로 옮긴다.
+BAG_TABS = ['장비', '도구', '아이템', '패션', '탈것·펫']
+BAG_TAB_X = [40, 85, 133, 181, 232]          # 선택된 탭은 초록 배경(y 52~66)
+# 등급 칩: (왼쪽 끝 x, 가운데 y, 누를 곳 x). 선택되면 밝은 색 테두리가 생긴다. 아무것도 안 고르면 전 등급.
+GRADE_CHIPS = {'일반': (55, 113, 78), '고급': (109, 113, 133), '레어': (163, 113, 186),
+               '엘리트': (217, 113, 245), '에픽': (281, 113, 304), '전설': (56, 147, 79),
+               '전설+': (109, 147, 136), '전설++': (170, 147, 200), '신화': (237, 147, 260), '유니크': (290, 147, 319)}
+RUNE_GRADES = ['일반', '고급', '레어', '엘리트', '에픽']  # 룬은 전설 이상을 남긴다(녹화)
+DETAIL_CLOSE = (770, 25)                     # 자세히 가방 정리·가방 오른쪽 위 X
+BAG_METHODS = {'분해': ((88, 253), (70, 245, 106, 261)), '열기': ((224, 253), (200, 245, 250, 261))}
+SELECT_ALL, SELECT_ALL_MARK = (695, 118), (689, 111, 701, 123)  # "전체 선택". 체크되면 초록
+RUN_BUTTON = (600, 550, 740, 575)            # "N개 정리하기". 0개면 어두운 초록
+BAG_LIST_REGION, SUBTAB_REGION = (440, 130, 790, 540), (440, 70, 760, 105)
 
 
 @dataclass
@@ -103,9 +117,9 @@ class Exhausted(Stop):
 
 
 class Macro:
-    def __init__(self, game, stop, log, max_runs=None, use_wings=True, start=None):
+    def __init__(self, game, stop, log, max_runs=None, use_wings=True, start=None, clean=True):
         self.game, self.stop, self.log = game, stop, log
-        self.max_runs, self.use_wings, self.start = max_runs, use_wings, start
+        self.max_runs, self.use_wings, self.start, self.clean = max_runs, use_wings, start, clean
         self.runs = 0
         self.roster = Roster()   # 카드별 마지막으로 본 재화(dungeon/characters.json)
         self.slot = None         # 지금 캐릭터의 카드 번호(0부터). 모르면 선택 화면에서 알아낸다
@@ -437,11 +451,177 @@ class Macro:
             except Exhausted as reason:
                 if self.fresh and self.recheck():
                     continue  # 접속 직후 덜 읽힌 재화였다. 이 캐릭터로 계속 돈다
+                self.log(f'{reason}' + (' 가방을 정리하고' if self.clean else '')
+                         + (' 다음 캐릭터로 바꿉니다.' if switch else ' 종료합니다.'))
+                if self.clean:
+                    self.clean_bag()
                 if not switch:
                     raise
-                self.log(f'{reason} 다음 캐릭터로 바꿉니다.')
             self.start = None
             self.switch_character()
+
+    # ---- 캐릭터를 바꾸기 전 가방 정리 ----
+    def clean_bag(self):
+        """녹화(20261005-154846, 20261005-160805)한 순서 그대로 가방을 정리한다.
+
+        자세히 가방 정리 → 아이템 탭 소모품: 등급 전체, "열기"로 전체 선택(패션 티켓 조각 보물 상자는 뺌) 정리
+        → "분해"로 전체 선택 정리 → 장비 탭: 등급 전체, 무기·방어구·장신구 차례로 전체 선택 분해
+        → 보석·룬: 일반~에픽만 골라 전체 선택 분해 → X로 닫기.
+        """
+        before, maximum = self.weight()
+        self.log(f'가방 정리 시작 · 무게 {before:.0f}/{maximum:.0f}')
+        self.open_bag_detail()
+        self.bag_tab('아이템')
+        self.bag_subtab('sub_consumable', back=True)
+        self.all_grades()
+        self.bag_method('열기')
+        if self.select_everything(skip_fashion=True):
+            self.run_cleanup('상자 열기')
+        self.bag_method('분해')
+        if self.select_everything():
+            self.run_cleanup('소모품 분해')
+        self.bag_tab('장비')
+        self.all_grades()
+        self.bag_method('분해')
+        for name, label in (('sub_weapon', '무기'), ('sub_armor', '방어구'), ('sub_accessory', '장신구')):
+            self.bag_subtab(name, back=name == 'sub_weapon')
+            if self.select_everything():
+                self.run_cleanup(f'{label} 분해')
+        self.bag_subtab('sub_rune')
+        self.set_grades(RUNE_GRADES)
+        if self.select_everything():
+            self.run_cleanup('룬 분해')
+        # 자세히 정리 → 가방 → 필드. 필드에서 그 자리를 누르면 다른 것이 눌리므로 필드가 아닐 때만 누른다.
+        self.until('가방 닫기', self.hud, lambda: self.hud() or self.game.click(*DETAIL_CLOSE), every=2, first=True)
+        after, _ = self.weight()
+        self.log(f'가방 정리 완료 · 무게 {before:.0f} → {after:.0f}')
+
+    def open_bag_detail(self):
+        """I(가방) → A(간단히 정리하기) → 자세히 정리하기."""
+        def step():
+            image = self.game.capture()
+            button = self.game.find('detail_button', image)
+            if button:
+                self.game.click(*button)
+            elif self.hud(image):
+                self.game.key(VK_I)
+            else:
+                self.game.key(VK_A)  # 가방이 열려 있다. 필드에서 A는 이동이라 필드가 아닐 때만 누른다
+        self.until('자세히 가방 정리', lambda: self.game.find('detail_title'), step, every=2, first=True)
+        self.wait(0.8)
+
+    def bag_tab(self, name):
+        """탭(장비·아이템 등)을 녹화처럼 W/S로 옮긴다. 선택된 탭은 초록 배경."""
+        target = BAG_TABS.index(name)
+
+        def current():
+            image = self.game.capture()
+            for i, x in enumerate(BAG_TAB_X):
+                r, g, _ = ImageStat.Stat(image.crop((x - 10, 52, x + 10, 66))).mean
+                if g - r > 30:
+                    return i
+            return None
+
+        def step():
+            now = current()
+            if now is not None:
+                self.game.key(VK_S if now < target else VK_W)
+        self.until(f'{name} 탭', lambda: current() == target, step, every=1.5, first=True)
+        self.wait(0.6)
+
+    def bag_subtab(self, name, back=False):
+        """칸(소모품·무기·방어구·장신구)이 흰색으로 선택될 때까지 Q(앞으로) 또는 E(뒤로).
+
+        칸 막대는 선택한 칸에 따라 옆으로 밀려서 위치 대신 선택된 칸의 글자로 확인한다.
+        """
+        self.until(f'{name} 칸', lambda: self.game.find(name, region=SUBTAB_REGION),
+                   lambda: self.game.key(VK_Q if back else VK_E), every=1.5, first=True)
+        self.wait(0.6)
+
+    def all_grades(self):
+        """선택된 등급 칩을 모두 풀어 전 등급을 본다(녹화에서는 '일반'만 선택돼 있어 그것을 풀었다).
+
+        게임이 칩 선택을 기억해서 지난번 룬 분해 때 고른 일반~에픽이 남아 있을 수 있다.
+        """
+        self.set_grades([])
+
+    @staticmethod
+    def grade_selected(image, name):
+        left, cy, _ = GRADE_CHIPS[name]
+        gray = np.asarray(image.convert('L')).astype(float)
+        edge = gray[cy - 3:cy + 4, left - 4:left + 7].mean(axis=0).max()
+        fill = gray[cy - 3:cy + 4, left + 10:left + 16].mean()
+        return edge - fill > 40  # 선택 72 이상, 아니면 2 이하
+
+    def set_grades(self, names):
+        """등급 칩을 names만 선택된 상태로 맞춘다(빈 목록이면 전부 해제 = 전 등급)."""
+        def wrong():
+            image = self.game.capture()
+            return [n for n in GRADE_CHIPS if self.grade_selected(image, n) != (n in names)]
+
+        def fix():
+            for name in wrong():
+                _, cy, x = GRADE_CHIPS[name]
+                self.game.click(x, cy)
+                self.wait(0.3)
+        self.until('등급 ' + ('·'.join(names) or '전체'), lambda: not wrong(), fix, every=1.5, first=True)
+        self.wait(0.4)
+
+    def bag_method(self, name):
+        """정리 방법(분해·열기). 선택된 쪽이 밝다."""
+        spot, box = BAG_METHODS[name]
+        self.until(f'정리 방법 {name}', lambda: sum(ImageStat.Stat(self.game.capture().crop(box)).mean) / 3 > 150,
+                   lambda: self.game.click(*spot), every=1.5, first=True)
+        self.wait(0.6)
+
+    def select_everything(self, skip_fashion=False):
+        """전체 선택. 정리할 것이 있으면 True(목록이 비었거나 0개면 False)."""
+        if self.game.find('list_empty', region=BAG_LIST_REGION):
+            return False
+
+        def checked():
+            r, g, _ = ImageStat.Stat(self.game.capture().crop(SELECT_ALL_MARK)).mean
+            return g > 150 and g - r > 80
+        self.until('전체 선택', checked, lambda: self.game.click(*SELECT_ALL), every=1.5, first=True)
+        self.wait(0.6)
+        if skip_fashion:
+            self.unselect_fashion_box()
+        _, g, _ = ImageStat.Stat(self.game.capture().crop(RUN_BUTTON)).mean
+        return g > 150
+
+    def unselect_fashion_box(self):
+        """패션 티켓 조각 보물 상자는 열지 않는다(녹화에서 뺐다).
+
+        캐릭터마다 아이템 순서가 달라 이름 글자로 찾고, 아이콘 테두리가 초록(선택)이면 눌러 뺀다.
+        """
+        for _ in range(4):
+            label = self.game.find('fashion_box', region=BAG_LIST_REGION)
+            if label:
+                break
+            self.game.scroll(615, 330, -3)  # 목록이 길면 아래로 내려 찾는다
+            self.wait(0.6)
+        else:
+            return
+        icon = (label[0], label[1] - 34)
+
+        def chosen():
+            edge = (icon[0] - 21, icon[1] - 15, icon[0] - 18, icon[1] + 15)
+            r, g, _ = ImageStat.Stat(self.game.capture().crop(edge)).mean
+            return g > 100 and g - r > 60
+        self.until('패션 티켓 조각 보물 상자 빼기', lambda: not chosen(), lambda: self.game.click(*icon),
+                   every=1.5, first=True)
+        self.log('패션 티켓 조각 보물 상자는 빼고 정리')
+
+    def run_cleanup(self, what):
+        """Space(정리하기) → Space(확인 창) → 결과 화면 → Space(확인·받기)."""
+        def result():
+            return self.game.find('result_disassemble') or self.game.find('result_open')
+        self.until(f'{what} 결과', result, lambda: self.game.key(VK_SPACE), every=3, first=True)
+        self.wait(1)
+        self.until(f'{what} 결과 닫기', lambda: not result() and self.game.find('detail_title'),
+                   lambda: result() and self.game.key(VK_SPACE), every=2, first=True)
+        self.log(f'{what} 완료')
+        self.wait(0.6)
 
     def recheck(self, tries=3):
         """Re-read currencies a few times; True if this character can still run a dungeon."""
@@ -494,19 +674,41 @@ class Macro:
         return found
 
     def to_character_select(self):
-        """ESC 메뉴 → 게임 종료 → 캐릭터 선택 화면으로. 로딩 중(검은 화면)에는 아무것도 누르지 않는다."""
-        def step():
+        """ESC 메뉴 → 게임 종료 → 캐릭터 선택 화면으로.
+
+        메뉴와 창은 보이는 즉시 누른다. 같은 버튼은 1.5초, ESC는 4초 간격으로만 다시 누른다(열리는 중에
+        또 누르면 닫히거나 두 번 눌린다). 로딩 중(검은 화면)에는 아무것도 누르지 않는다.
+        """
+        deadline = time.monotonic() + PATIENCE
+        pressed = {}
+
+        def due(what, gap):
+            if time.monotonic() - pressed.get(what, -99) < gap:
+                return False
+            pressed[what] = time.monotonic()
+            return True
+
+        while True:
+            self.check()
             image = self.game.capture()
+            if self.game.find('select_title', image):
+                break
+            if time.monotonic() > deadline:
+                raise Stop(f'캐릭터 선택 화면: {PATIENCE}초 동안 확인되지 않았습니다.')
             button = self.find_text('menu_quit', image, region=MENU_QUIT_REGION)
             if self.game.find('quit_title', image):
-                self.game.click(*TO_SELECT)
+                if due('select', 1.5):
+                    self.game.click(*TO_SELECT)
             elif button:
-                self.game.click(*button)
+                if due('quit', 1.5):
+                    self.game.click(*button)
             elif self.hud(image):
-                self.game.key(VK_ESC)
-
-        self.until('캐릭터 선택 화면', lambda: self.game.find('select_title'), step, first=True)
-        self.wait(2)  # 카드가 다 그려질 때까지
+                if due('esc', 4) and not self.close_notice(image):
+                    self.game.key(VK_ESC)
+            elif due('dialogue', 4):
+                self.skip_dialogue(summarize_activity(cli('get_activity')))
+            self.wait(0.4)
+        self.wait(1.5)  # 카드가 다 그려질 때까지
 
     def in_game(self):
         return self.ready(summarize_activity(cli('get_activity')))
@@ -716,7 +918,7 @@ class Macro:
             elif retry:
                 self.game.click(*retry)
 
-        button = self.until('입장 화면', lambda: self.game.find(route.enter_template), nudge, every=5)
+        button = self.until('입장 화면', lambda: self.game.find(route.enter_template), nudge, every=2)
         if route.double_cost:
             want = self.balance(route) >= route.double_cost
             have = bool(self.game.find('double_on', region=DOUBLE_REGION))
@@ -867,7 +1069,7 @@ class Macro:
                 idle_since = None
             else:
                 idle_since = idle_since or time.monotonic()
-                if a['interaction'] == 'EnterDungeon' or time.monotonic() - idle_since > 4:
+                if a['interaction'] == 'EnterDungeon' or time.monotonic() - idle_since > 1.5:
                     break
             self.wait(1.5)
         try:
@@ -888,6 +1090,7 @@ def main():
     parser.add_argument('--check', action='store_true', help='조작 없이 현재 위치·재화·화면 인식 결과만 출력')
     parser.add_argument('--no-wings', action='store_true', help='던전 간 이동에 정령의 날개(T)를 쓰지 않음')
     parser.add_argument('--no-switch', action='store_true', help='재화가 떨어져도 다른 캐릭터로 바꾸지 않고 종료')
+    parser.add_argument('--no-clean', action='store_true', help='재화를 다 쓴 뒤 가방 정리(장비 분해 등)를 하지 않음')
     args = parser.parse_args()
     sys.stdout.reconfigure(encoding='utf-8')
     if not is_admin():
@@ -911,7 +1114,7 @@ def main():
             raise Stop('마비노기 모바일 창을 찾지 못했습니다.')
         log('던전 매크로 시작 · F12 중지')
         macro = Macro(Game(hwnd), stop, log, max_runs=args.runs, use_wings=not args.no_wings,
-                      start=args.start)
+                      start=args.start, clean=not args.no_clean)
         if args.check:
             macro.report()
             return
