@@ -46,7 +46,57 @@ class DungeonTab(unittest.TestCase):
         self.assertEqual(panel.arguments(), ['--no-switch', '--no-wings', '--start', 'peka', '--runs', '3'])
         self.assertEqual(panel.arguments(check=True), ['--check'])
         self.assertEqual(DungeonPanel({}).arguments(), [])
-        self.assertEqual(panel.state(), {'switch': False, 'clean': True, 'wings': False, 'start': 2, 'runs': 3})
+        state = panel.state()
+        self.assertEqual({k: state[k] for k in ('switch', 'clean', 'wings', 'start', 'runs')},
+                         {'switch': False, 'clean': True, 'wings': False, 'start': 2, 'runs': 3})
+
+    def test_defaults_match_macro(self):
+        state = DungeonPanel({}).state()
+        self.assertEqual(state['silver_route'], 'runda')
+        self.assertEqual(state['tribute_route'], 'peka')
+        self.assertEqual((state['double'], state['double_min']), ('threshold', 20))
+        self.assertEqual(state['rune_grades'], ['일반', '고급', '레어', '엘리트', '에픽'])
+        self.assertFalse(state['wait'])
+        self.assertEqual(len(state['characters']), 6)
+        self.assertTrue(all(all(opts.values()) for opts in state['characters'].values()))
+
+    def test_character_table_round_trip(self):
+        saved = {'characters': {'2': {'include': False}, '3': {'silver': False, 'rune': False}},
+                 'rune_grades': ['일반', '전설'], 'double': 'off', 'wait': True}
+        state = DungeonPanel(saved).state()
+        self.assertFalse(state['characters']['2']['include'])
+        self.assertTrue(state['characters']['2']['silver'])
+        self.assertEqual(state['characters']['3'],
+                         {'include': True, 'silver': False, 'tribute': True, 'items': True, 'equip': True,
+                          'rune': False})
+        self.assertEqual(state['rune_grades'], ['일반', '전설'])
+        self.assertEqual(state['double'], 'off')
+        self.assertTrue(state['wait'])
+
+    def test_old_global_clean_off_becomes_per_character(self):
+        state = DungeonPanel({'clean': False, 'characters': {'1': {'items': True}}}).state()
+        self.assertFalse(state['characters']['0']['items'])
+        self.assertTrue(state['characters']['1']['items'])
+
+    def test_progress_counts_log_lines(self):
+        panel = DungeonPanel()
+        for line in ['[10:00:00] 3번 캐릭터 접속 · 알리사 전격술사 100레벨 · 재화 {}',
+                     '[10:01:00] 룬다 일반 1-1 입장 · 은동전 20개 사용',
+                     '[10:02:00] 룬다 일반 1-1 1회 클리어 · 남은 은동전 80 · 가방 300/470',
+                     '[10:03:00] 페카 고분 심층 2-1 입장 · 마족 공물 1개 사용',
+                     '[10:04:00] 페카 고분 심층 2-1 2회 클리어 · 남은 마족 공물 0 · 가방 310/470',
+                     '[10:05:00] 종료: 모든 100레벨 캐릭터의 은동전·마족 공물이 부족합니다.']:
+            panel.message(line)
+        p = panel.progress
+        self.assertEqual((p.character, p.clears, p.silver, p.tribute), ('3번 전격술사', 2, 20, 1))
+        self.assertIn('부족', p.reason)
+
+    def test_checks_without_game(self):
+        with patch.object(dungeon_tab, 'game_window', return_value=None):
+            results = dict((name, ok) for name, ok, _ in dungeon_tab.run_checks(self.temp.name + '/없음.exe'))
+        self.assertFalse(results['게임 창'])
+        self.assertFalse(results['게임 CLI'])
+        self.assertFalse(results['게임 접속'])
 
     def test_first_open_installs_once(self):
         panel = DungeonPanel()

@@ -43,7 +43,16 @@ class Roster:
         self.path.write_text(json.dumps(self.cards, ensure_ascii=False, indent=1), encoding='utf-8')
 
     def slot_of(self, ident):
-        return next((int(k) for k, v in self.cards.items() if v.get('id') == list(ident)), None)
+        """서버·직업·칭호(ident)로 카드를 찾는다.
+
+        칭호는 게임에서 바꿀 수 있어서, 똑같은 기록이 없으면 서버·직업이 같은 카드가 하나뿐일 때 그 카드로 본다.
+        """
+        ident = list(ident)
+        exact = [int(k) for k, v in self.cards.items() if v.get('id') == ident]
+        if exact:
+            return exact[0]
+        same = [int(k) for k, v in self.cards.items() if (v.get('id') or [])[:2] == ident[:2]]
+        return same[0] if len(same) == 1 else None
 
     def estimate(self, slot):
         """Currencies now assuming steady regen since last seen; None if the card was never seen."""

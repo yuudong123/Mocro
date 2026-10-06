@@ -76,8 +76,13 @@ class Window(QMainWindow):
         self.modes = QTabWidget()
         self.setCentralWidget(self.modes)
         base = QWidget()
-        self.modes.addTab(base, '생활')
-        self.dungeon = DungeonPanel(self.saved.get('dungeon', {}), self.schedule_save)
+        # 생활 화면은 세로로 744px 넘게 쌓여서, 스크롤로 감싸 창을 그보다 작게 줄일 수 있게 한다.
+        life = QScrollArea()
+        life.setWidgetResizable(True)
+        life.setWidget(base)
+        self.modes.addTab(life, '생활')
+        self.dungeon = DungeonPanel(self.saved.get('dungeon', {}), self.schedule_save, self.save,
+                                    lambda: self.path.text())
         self.modes.addTab(self.dungeon, '던전')
         layout = QVBoxLayout(base)
         layout.setContentsMargins(24, 20, 24, 20)

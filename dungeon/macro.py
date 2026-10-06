@@ -6,6 +6,7 @@
 F12로 중지한다. 게임이 관리자 권한이라 이 스크립트도 관리자 권한으로 다시 실행된다.
 """
 import argparse
+import json
 import math
 import sys
 import threading
@@ -19,8 +20,8 @@ import win32con
 from PIL import Image, ImageStat
 from pynput import keyboard
 
-from common import (DATA, EXPECTED_SIZE, ROOT, TEMPLATES, Game, cli, currencies, find_game, is_admin,
-                    relaunch_as_admin, summarize_activity, summarize_env)
+from common import (DATA, EXPECTED_SIZE, ROOT, SETTINGS, TEMPLATES, Game, cli, currencies, find_game,
+                    is_admin, relaunch_as_admin, summarize_activity, summarize_env)
 from roster import Roster, clock
 
 LOGS = DATA / 'logs'
@@ -107,6 +108,36 @@ ROUTES = [
           enter_template='enter_deep', map_template='map_peka', map_tab=MAP_EAST,
           world_template='world_peka', world_offset=(0, -24)),
 ]
+ROUTE_BY_KEY = {route.key: route for route in ROUTES}
+CURRENCY_KEY = {'은동전': 'silver', '마족 공물': 'tribute'}
+
+# 에린 공방 던전 탭에서 고르는 설정(settings.json의 "dungeon"). 없는 값은 이 기본값을 쓴다.
+DEFAULT_CONFIG = {
+    'silver_route': 'runda',            # 은동전을 쓸 던전(ROUTES의 key). 새 던전은 녹화해 ROUTES에 추가한다
+    'tribute_route': 'peka',            # 마족 공물을 쓸 던전
+    'double': 'threshold',              # 더블 루팅: off(끔) / always(가능하면 항상) / threshold(double_min개 이상일 때)
+    'double_min': 20,
+    'rune_grades': RUNE_GRADES,         # 룬 분해 등급. 비우면 룬 분해를 하지 않는다
+    'clean': True,                      # 상자 열기·소모품 분해 전체 스위치(--no-clean). 캐릭터별은 items
+    'wait': False,                      # 모두 부족하면 충전될 때까지 기다렸다 이어서
+    'characters': {},                   # 카드 번호(0부터, 문자열) → CHAR_DEFAULT의 항목
+}
+# 카드별: 매크로에 포함, 은동전·마족 공물 사용, 캐릭터를 바꾸기 전 상자 열기·소모품 분해, 장비·룬 분해
+CHAR_DEFAULT = {'include': True, 'silver': True, 'tribute': True, 'items': True, 'equip': True, 'rune': True}
+
+
+def load_config():
+    """에린 공방 설정(settings.json)의 던전 설정. 파일이 없거나 깨졌으면 기본값."""
+    try:
+        saved = json.loads(SETTINGS.read_text(encoding='utf-8')).get('dungeon', {})
+    except (OSError, ValueError, AttributeError):
+        saved = {}
+    config = {**DEFAULT_CONFIG, **{k: v for k, v in saved.items() if k in DEFAULT_CONFIG}}
+    for key, currency in (('silver_route', '은동전'), ('tribute_route', '마족 공물')):
+        route = ROUTE_BY_KEY.get(config[key])
+        if route is None or route.currency != currency:
+            config[key] = DEFAULT_CONFIG[key]
+    return config
 
 
 class Stop(Exception):
@@ -118,9 +149,12 @@ class Exhausted(Stop):
 
 
 class Macro:
-    def __init__(self, game, stop, log, max_runs=None, use_wings=True, start=None, clean=True):
+    def __init__(self, game, stop, log, max_runs=None, use_wings=True, start=None, clean=True, config=None):
         self.game, self.stop, self.log = game, stop, log
-        self.max_runs, self.use_wings, self.start, self.clean = max_runs, use_wings, start, clean
+        self.max_runs, self.use_wings, self.start = max_runs, use_wings, start
+        self.clean_allowed = clean      # --no-clean이면 공방 설정과 상관없이 상자·소모품 정리를 안 한다
+        self.live = False               # True면 캐릭터를 바꿀 때마다 공방 설정을 다시 읽는다(session)
+        self.apply_config(config or {})
         self.runs = 0
         self.roster = Roster()   # 카드별 마지막으로 본 재화(dungeon/characters.json)
         self.slot = None         # 지금 캐릭터의 카드 번호(0부터). 모르면 선택 화면에서 알아낸다
@@ -168,8 +202,34 @@ class Macro:
             self.wait(1)
         raise Stop(f'재화를 읽지 못했습니다: {money}')
 
+    def apply_config(self, config):
+        self.config = {**DEFAULT_CONFIG, **config}
+        self.clean = self.clean_allowed and self.config['clean']
+        # 은동전 던전, 마족 공물 던전 순서
+        self.routes = [ROUTE_BY_KEY[self.config['silver_route']], ROUTE_BY_KEY[self.config['tribute_route']]]
+
+    def reload_config(self):
+        """도는 중에 공방에서 바꾼 설정을 가방 정리·캐릭터 전환 전에 다시 읽는다."""
+        if self.live:
+            self.apply_config(load_config())
+
+    def char_opts(self, slot=None):
+        """카드별 설정(공방 캐릭터 표). 지금 캐릭터가 몇 번 카드인지 모르면 기본값(전부 켬)."""
+        slot = self.slot if slot is None else slot
+        saved = self.config['characters'].get(str(slot), {}) if slot is not None else {}
+        return {**CHAR_DEFAULT, **saved}
+
+    def uses(self, route, slot=None):
+        """이 캐릭터가 매크로에 포함됐고 이 던전의 재화를 쓰도록 설정됐다."""
+        opts = self.char_opts(slot)
+        return bool(opts['include'] and opts[CURRENCY_KEY[route.currency]])
+
+    def costs_for(self, slot):
+        """이 카드로 돌 던전의 {재화: 입장 비용}. 비었으면 돌릴 것이 없다."""
+        return {r.currency: r.cost for r in self.routes if self.uses(r, slot)}
+
     def affordable(self, route):
-        return self.balance(route) >= route.cost
+        return self.uses(route) and self.balance(route) >= route.cost
 
     def weight(self):
         for _ in range(90):
@@ -208,7 +268,7 @@ class Macro:
         return math.dist((env['x'], env['y']), route.entrance) < 80
 
     def other(self, route):
-        return next(r for r in ROUTES if r is not route)
+        return next((r for r in self.routes if r.currency != route.currency), route)
 
     def screenshot(self, tag):
         LOGS.mkdir(exist_ok=True)
@@ -371,14 +431,15 @@ class Macro:
     def starting_route(self):
         env = self.environment()
         if self.start and not self.route_in(env):
-            route = next(r for r in ROUTES if r.key == self.start)
+            currency = ROUTE_BY_KEY[self.start].currency  # 고른 던전 중 같은 재화를 쓰는 던전
+            route = next(r for r in self.routes if r.currency == currency)
             self.log(f'지정한 {route.name}부터 진행')
             return route
-        route = self.route_in(env) or next((r for r in ROUTES if self.near_entrance(r, env)), None)
+        route = self.route_in(env) or next((r for r in self.routes if self.near_entrance(r, env)), None)
         if route:
             self.log(f'현재 위치 {env["space"]} → {route.name}부터 진행')
             return route
-        route = next((r for r in ROUTES if self.affordable(r)), ROUTES[0])
+        route = next((r for r in self.routes if self.affordable(r)), self.routes[0])
         self.log(f'현재 위치 {env["space"]}는 두 던전 입구가 아님 → {route.name}부터 진행')
         return route
 
@@ -445,6 +506,9 @@ class Macro:
         self.slot = self.roster.slot_of(self.ident)
         if self.slot is not None:
             self.log(f'지금 캐릭터는 기록상 {self.slot + 1}번 카드')
+            self.remember()  # 칭호가 바뀌었으면 기록도 지금 값으로
+        else:
+            self.log('지금 캐릭터가 몇 번 카드인지 기록이 없어 캐릭터 표 대신 모두 켠 것으로 돕니다(한 번 바꾸면 알아봅니다)')
         while True:
             try:
                 self.run()
@@ -452,10 +516,11 @@ class Macro:
             except Exhausted as reason:
                 if self.fresh and self.recheck():
                     continue  # 접속 직후 덜 읽힌 재화였다. 이 캐릭터로 계속 돈다
-                self.log(f'{reason}' + (' 가방을 정리하고' if self.clean else '')
-                         + (' 다음 캐릭터로 바꿉니다.' if switch else ' 종료합니다.'))
-                if self.clean:
-                    self.clean_bag()
+                self.reload_config()  # 도는 중에 공방에서 바꾼 캐릭터 표·정리 설정을 여기서부터 적용
+                if not self.char_opts()['include']:
+                    reason = f'{self.slot + 1}번 캐릭터는 매크로에서 빼 두었습니다.'
+                self.log(f'{reason}' + (' 다음 캐릭터로 바꿉니다.' if switch else ' 종료합니다.'))
+                self.clean_bag()
                 if not switch:
                     raise
             self.start = None
@@ -467,31 +532,44 @@ class Macro:
 
         자세히 가방 정리 → 아이템 탭 소모품: 등급 전체, "열기"로 전체 선택(패션 티켓 조각 보물 상자는 뺌) 정리
         → "분해"로 전체 선택 정리 → 장비 탭: 등급 전체, 무기·방어구·장신구 차례로 전체 선택 분해
-        → 보석·룬: 일반~에픽만 골라 전체 선택 분해 → X로 닫기.
+        → 보석·룬: 고른 등급(기본 일반~에픽)만 전체 선택 분해 → X로 닫기.
+        상자·소모품은 공방 설정 clean, 장비·룬 분해는 캐릭터 표의 카드별 설정을 따른다.
         """
+        opts = self.char_opts()
+        if not opts['include']:
+            return  # 매크로에서 뺀 캐릭터의 가방은 건드리지 않는다
+        items = self.clean and opts['items']
+        equip = opts['equip']
+        runes = opts['rune'] and list(self.config['rune_grades'])
+        if not (items or equip or runes):
+            return
         before, maximum = self.weight()
         self.log(f'가방 정리 시작 · 무게 {before:.0f}/{maximum:.0f}')
         self.open_bag_detail()
-        self.bag_tab('아이템')
-        self.bag_subtab('sub_consumable', back=True)
-        self.all_grades()
-        self.bag_method('열기')
-        if self.select_everything(skip_fashion=True):
-            self.run_cleanup('상자 열기')
-        self.bag_method('분해')
-        if self.select_everything():
-            self.run_cleanup('소모품 분해')
-        self.bag_tab('장비')
-        self.all_grades()
-        self.bag_method('분해')
-        for name, label in (('sub_weapon', '무기'), ('sub_armor', '방어구'), ('sub_accessory', '장신구')):
-            self.bag_subtab(name, back=name == 'sub_weapon')
+        if items:
+            self.bag_tab('아이템')
+            self.bag_subtab('sub_consumable', back=True)
+            self.all_grades()
+            self.bag_method('열기')
+            if self.select_everything(skip_fashion=True):
+                self.run_cleanup('상자 열기')
+            self.bag_method('분해')
             if self.select_everything():
-                self.run_cleanup(f'{label} 분해')
-        self.bag_subtab('sub_rune')
-        self.set_grades(RUNE_GRADES)
-        if self.select_everything():
-            self.run_cleanup('룬 분해')
+                self.run_cleanup('소모품 분해')
+        if equip or runes:
+            self.bag_tab('장비')
+            self.all_grades()
+            self.bag_method('분해')
+        if equip:
+            for name, label in (('sub_weapon', '무기'), ('sub_armor', '방어구'), ('sub_accessory', '장신구')):
+                self.bag_subtab(name, back=name == 'sub_weapon')
+                if self.select_everything():
+                    self.run_cleanup(f'{label} 분해')
+        if runes:
+            self.bag_subtab('sub_rune')
+            self.set_grades(runes)
+            if self.select_everything():
+                self.run_cleanup('룬 분해(' + '·'.join(runes) + ')')
         # 자세히 정리 → 가방 → 필드. 필드에서 그 자리를 누르면 다른 것이 눌리므로 필드가 아닐 때만 누른다.
         self.until('가방 닫기', self.hud, lambda: self.hud() or self.game.click(*DETAIL_CLOSE), every=2, first=True)
         after, _ = self.weight()
@@ -631,7 +709,7 @@ class Macro:
             money = currencies()
             if not isinstance(money, dict) or 'error' in money:
                 continue
-            if any(money.get(route.currency, 0) >= route.cost for route in ROUTES):
+            if any(self.uses(route) and money.get(route.currency, 0) >= route.cost for route in self.routes):
                 self.log(f'재화를 다시 읽으니 {money} · 이 캐릭터로 계속')
                 self.remember(money)
                 self.fresh = False
@@ -734,15 +812,27 @@ class Macro:
         self.slot, self.ident = (current if current is not None else self.slot), before['id']
         if isinstance(money, dict) and 'error' not in money:
             self.remember(money)
-        costs = {route.currency: route.cost for route in ROUTES}
-        candidates = [c for c in cards if c['lv100'] and c['slot'] not in self.skip_slots]
-        self.log('캐릭터 선택 · ' + ' / '.join(self.roster.describe(c['slot'], costs) for c in candidates))
-        todo = [c for c in candidates if self.roster.ready_at(c['slot'], costs) <= self.roster.now()]
-        if not todo:
-            soonest = min(candidates, key=lambda c: self.roster.ready_at(c['slot'], costs), default=None)
-            when = (f' 가장 빠른 것은 {soonest["slot"] + 1}번 캐릭터, '
-                    f'{clock(self.roster.ready_at(soonest["slot"], costs))}쯤부터입니다.') if soonest else ''
-            raise Stop(f'모든 100레벨 캐릭터의 은동전·마족 공물이 부족합니다.{when} 종료합니다.')
+        # 캐릭터 표에서 뺐거나 은동전·공물을 둘 다 끈 카드는 고르지 않는다.
+        candidates = [c for c in cards if c['lv100'] and c['slot'] not in self.skip_slots
+                      and self.costs_for(c['slot'])]
+        ready = {c['slot']: self.roster.ready_at(c['slot'], self.costs_for(c['slot'])) for c in candidates}
+        self.log('캐릭터 선택 · ' + (' / '.join(self.roster.describe(c['slot'], self.costs_for(c['slot']))
+                                               for c in candidates) or '돌릴 캐릭터 없음'))
+        while True:
+            todo = [c for c in candidates if ready[c['slot']] <= self.roster.now()]
+            if todo:
+                break
+            soonest = min(candidates, key=lambda c: ready[c['slot']], default=None)
+            if soonest is None or ready[soonest['slot']] == float('inf'):
+                raise Stop('매크로에 포함한 100레벨 캐릭터가 없습니다. 종료합니다.')
+            when = f'가장 빠른 것은 {soonest["slot"] + 1}번 캐릭터, {clock(ready[soonest["slot"]])}쯤부터입니다.'
+            if not self.config['wait']:
+                raise Stop(f'모든 100레벨 캐릭터의 은동전·마족 공물이 부족합니다. {when} 종료합니다.')
+            self.log(f'모든 캐릭터의 재화가 부족합니다. {when} 그때까지 기다렸다 이어서 돕니다.')
+            # 충전 간격을 기록 시각부터 세므로 1분 여유를 둔다. 기다리는 동안에도 중지할 수 있다.
+            while self.roster.now() < ready[soonest['slot']] + 60:
+                self.wait(min(60, ready[soonest['slot']] + 60 - self.roster.now()))
+            self.until('캐릭터 선택 화면', lambda: self.game.find('select_title'), lambda: None, every=60)
         card = todo[0]
         self.until(f'{card["slot"] + 1}번 캐릭터 카드 선택',
                    lambda: self.cards(self.game.capture())[card['slot']]['selected'],
@@ -921,10 +1011,14 @@ class Macro:
 
         button = self.until('입장 화면', lambda: self.game.find(route.enter_template), nudge, every=2)
         if route.double_cost:
-            want = self.balance(route) >= route.double_cost
+            # 더블 루팅: off 끔, always 비용만 되면, threshold 공방에서 정한 개수 이상일 때(기본 20)
+            mode, balance = self.config['double'], self.balance(route)
+            need = route.double_cost if mode == 'always' else max(route.double_cost, int(self.config['double_min']))
+            want = mode != 'off' and balance >= need
             have = bool(self.game.find('double_on', region=DOUBLE_REGION))
             if want != have:
-                self.log('더블 루팅 ' + ('켜기' if want else '끄기 (은동전 20개 미만)'))
+                self.log('더블 루팅 ' + ('켜기' if want else '끄기' if mode == 'off'
+                                      else f'끄기 ({route.currency} {need}개 미만)'))
                 self.until('더블 루팅 ' + ('켜기' if want else '끄기'),
                            lambda: bool(self.game.find('double_on', region=DOUBLE_REGION)) == want,
                            lambda: self.game.click(*DOUBLE_BUTTON), every=2, first=True)
@@ -1131,8 +1225,14 @@ def session(args, stop, log):
         if not hwnd:
             raise Stop('마비노기 모바일 창을 찾지 못했습니다.')
         log('던전 매크로 시작 · F12 중지')
+        config = load_config()
         macro = Macro(Game(hwnd), stop, log, max_runs=args.runs, use_wings=not args.no_wings,
-                      start=args.start, clean=not args.no_clean)
+                      start=args.start, clean=not args.no_clean, config=config)
+        macro.live = True
+        log('설정 · 은동전 ' + macro.routes[0].name + ' · 마족 공물 ' + macro.routes[1].name
+            + ' · 더블 루팅 ' + {'off': '끔', 'always': '항상'}.get(config['double'], f'{config["double_min"]}개 이상')
+            + ' · 룬 분해 ' + ('·'.join(config['rune_grades']) or '안 함')
+            + (' · 충전 대기' if config['wait'] else ''))
         if args.check:
             macro.report()
             return
