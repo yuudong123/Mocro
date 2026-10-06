@@ -191,19 +191,29 @@ class Game:
             return
         if win32gui.IsIconic(self.hwnd):
             win32gui.ShowWindow(self.hwnd, win32con.SW_RESTORE)
-        # Foreground changes are only allowed to the input owner; borrow its input queue.
-        current = win32process.GetWindowThreadProcessId(win32gui.GetForegroundWindow())[0]
-        mine = win32api.GetCurrentThreadId()
-        attached = current and current != mine and ctypes.windll.user32.AttachThreadInput(mine, current, True)
-        try:
-            win32gui.BringWindowToTop(self.hwnd)
-            win32gui.SetForegroundWindow(self.hwnd)
-        finally:
-            if attached:
-                ctypes.windll.user32.AttachThreadInput(mine, current, False)
-        time.sleep(0.3)
-        if win32gui.GetForegroundWindow() != self.hwnd:
-            raise RuntimeError('게임 창을 앞으로 가져오지 못했습니다.')
+        # 다른 창(에린 공방 등)이 앞에 있으면 Windows가 앞으로 가져오기를 막을 때가 있다. 몇 초 동안 다시 시도하고,
+        # 두 번째부터는 Alt를 눌렀다 떼서(마지막 입력을 이 프로세스로 만들어) 그 제한을 푼다.
+        for attempt in range(8):
+            if attempt:
+                win32api.keybd_event(win32con.VK_MENU, 0, 0, 0)
+                win32api.keybd_event(win32con.VK_MENU, 0, win32con.KEYEVENTF_KEYUP, 0)
+            # Foreground changes are only allowed to the input owner; borrow its input queue.
+            current = win32process.GetWindowThreadProcessId(win32gui.GetForegroundWindow())[0]
+            mine = win32api.GetCurrentThreadId()
+            attached = current and current != mine and ctypes.windll.user32.AttachThreadInput(mine, current, True)
+            try:
+                win32gui.BringWindowToTop(self.hwnd)
+                win32gui.SetForegroundWindow(self.hwnd)
+            except win32gui.error:
+                pass  # 거절되면 아래에서 확인하고 다시 시도한다
+            finally:
+                if attached:
+                    ctypes.windll.user32.AttachThreadInput(mine, current, False)
+            time.sleep(0.3)
+            if win32gui.GetForegroundWindow() == self.hwnd:
+                return
+            time.sleep(0.4)
+        raise RuntimeError('게임 창을 앞으로 가져오지 못했습니다.')
 
     def click(self, x, y):
         self.focus()
