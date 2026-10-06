@@ -45,6 +45,7 @@ MAP_PAN = ((400, 300), (560, 420))
 HUD_ANCHORS = {'hud_esc': (600, 0, 720, 60), 'hud_space': (700, 530, 800, 600), 'hud_chat': (100, 530, 260, 600)}
 CRUMB_REGION = (0, 0, 160, 60)  # 지도 왼쪽 위 "울라 대륙". 지도가 열렸을 때만 있다
 NOTICE_CLOSE_REGION = (320, 220, 480, 380)  # 레벨업 다이스 획득 같은 알림 가운데의 X
+CHOICE_REGION = (100, 470, 700, 600)        # 대화 선택지(초록 둥근 버튼, 몰리 "지하 감옥/몬스터 소굴/…" 등)
 # 레벨업·시즌 스킬·스킬 획득 알림 창이 떠 있으면 조작이 먹히지 않는다. 화면 조작은 이만큼 다시 시도한다.
 PATIENCE = 180
 # 가방 무게가 한도를 넘으면 자동 진행이 멈춘다. 한 판 전리품만큼 여유를 두고 가방을 정리한다.
@@ -364,15 +365,36 @@ class Macro:
         return True
 
     def skip_dialogue(self, a):
-        """If the CLI says a dialogue or choice is up, press "대화 넘기기" (or Space); True if it did."""
+        """If the CLI says a dialogue or choice is up, get past it; True if it did.
+
+        "대화 넘기기"가 있으면 누르고, 없이 선택지(초록 버튼)만 있으면 첫 번째를 고르고(몰리 질문은 매번 다르지만
+        어느 답이든 대화만 이어진다), 둘 다 없으면 Space로 대화를 넘긴다.
+        """
         if not isinstance(a, dict) or not (a.get('dialogue') or a.get('selecting')):
             return False
-        if self.skip_scene():
+        image = self.game.capture()
+        choices = self.choice_buttons(image)
+        if self.skip_scene(image):
             self.log('대화 넘기기')
+        elif choices:
+            self.log(f'대화 선택지 고르기(첫 번째, {len(choices)}개 중)')
+            self.game.click(*choices[0])
         else:
-            self.game.key(VK_SPACE)  # 넘기기 버튼이 없는 대화와 선택지(기본 선택)
+            self.game.key(VK_SPACE)
         self.wait(1)
         return True
+
+    @staticmethod
+    def choice_buttons(image):
+        """대화 선택지 버튼(초록 둥근 버튼) 가운데 좌표, 왼쪽부터."""
+        left, top, right, bottom = CHOICE_REGION
+        a = np.asarray(image.convert('RGB').crop((left, top, right, bottom))).astype(int)
+        r, g, b = a[..., 0], a[..., 1], a[..., 2]
+        green = ((g > 150) & (g - r > 80) & (g - b > 20)).astype(np.uint8)
+        _, _, stats, centers = cv2.connectedComponentsWithStats(green)
+        spots = [(left + int(cx), top + int(cy)) for (cx, cy), (_, _, w, h, area) in zip(centers[1:], stats[1:])
+                 if w > 40 and 18 < h < 40 and area > 0.6 * w * h]  # 가로로 길고 속이 찬 버튼만
+        return sorted(spots)
 
     def hud(self, image=None):
         """True while the field HUD shows, i.e. no full-screen window (map, bag, menu) is open.
