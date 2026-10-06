@@ -15,6 +15,7 @@ from app import (Engine, CLI, Halt, ROOT, DEFAULT_CLI, SETTINGS, recipe_groups,
 from recovery import send_game_escape
 from facilities import ORDER, facility_for, ordered_names
 from target_modes import freeze_targets, matches_pending
+from dungeon_tab import DungeonPanel
 
 STYLE = '''
 QWidget { background:#101720; color:#e6edf5; font-family:'Malgun Gothic'; font-size:13px; }
@@ -71,8 +72,13 @@ class Window(QMainWindow):
         self.autosave.setSingleShot(True)
         self.autosave.setInterval(300)
         self.autosave.timeout.connect(self.save)
+        # 맨 위 탭: 생활(기존 화면)과 던전(dungeon/macro.py). 던전 탭은 처음 열 때 필요한 패키지를 설치한다.
+        self.modes = QTabWidget()
+        self.setCentralWidget(self.modes)
         base = QWidget()
-        self.setCentralWidget(base)
+        self.modes.addTab(base, '생활')
+        self.dungeon = DungeonPanel(self.saved.get('dungeon', {}), self.schedule_save)
+        self.modes.addTab(self.dungeon, '던전')
         layout = QVBoxLayout(base)
         layout.setContentsMargins(24, 20, 24, 20)
         title = QLabel('에린 생활 공방')
@@ -212,6 +218,8 @@ class Window(QMainWindow):
         self.recovery_mode.currentIndexChanged.connect(self.schedule_save)
         self.tabs.currentChanged.connect(self.schedule_save)
         self.route.currentIndexChanged.connect(self.route_changed)
+        self.modes.currentChanged.connect(self.mode_changed)
+        self.modes.setCurrentIndex(self.ui_state.get('mode', 0))
         self.restoring = False
         QTimer.singleShot(100, self.refresh)
 
@@ -238,6 +246,11 @@ class Window(QMainWindow):
         lay.addWidget(note)
         return panel
 
+    def mode_changed(self, index):
+        if self.modes.widget(index) is self.dungeon:
+            self.dungeon.activate()
+        self.schedule_save()
+
     def update_quantity_hint(self):
         self.quantity_hint.setText('포함: 100개 보유 중 40개 입력 → 이미 달성'
                                    if self.include_inventory.isChecked()
@@ -254,10 +267,11 @@ class Window(QMainWindow):
             'recovery_mode': self.recovery_mode.currentIndex(),
             'tab': self.tabs.currentIndex(), 'search': self.search.text(),
             'facilities': dict(self.facility_choices), 'group': self.selected_group,
-            'card_quantities': dict(self.card_quantities),
+            'card_quantities': dict(self.card_quantities), 'mode': self.modes.currentIndex(),
         }
         self.saved.update(cli=self.path.text(), defaults=self.defaults, icons=self.icons, presets=self.presets,
-                          include_inventory=self.include_inventory.isChecked(), ui=self.ui_state)
+                          include_inventory=self.include_inventory.isChecked(), ui=self.ui_state,
+                          dungeon=self.dungeon.state())
         try:
             temp = SETTINGS.with_suffix('.tmp')
             temp.write_text(json.dumps(self.saved, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -654,7 +668,12 @@ class Window(QMainWindow):
                 self.message(f'준비 완료 · 채집 {len(e.gather)}종 · 기본 경로 설정 {len(self.groups)}종')
 
     def closeEvent(self, event):
-        if self.running:
+        if self.dungeon.process == 'inside':
+            # exe에서는 던전 매크로가 이 프로세스 안에서 돈다. 클릭 도중 끊기지 않게 먼저 멈춘다.
+            self.dungeon.request_stop()
+            self.message('던전 매크로를 멈추는 중입니다. 멈춘 뒤 다시 닫아 주세요.')
+            event.ignore()
+        elif self.running:
             self.cancel()
             event.ignore()
         else:

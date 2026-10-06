@@ -15,8 +15,12 @@ import win32process
 import win32ui
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parent
-SETTINGS = ROOT.parent / 'workshop' / 'settings.json'
+# exe(모비 통합 매크로.exe)로 실행하면 템플릿은 exe 안에서 읽고, 로그·기록은 exe 옆 data 폴더에 쓴다.
+# 소스로 실행하면 둘 다 이 폴더다.
+FROZEN = getattr(sys, 'frozen', False)
+ROOT = Path(sys._MEIPASS) / 'dungeon' if FROZEN else Path(__file__).resolve().parent
+DATA = Path(sys.executable).parent / 'data' / 'dungeon' if FROZEN else ROOT
+SETTINGS = DATA.parent / 'workshop' / 'settings.json'
 TEMPLATES = ROOT / 'templates'
 DEFAULT_CLI = r"C:\Nexon\MabinogiMobile\MabinogiMobile_CLI.exe"
 EXPECTED_SIZE = (800, 600)

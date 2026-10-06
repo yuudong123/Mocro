@@ -16,14 +16,14 @@ import win32gui
 from PIL import Image
 from pynput import keyboard, mouse
 
-from common import (EXPECTED_SIZE, ROOT, cli, client_rect, currencies, find_game, is_admin,
+from common import (DATA, EXPECTED_SIZE, cli, client_rect, currencies, find_game, is_admin,
                     print_window, relaunch_as_admin, summarize_activity, summarize_env)
 
 
 class Recorder:
     def __init__(self, hwnd):
         self.hwnd = hwnd
-        self.out = ROOT / 'recordings' / datetime.now().strftime('%Y%m%d-%H%M%S')
+        self.out = DATA / 'recordings' / datetime.now().strftime('%Y%m%d-%H%M%S')
         self.out.mkdir(parents=True)
         self.events = (self.out / 'events.jsonl').open('a', encoding='utf-8')
         self.lock = threading.Lock()

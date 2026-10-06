@@ -18,3 +18,8 @@ venv/
 dungeon/recordings/
 dungeon/logs/
 dungeon/characters.json
+dungeon/stop.request
+
+# exe 빌드
+build/
+dist/

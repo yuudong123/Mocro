@@ -4,11 +4,15 @@
 그 뒤 충전량으로 지금 던전을 돌 수 있는지 추정한다.
 """
 import json
+import sys
 import time
 from datetime import datetime
 from pathlib import Path
 
-PATH = Path(__file__).resolve().parent / 'characters.json'
+# exe로 실행하면 exe 옆 data 폴더에 쓴다(common.DATA와 같다. 이 모듈은 공방에서도 읽어서 common을 쓰지 않는다).
+FROZEN = getattr(sys, 'frozen', False)
+PATH = ((Path(sys.executable).parent / 'data' / 'dungeon') if FROZEN
+        else Path(__file__).resolve().parent) / 'characters.json'
 # 재화별 (1개 충전 간격(초), 자연 충전 최대치). 게임 화면에 은동전 n/100, 마족 공물 n/10으로 나온다.
 REGEN = {'은동전': (30 * 60, 100), '마족 공물': (12 * 3600, 10)}
 

@@ -19,11 +19,12 @@ import win32con
 from PIL import Image, ImageStat
 from pynput import keyboard
 
-from common import (EXPECTED_SIZE, ROOT, TEMPLATES, Game, cli, currencies, find_game, is_admin,
+from common import (DATA, EXPECTED_SIZE, ROOT, TEMPLATES, Game, cli, currencies, find_game, is_admin,
                     relaunch_as_admin, summarize_activity, summarize_env)
 from roster import Roster, clock
 
-LOGS = ROOT / 'logs'
+LOGS = DATA / 'logs'
+STOP_FILE = DATA / 'stop.request'  # 에린 공방 던전 탭의 중지 버튼이 만든다
 VK_I, VK_M, VK_T, VK_ESC, VK_SPACE = 0x49, 0x4D, 0x54, win32con.VK_ESCAPE, win32con.VK_SPACE
 VK_A, VK_E, VK_Q, VK_S, VK_W = 0x41, 0x45, 0x51, 0x53, 0x57
 SKIP_REGION = (480, 0, 800, 70)  # 오른쪽 위 "장면 넘기기"·"대화 넘기기"·"이야기 넘기기"
@@ -132,11 +133,11 @@ class Macro:
     # ---- 상태 확인 ----
     def check(self):
         if self.stop.is_set():
-            raise Stop('F12 중지 요청')
+            raise Stop('중지 요청(F12 또는 에린 공방 중지 버튼)')
 
     def wait(self, seconds):
         if self.stop.wait(seconds):
-            raise Stop('F12 중지 요청')
+            raise Stop('중지 요청(F12 또는 에린 공방 중지 버튼)')
 
     def activity(self, patience=90):
         """get_activity, riding out not_in_game during loading screens."""
@@ -1082,7 +1083,7 @@ class Macro:
             return False
 
 
-def main():
+def parse(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--runs', type=int, help='이 횟수만큼 클리어하면 종료')
     parser.add_argument('--start', choices=[r.key for r in ROUTES],
@@ -1091,23 +1092,40 @@ def main():
     parser.add_argument('--no-wings', action='store_true', help='던전 간 이동에 정령의 날개(T)를 쓰지 않음')
     parser.add_argument('--no-switch', action='store_true', help='재화가 떨어져도 다른 캐릭터로 바꾸지 않고 종료')
     parser.add_argument('--no-clean', action='store_true', help='재화를 다 쓴 뒤 가방 정리(장비 분해 등)를 하지 않음')
-    args = parser.parse_args()
-    sys.stdout.reconfigure(encoding='utf-8')
-    if not is_admin():
-        if not relaunch_as_admin(__file__):
-            sys.exit('관리자 권한 실행이 취소되었습니다. 게임이 관리자 권한이라 매크로도 관리자 권한이 필요합니다.')
-        return
-    LOGS.mkdir(exist_ok=True)
+    parser.add_argument('--no-pause', action='store_true', help='끝나도 엔터를 기다리지 않음(에린 공방 던전 탭에서 실행)')
+    return parser.parse_args(argv)
+
+
+def open_log(echo=print):
+    """dungeon/logs/dungeon-날짜.log에 쓰고 echo로도 보내는 log 함수와 닫기 함수."""
+    LOGS.mkdir(parents=True, exist_ok=True)
     logfile = (LOGS / f'dungeon-{datetime.now():%Y%m%d}.log').open('a', encoding='utf-8')
 
     def log(message):
         line = f'[{datetime.now():%H:%M:%S}] {message}'
-        print(line, flush=True)
+        echo(line)
         logfile.write(line + '\n')
         logfile.flush()
+    return log, logfile.close
 
-    stop = threading.Event()
-    keyboard.Listener(on_press=lambda k: stop.set() if k == keyboard.Key.f12 else None, daemon=True).start()
+
+def watch_stop(stop):
+    """F12, 또는 STOP_FILE(관리자 권한으로 따로 띄웠을 때 에린 공방 중지 버튼)이 생기면 stop을 켠다."""
+    listener = keyboard.Listener(on_press=lambda k: stop.set() if k == keyboard.Key.f12 else None, daemon=True)
+    listener.start()
+    STOP_FILE.unlink(missing_ok=True)
+
+    def watch_file():
+        while not stop.wait(0.5):
+            if STOP_FILE.exists():
+                STOP_FILE.unlink(missing_ok=True)
+                stop.set()
+    threading.Thread(target=watch_file, daemon=True).start()
+    return listener
+
+
+def session(args, stop, log):
+    """한 번 실행(--check면 확인만). 끝난 이유는 log로 남기고 예외는 밖으로 내보내지 않는다."""
     try:
         hwnd = find_game()
         if not hwnd:
@@ -1129,9 +1147,27 @@ def main():
             raise Stop(f'예상치 못한 오류: {error!r} (화면: {shot})') from error
     except Stop as reason:
         log(f'종료: {reason}')
+    except Exception as error:  # noqa: BLE001 - 게임 창을 찾기 전 오류도 남긴다
+        log(f'종료: 예상치 못한 오류: {error!r}')
+
+
+def main():
+    args = parse()
+    if sys.stdout:  # 콘솔 없이(pythonw) 띄우면 stdout이 없다. 로그는 파일로 본다
+        sys.stdout.reconfigure(encoding='utf-8')
+    if not is_admin():
+        if not relaunch_as_admin(__file__):
+            sys.exit('관리자 권한 실행이 취소되었습니다. 게임이 관리자 권한이라 매크로도 관리자 권한이 필요합니다.')
+        return
+    log, close = open_log(lambda line: print(line, flush=True))
+    stop = threading.Event()
+    watch_stop(stop)
+    try:
+        session(args, stop, log)
     finally:
-        logfile.close()
-        input('엔터를 누르면 창을 닫습니다.')
+        close()
+        if not args.no_pause and sys.stdin:
+            input('엔터를 누르면 창을 닫습니다.')
 
 
 if __name__ == '__main__':

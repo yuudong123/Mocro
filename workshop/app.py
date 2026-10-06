@@ -15,11 +15,18 @@ from logging.handlers import RotatingFileHandler
 import tkinter as tk
 from tkinter import ttk, filedialog
 
-ROOT = Path(__file__).resolve().parent
+import sys
+
+# exe(모비 통합 매크로.exe)로 실행하면 읽기 전용 파일(레시피·아이콘)은 exe 안에서 읽고,
+# 설정·로그는 exe 옆 data 폴더에 쓴다. 소스로 실행하면 둘 다 이 폴더다.
+FROZEN = getattr(sys, 'frozen', False)
+ROOT = Path(sys._MEIPASS) / 'workshop' if FROZEN else Path(__file__).resolve().parent
+DATA = Path(sys.executable).parent / 'data' / 'workshop' if FROZEN else ROOT
+DATA.mkdir(parents=True, exist_ok=True)
 DEFAULT_CLI = r"C:\Nexon\MabinogiMobile\MabinogiMobile_CLI.exe"
-SETTINGS = ROOT / 'settings.json'
+SETTINGS = DATA / 'settings.json'
 RECIPE_DATA = ROOT / 'recipes.json'
-LOG_DIR = ROOT / 'logs'
+LOG_DIR = DATA / 'logs'
 LOG_FILE = LOG_DIR / f'lifestyle-{os.getpid()}.log'
 
 
