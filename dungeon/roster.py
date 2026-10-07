@@ -38,9 +38,32 @@ class Roster:
         now = self.now()
         # 같은 캐릭터가 다른 칸에 남아 있으면(카드 순서가 바뀐 경우) 지운다.
         self.cards = {k: v for k, v in self.cards.items() if v.get('id') != list(ident) or k == str(slot)}
+        old = self.cards.get(str(slot), {})
+        # 같은 캐릭터(서버·직업)면 마지막으로 던전을 돈·가방을 정리한 시각을 이어 간다.
+        times = {k: old[k] for k in ('played', 'played_at', 'cleaned', 'cleaned_at')
+                 if k in old and (old.get('id') or [])[:2] == list(ident)[:2]}
         self.cards[str(slot)] = {'id': list(ident), 'seen': now, 'seen_at': clock(now),
-                                 **{name: int(money.get(name, 0)) for name in REGEN}}
+                                 **{name: int(money.get(name, 0)) for name in REGEN}, **times}
+        self.save()
+
+    def save(self):
         self.path.write_text(json.dumps(self.cards, ensure_ascii=False, indent=1), encoding='utf-8')
+
+    def mark(self, slot, what):
+        """카드에 지금 시각을 남긴다. what: 'played'(던전을 돌았다) 또는 'cleaned'(가방을 정리했다)."""
+        card = self.cards.get(str(slot))
+        if card is None:
+            return
+        now = self.now()
+        card[what], card[f'{what}_at'] = now, clock(now)
+        self.save()
+
+    def needs_cleaning(self, slot):
+        """마지막으로 가방을 정리한 뒤 던전을 돌았으면(또는 정리 기록이 없으면) True."""
+        card = self.cards.get(str(slot))
+        if not card or 'cleaned' not in card:
+            return True
+        return card.get('played', 0) > card['cleaned']
 
     def slot_of(self, ident):
         """서버·직업·칭호(ident)로 카드를 찾는다.

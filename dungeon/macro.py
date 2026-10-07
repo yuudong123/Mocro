@@ -164,6 +164,7 @@ class Macro:
         self.map_opened = False  # 이번 이동에서 M으로 지도를 열었다
         self.skip_slots = set()  # 100레벨 표시였지만 접속해 보니 아니었던 카드
         self.fresh = False       # 방금 접속해서 아직 한 판도 안 돌았다(재화를 잘못 읽었을 수 있다)
+        self.pending_clean = False  # 카드 번호를 모르는 채로 가방을 정리했다(전환할 때 기록한다)
 
     # ---- 상태 확인 ----
     def check(self):
@@ -233,10 +234,16 @@ class Macro:
         return self.uses(route) and self.balance(route) >= route.cost
 
     def weight(self):
+        # 장면이 바뀌는 중(던전 퇴장·대화 직전)에는 0/3.4e38(float 최댓값) 같은 값이 온다. 말이 되는 값까지 다시 읽는다.
         for _ in range(90):
             data = cli('get_inventory')
-            if isinstance(data, dict) and 'error' not in data:
-                return float(data['CurrentInventoryWeight']), float(data['MaxInventoryWeight'])
+            try:
+                current = float(data['CurrentInventoryWeight'])
+                maximum = float(data['MaxInventoryWeight'])
+                if 0 < maximum < 1e6 and 0 <= current < 1e6:
+                    return current, maximum
+            except (KeyError, TypeError, ValueError):
+                pass
             self.wait(1)
         raise Stop(f'가방 무게를 읽지 못했습니다: {data}')
 
@@ -493,6 +500,8 @@ class Macro:
                 self.log(f'{route.name} {self.runs}회 클리어 · 남은 {route.currency} {self.balance(route)}'
                          f' · 가방 {current:.0f}/{maximum:.0f}')
                 self.remember()
+                if self.slot is not None:
+                    self.roster.mark(self.slot, 'played')  # 이 뒤로는 가방을 다시 정리해야 한다
                 if self.max_runs and self.runs >= self.max_runs:
                     self.leave_reward()
                     raise Stop(f'목표 {self.max_runs}회 완료')
@@ -565,6 +574,11 @@ class Macro:
         runes = opts['rune'] and list(self.config['rune_grades'])
         if not (items or equip or runes):
             return
+        if self.slot is not None and not self.roster.needs_cleaning(self.slot):
+            # 재시작했을 때 이미 정리한 캐릭터를 또 정리하지 않는다(정리한 뒤로 던전을 안 돌았다).
+            self.log(f'{self.slot + 1}번 캐릭터는 마지막으로 던전을 돈 뒤 이미 가방을 정리했습니다'
+                     f'({self.roster.cards[str(self.slot)]["cleaned_at"]}) · 건너뜀')
+            return
         before, maximum = self.weight()
         self.log(f'가방 정리 시작 · 무게 {before:.0f}/{maximum:.0f}')
         self.open_bag_detail()
@@ -596,6 +610,10 @@ class Macro:
         self.until('가방 닫기', self.hud, lambda: self.hud() or self.game.click(*DETAIL_CLOSE), every=2, first=True)
         after, _ = self.weight()
         self.log(f'가방 정리 완료 · 무게 {before:.0f} → {after:.0f}')
+        if self.slot is not None:
+            self.roster.mark(self.slot, 'cleaned')
+        else:
+            self.pending_clean = True  # 몇 번 카드인지 캐릭터 선택 화면에서 알아낸 뒤 기록한다
 
     def open_bag_detail(self):
         """I(가방) → A(간단히 정리하기) → 자세히 정리하기."""
@@ -834,6 +852,9 @@ class Macro:
         self.slot, self.ident = (current if current is not None else self.slot), before['id']
         if isinstance(money, dict) and 'error' not in money:
             self.remember(money)
+        if self.pending_clean and self.slot is not None:
+            self.roster.mark(self.slot, 'cleaned')
+        self.pending_clean = False
         # 캐릭터 표에서 뺐거나 은동전·공물을 둘 다 끈 카드는 고르지 않는다.
         candidates = [c for c in cards if c['lv100'] and c['slot'] not in self.skip_slots
                       and self.costs_for(c['slot'])]

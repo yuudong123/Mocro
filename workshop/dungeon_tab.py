@@ -197,8 +197,9 @@ def roster_rows(costs=COSTS):
         guess = roster.estimate(slot)
         ready = roster.ready_at(slot, costs)
         when = '지금 가능' if ready <= roster.now() else f'{datetime.fromtimestamp(ready):%m-%d %H:%M}부터'
+        cleaned = f' · 가방 정리됨 {card["cleaned_at"]}' if not roster.needs_cleaning(slot) else ''
         rows[slot] = (f'{ident[1]} · {ident[0]}',
-                      f'은동전 {guess["은동전"]} · 공물 {guess["마족 공물"]} · {when} (기록 {card["seen_at"]})')
+                      f'은동전 {guess["은동전"]} · 공물 {guess["마족 공물"]} · {when} (기록 {card["seen_at"]}){cleaned}')
     return rows
 
 
