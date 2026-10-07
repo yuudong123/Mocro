@@ -313,7 +313,7 @@ def box(title):
     frame.setObjectName('card')
     lay = QVBoxLayout(frame)
     label = QLabel(title)
-    label.setStyleSheet('font-weight:bold; color:#85cbbb;')
+    label.setObjectName('accent')  # 색은 공방 테마를 따른다
     lay.addWidget(label)
     return frame, lay
 

@@ -155,6 +155,22 @@ class WindowHasDungeonTab(unittest.TestCase):
                 window.close()
             self.assertEqual(json.loads(settings.read_text(encoding='utf-8'))['dungeon']['runs'], 7)
 
+    def test_dark_mode_toggle_is_saved(self):
+        from desktop import Window, THEMES
+        with tempfile.TemporaryDirectory() as temp:
+            settings = Path(temp) / 'settings.json'
+            with patch('desktop.SETTINGS', settings), patch.object(Window, 'refresh'):
+                window = Window()
+                window.timer.stop()
+                self.assertFalse(window.dark.isChecked())  # 기본은 밝은 화면
+                self.assertIn(THEMES['light']['bg'], self.app.styleSheet())
+                window.dark.setChecked(True)
+                self.assertIn(THEMES['dark']['bg'], self.app.styleSheet())
+                self.assertNotIn('$', self.app.styleSheet())
+                self.assertTrue(window.save())
+                window.close()
+            self.assertEqual(json.loads(settings.read_text(encoding='utf-8'))['theme'], 'dark')
+
 
 if __name__ == '__main__':
     unittest.main()

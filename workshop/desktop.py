@@ -17,23 +17,45 @@ from facilities import ORDER, facility_for, ordered_names
 from target_modes import freeze_targets, matches_pending
 from dungeon_tab import DungeonPanel
 
-STYLE = '''
-QWidget { background:#101720; color:#e6edf5; font-family:'Malgun Gothic'; font-size:13px; }
-QLabel#title {font-size:28px; font-weight:bold; color:#f1e6cc;}
-QLabel#muted {color:#91a3b8;}
-QFrame#card {background:#1b2634; border:1px solid #304054; border-radius:12px;}
+STYLE_TEMPLATE = '''
+QWidget { background:$bg; color:$fg; font-family:'Malgun Gothic'; font-size:13px; }
+QLabel#title {font-size:28px; font-weight:bold; color:$title;}
+QLabel#muted {color:$muted;}
+QLabel#accent {color:$accent; font-weight:bold;}
+QFrame#card {background:$card; border:1px solid $card_border; border-radius:12px;}
 QFrame#card QLabel {background:transparent;}
-QLineEdit,QSpinBox,QComboBox,QPlainTextEdit,QListWidget {background:#151f2c; border:1px solid #35465b; border-radius:6px; padding:7px;}
-QPushButton {background:#26394b; border:1px solid #40546a; border-radius:7px; padding:8px 12px;}
-QPushButton:hover {background:#36536a;}
-QPushButton:disabled {color:#64748b; background:#18222d;}
-QPushButton#primary {background:#85cbbb; color:#102b29; font-weight:bold;}
+QLineEdit,QSpinBox,QComboBox,QPlainTextEdit,QListWidget,QTableWidget {background:$input; border:1px solid $input_border; border-radius:6px; padding:7px;}
+QTableWidget {gridline-color:$card_border; padding:2px;}
+QHeaderView::section {background:$tab; color:$fg; border:0; border-bottom:1px solid $card_border; padding:4px 6px;}
+QPushButton {background:$button; border:1px solid $button_border; border-radius:7px; padding:8px 12px;}
+QPushButton:hover {background:$hover;}
+QPushButton:disabled {color:$disabled_fg; background:$disabled_bg;}
+QPushButton#primary {background:$accent; color:$accent_fg; font-weight:bold;}
 QTabWidget::pane {border:0;}
-QTabBar::tab {padding:12px 18px; background:#151f2c; color:#91a3b8;}
-QTabBar::tab:selected {color:#85cbbb; border-bottom:2px solid #85cbbb;}
+QTabBar::tab {padding:12px 18px; background:$tab; color:$muted;}
+QTabBar::tab:selected {color:$accent; border-bottom:2px solid $accent;}
 QScrollArea {border:0;}
 QSpinBox {min-height:25px;}
 '''
+# 공방 화면 색. 맨 위 「다크 모드」로 바꾸고 settings.json의 theme에 남는다.
+THEMES = {
+    'dark': dict(bg='#101720', fg='#e6edf5', title='#f1e6cc', muted='#91a3b8', card='#1b2634', card_border='#304054',
+                 input='#151f2c', input_border='#35465b', button='#26394b', button_border='#40546a', hover='#36536a',
+                 disabled_fg='#64748b', disabled_bg='#18222d', accent='#85cbbb', accent_fg='#102b29', tab='#151f2c'),
+    'light': dict(bg='#f4f6f9', fg='#1f2933', title='#5a4520', muted='#52606d', card='#ffffff', card_border='#d3dae3',
+                  input='#ffffff', input_border='#b8c2cc', button='#e4e9ef', button_border='#b8c2cc', hover='#d2dbe5',
+                  disabled_fg='#9aa5b1', disabled_bg='#eceff3', accent='#1f7a68', accent_fg='#ffffff', tab='#e8edf2'),
+}
+
+
+def style_for(theme):
+    style = STYLE_TEMPLATE
+    for key, value in sorted(THEMES.get(theme, THEMES['light']).items(), key=lambda kv: -len(kv[0])):
+        style = style.replace('$' + key, value)  # 긴 이름부터(button_border가 button보다 먼저)
+    return style
+
+
+STYLE = style_for('dark')
 
 
 class Window(QMainWindow):
@@ -75,6 +97,15 @@ class Window(QMainWindow):
         # 맨 위 탭: 생활(기존 화면)과 던전(dungeon/macro.py). 던전 탭은 처음 열 때 필요한 패키지를 설치한다.
         self.modes = QTabWidget()
         self.setCentralWidget(self.modes)
+        corner = QWidget()
+        corner_layout = QHBoxLayout(corner)
+        corner_layout.setContentsMargins(0, 0, 16, 0)
+        self.dark = QCheckBox('다크 모드')
+        self.dark.setChecked(self.saved.get('theme', 'light') == 'dark')
+        self.dark.toggled.connect(self.theme_changed)
+        corner_layout.addWidget(self.dark)
+        self.modes.setCornerWidget(corner, Qt.Corner.TopRightCorner)
+        self.apply_theme()
         base = QWidget()
         # 생활 화면은 세로로 744px 넘게 쌓여서, 스크롤로 감싸 창을 그보다 작게 줄일 수 있게 한다.
         life = QScrollArea()
@@ -251,6 +282,15 @@ class Window(QMainWindow):
         lay.addWidget(note)
         return panel
 
+    def apply_theme(self):
+        app = QApplication.instance()
+        if app is not None:
+            app.setStyleSheet(style_for('dark' if self.dark.isChecked() else 'light'))
+
+    def theme_changed(self, *_):
+        self.apply_theme()
+        self.schedule_save()
+
     def mode_changed(self, index):
         if self.modes.widget(index) is self.dungeon:
             self.dungeon.activate()
@@ -276,7 +316,7 @@ class Window(QMainWindow):
         }
         self.saved.update(cli=self.path.text(), defaults=self.defaults, icons=self.icons, presets=self.presets,
                           include_inventory=self.include_inventory.isChecked(), ui=self.ui_state,
-                          dungeon=self.dungeon.state())
+                          dungeon=self.dungeon.state(), theme='dark' if self.dark.isChecked() else 'light')
         try:
             temp = SETTINGS.with_suffix('.tmp')
             temp.write_text(json.dumps(self.saved, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -463,7 +503,8 @@ class Window(QMainWindow):
             pix = QPixmap(self.icons.get(name, ''))
             if pix.isNull():
                 icon.setText(name[:2])
-                icon.setStyleSheet('font-size:26px; color:#85cbbb; padding:8px;')
+                icon.setObjectName('accent')  # 색은 테마를 따른다
+                icon.setStyleSheet('font-size:26px; padding:8px;')
             else:
                 icon.setPixmap(pix.scaled(56, 56, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
             cl.addWidget(icon)
@@ -695,7 +736,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon(str(ROOT / 'assets' / 'workshop.ico')))
     app.setStyle('Fusion')
-    app.setStyleSheet(STYLE)
+    # 화면 색(밝은·어두운 테마)은 Window가 설정에 따라 정한다
     window = Window()
     window.show()
     sys.exit(app.exec())

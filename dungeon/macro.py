@@ -125,6 +125,7 @@ DEFAULT_CONFIG = {
 }
 # 카드별: 매크로에 포함, 은동전·마족 공물 사용, 캐릭터를 바꾸기 전 상자 열기·소모품 분해, 장비·룬 분해
 CHAR_DEFAULT = {'include': True, 'silver': True, 'tribute': True, 'items': True, 'equip': True, 'rune': True}
+SLOTS = 6                                # 캐릭터 선택 화면 카드 수
 
 
 def load_config():
@@ -216,10 +217,17 @@ class Macro:
             self.apply_config(load_config())
 
     def char_opts(self, slot=None):
-        """카드별 설정(공방 캐릭터 표). 지금 캐릭터가 몇 번 카드인지 모르면 기본값(전부 켬)."""
+        """카드별 설정(공방 캐릭터 표).
+
+        지금 캐릭터가 몇 번 카드인지 모르면 보수적으로, 모든 카드에서 켜져 있는 항목만 켠 것으로 본다.
+        정리(되돌릴 수 없다)도, 재화를 쓰는 던전도 마찬가지다. 허용되지 않으면 던전을 돌지 않고 바로 캐릭터 선택
+        화면으로 가서 카드를 알아낸 뒤 표대로 다시 고른다(돌아도 되는 카드면 같은 캐릭터로 다시 접속한다).
+        """
         slot = self.slot if slot is None else slot
-        saved = self.config['characters'].get(str(slot), {}) if slot is not None else {}
-        return {**CHAR_DEFAULT, **saved}
+        if slot is not None:
+            return {**CHAR_DEFAULT, **self.config['characters'].get(str(slot), {})}
+        cards = [{**CHAR_DEFAULT, **self.config['characters'].get(str(s), {})} for s in range(SLOTS)]
+        return {key: all(card[key] for card in cards) for key in CHAR_DEFAULT}
 
     def uses(self, route, slot=None):
         """이 캐릭터가 매크로에 포함됐고 이 던전의 재화를 쓰도록 설정됐다."""
@@ -539,7 +547,8 @@ class Macro:
             self.log(f'지금 캐릭터는 기록상 {self.slot + 1}번 카드')
             self.remember()  # 칭호가 바뀌었으면 기록도 지금 값으로
         else:
-            self.log('지금 캐릭터가 몇 번 카드인지 기록이 없어 캐릭터 표 대신 모두 켠 것으로 돕니다(한 번 바꾸면 알아봅니다)')
+            self.log('지금 캐릭터가 몇 번 카드인지 기록이 없습니다. 캐릭터 표에서 모든 카드에 켠 항목만 하고, '
+                     '한 번 캐릭터 선택 화면에 가면 카드를 알아봅니다')
         while True:
             try:
                 self.run()
@@ -548,7 +557,10 @@ class Macro:
                 if self.fresh and self.recheck():
                     continue  # 접속 직후 덜 읽힌 재화였다. 이 캐릭터로 계속 돈다
                 self.reload_config()  # 도는 중에 공방에서 바꾼 캐릭터 표·정리 설정을 여기서부터 적용
-                if not self.char_opts()['include']:
+                opts = self.char_opts()
+                if self.slot is None and not (opts['include'] and opts['silver'] and opts['tribute']):
+                    reason = '몇 번 카드인지 몰라 캐릭터 표대로 돌 수 있는지 선택 화면에서 확인합니다.'
+                elif not self.char_opts()['include']:
                     reason = f'{self.slot + 1}번 캐릭터는 매크로에서 빼 두었습니다.'
                 self.log(f'{reason}' + (' 다음 캐릭터로 바꿉니다.' if switch else ' 종료합니다.'))
                 self.clean_bag()
