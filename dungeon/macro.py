@@ -45,7 +45,8 @@ MAP_PAN = ((400, 300), (560, 420))
 HUD_ANCHORS = {'hud_esc': (600, 0, 720, 60), 'hud_space': (700, 530, 800, 600), 'hud_chat': (100, 530, 260, 600)}
 CRUMB_REGION = (0, 0, 160, 60)  # 지도 왼쪽 위 "울라 대륙". 지도가 열렸을 때만 있다
 NOTICE_CLOSE_REGION = (320, 220, 480, 380)  # 레벨업 다이스 획득 같은 알림 가운데의 X
-CHOICE_REGION = (100, 470, 700, 600)        # 대화 선택지(초록 둥근 버튼, 몰리 "지하 감옥/몬스터 소굴/…" 등)
+POPUP_CLOSE_REGION = (670, 116, 730, 176)  # 캐릭터에 들어가면 뜨는 공지 팝업의 오른쪽 위 X(700,146)
+CHOICE_REGION = (100, 470, 700, 600)       # 대화 선택지(초록 둥근 버튼, 몰리 "지하 감옥/몬스터 소굴/…" 등)
 # 레벨업·시즌 스킬·스킬 획득 알림 창이 떠 있으면 조작이 먹히지 않는다. 화면 조작은 이만큼 다시 시도한다.
 PATIENCE = 180
 # 가방 무게가 한도를 넘으면 자동 진행이 멈춘다. 한 판 전리품만큼 여유를 두고 가방을 정리한다.
@@ -367,17 +368,23 @@ class Macro:
         self.until('대화 넘기기', lambda: not self.in_dialogue(), lambda: None, every=3, first=True)
 
     def close_notice(self, image=None):
-        """Close a notice window (e.g. level-up dice reward) with the X in the middle; True if it did.
+        """Close a notice window with its X; True if it did.
 
-        알림이 화면을 어둡게 덮으므로 밝기를 펴서 밝은 획만 비교한다(녹화의 다른 화면은 0.41 이하).
+        - 레벨업 다이스 획득 같은 알림: 가운데 X(녹화의 다른 화면은 0.41 이하)
+        - 캐릭터에 들어가면 뜨는 공지 팝업(배너·공지사항·이벤트): 오른쪽 위 바깥 X(다른 화면은 0.49 이하)
+        화면을 어둡게 덮으므로 밝기를 펴서 밝은 획만 비교한다.
         """
-        spot = self.find_text('notice_close', image, region=NOTICE_CLOSE_REGION, threshold=0.6, normalize=True)
-        if not spot:
-            return False
-        self.log('알림 창 닫기')
-        self.game.click(*spot)
-        self.wait(1)
-        return True
+        image = image if image is not None else self.game.capture()
+        for name, region, label in (('notice_close', NOTICE_CLOSE_REGION, '알림 창 닫기'),
+                                    ('popup_close', POPUP_CLOSE_REGION, '공지 팝업 닫기')):
+            spot = self.find_text(name, image, region=region, threshold=0.75 if name == 'popup_close' else 0.6,
+                                  normalize=True)
+            if spot:
+                self.log(label)
+                self.game.click(*spot)
+                self.wait(1)
+                return True
+        return False
 
     def skip_dialogue(self, a):
         """If the CLI says a dialogue or choice is up, get past it; True if it did.
@@ -900,6 +907,9 @@ class Macro:
         money = self.settled_currencies()
         self.log(f'{card["slot"] + 1}번 캐릭터 접속 · {now["realm"]} {now["job"]} {now["level"]}레벨 · '
                  f'재화 {money}')
+        for _ in range(3):  # 접속하면 공지 팝업(배너)이 뜬다. 겹쳐 뜨는 알림까지 닫는다
+            if not self.close_notice():
+                break
         if now['id'] in self.done_ids:
             # 고른 카드와 다른 캐릭터다. 기록하지 않고 선택 화면에서 다시 고른다.
             self.log(f'이미 끝낸 캐릭터로 접속됨({now["realm"]} {now["job"]}) · 다음 캐릭터로 넘어갑니다.')
