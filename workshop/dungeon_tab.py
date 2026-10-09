@@ -319,12 +319,13 @@ def box(title):
 
 
 class DungeonPanel(QWidget):
-    def __init__(self, state=None, changed=None, save=None, cli_path=None):
+    def __init__(self, state=None, changed=None, save=None, cli_path=None, can_launch=None):
         super().__init__()
         state = state or {}
         self.changed = changed or (lambda: None)
         self.save_now = save or (lambda: True)
         self.cli_path = cli_path or (lambda: '')
+        self.can_launch = can_launch or (lambda: True)
         self.events = queue.Queue()
         self.installing = False
         self.checking = False
@@ -396,8 +397,8 @@ class DungeonPanel(QWidget):
         note = QLabel('포함을 끄면 그 캐릭터는 고르지 않습니다. 은동전·공물을 끄면 그 재화로 던전을 돌지 않습니다. '
                       '상자·소모품(상자 열기, 소모품 분해, 패션 티켓 조각 보물 상자는 제외)과 장비·룬 분해는 그 '
                       '캐릭터를 바꾸기 전 가방 정리에서 합니다. 셋 다 끄면 가방을 열지 않습니다. 도는 중에 바꾼 설정은 다음 가방 '
-                      '정리·캐릭터 전환부터 적용됩니다. 기록이 없는 캐릭터로 시작하면 몇 번 카드인지 몰라서 '
-                      '모든 카드에 켠 항목만 하고, 못 하는 것은 캐릭터 선택 화면에서 카드를 알아낸 뒤 표대로 합니다.')
+                      '정리·캐릭터 전환부터 적용됩니다. 시작할 때 선택 화면에서 실제 카드 번호를 확인한 뒤 '
+                      '캐릭터 표대로 진행합니다. 이 확인은 작업 완료로 처리하지 않습니다.')
         note.setObjectName('muted')
         note.setWordWrap(True)
         inner.addWidget(note)
@@ -610,6 +611,9 @@ class DungeonPanel(QWidget):
 
     def launch(self, check=False):
         if self.process is not None or not installed():
+            return
+        if not check and not self.can_launch():
+            self.message('생활 작업을 중지한 뒤 던전 매크로를 시작하세요.')
             return
         if not self.save_now():  # 매크로는 시작할 때 settings.json의 던전 설정을 읽는다
             self.message('설정을 저장하지 못해 시작하지 않았습니다.')

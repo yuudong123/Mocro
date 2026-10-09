@@ -113,7 +113,7 @@ class Window(QMainWindow):
         life.setWidget(base)
         self.modes.addTab(life, '생활')
         self.dungeon = DungeonPanel(self.saved.get('dungeon', {}), self.schedule_save, self.save,
-                                    lambda: self.path.text())
+                                    lambda: self.path.text(), can_launch=lambda: not self.running)
         self.modes.addTab(self.dungeon, '던전')
         layout = QVBoxLayout(base)
         layout.setContentsMargins(24, 20, 24, 20)
@@ -564,6 +564,9 @@ class Window(QMainWindow):
 
     def launch(self):
         if self.running:
+            return
+        if self.dungeon.process is not None:
+            self.message('던전 매크로를 중지한 뒤 생활 작업을 시작하세요.')
             return
         if not self.targets:
             self.message('목표 품목을 먼저 담아주세요.')

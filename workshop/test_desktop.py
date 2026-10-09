@@ -72,6 +72,16 @@ class Presets(unittest.TestCase):
             w.save_preset()
             save.assert_not_called()
 
+    def test_dungeon_blocks_lifestyle_actions(self):
+        self.window.targets = {'철괴': 1}
+        self.window.dungeon.process = 'inside'
+        try:
+            self.window.launch()
+            self.assertFalse(self.window.running)
+            self.assertIn('던전 매크로를 중지', self.window.status.text())
+        finally:
+            self.window.dungeon.process = None
+
     def test_resume_keeps_frozen_goal_and_request_count(self):
         w = self.window
         w.add_target('강철괴', 40)

@@ -162,7 +162,7 @@ class Macro:
         self.roster = Roster()   # 카드별 마지막으로 본 재화(dungeon/characters.json)
         self.slot = None         # 지금 캐릭터의 카드 번호(0부터). 모르면 선택 화면에서 알아낸다
         self.ident = None
-        self.done_ids = set()    # 이번 실행에서 끝낸 캐릭터(카드와 다르게 접속됐는지 확인)
+        self.completed_slots = set()  # 카드 확인과 실제 작업 완료를 구분한다
         self.map_opened = False  # 이번 이동에서 M으로 지도를 열었다
         self.skip_slots = set()  # 100레벨 표시였지만 접속해 보니 아니었던 카드
         self.fresh = False       # 방금 접속해서 아직 한 판도 안 돌았다(재화를 잘못 읽었을 수 있다)
@@ -201,8 +201,10 @@ class Macro:
         # 로딩 중에는 not_in_game 오류가 온다. 0개로 오인하지 않도록 다시 읽는다.
         for _ in range(90):
             money = currencies()
-            if isinstance(money, dict) and 'error' not in money:
-                return money.get(route.currency, 0)
+            if (isinstance(money, dict) and 'error' not in money
+                    and isinstance(money.get(route.currency), (int, float))
+                    and money[route.currency] >= 0):
+                return money[route.currency]
             self.wait(1)
         raise Stop(f'재화를 읽지 못했습니다: {money}')
 
@@ -268,7 +270,7 @@ class Macro:
         """Tidy the bag when it is nearly full; Stop if that did not free enough weight."""
         if not self.overweight(limit):
             return
-        self.tidy_bag()
+        self.clean_bag(force=True)
         heavy = self.overweight(limit)
         if heavy:
             raise Stop(f'가방 정리 후에도 {heavy}')
@@ -544,23 +546,35 @@ class Macro:
 
     def remember(self, money=None):
         if self.slot is not None and self.ident:
-            self.roster.record(self.slot, self.ident, money or currencies())
+            money = currencies() if money is None else money
+            if (not isinstance(money, dict) or 'error' in money
+                    or not all(isinstance(money.get(r.currency), (int, float))
+                               and money[r.currency] >= 0 for r in self.routes)):
+                self.log('재화 조회가 불완전해 기존 캐릭터 기록을 유지합니다.')
+                return
+            self.roster.record(self.slot, self.ident, money)
 
     def run_all(self, switch=True):
         """run() each level-100 character in turn until every one is out of currency."""
         self.ident = self.me()['id']
-        self.slot = self.roster.slot_of(self.ident)
-        if self.slot is not None:
-            self.log(f'지금 캐릭터는 기록상 {self.slot + 1}번 카드')
-            self.remember()  # 칭호가 바뀌었으면 기록도 지금 값으로
-        else:
-            self.log('지금 캐릭터가 몇 번 카드인지 기록이 없습니다. 캐릭터 표에서 모든 카드에 켠 항목만 하고, '
-                     '한 번 캐릭터 선택 화면에 가면 카드를 알아봅니다')
+        # 직업·칭호·카드 순서는 바뀔 수 있다. 지난 기록만으로 이번 카드의
+        # 권한을 추측하지 않고 선택 화면에서 실제 번호를 확인한다.
+        self.slot = None
+        self.log('현재 카드 번호를 선택 화면에서 확인한 뒤 캐릭터별 설정을 적용합니다.')
+        if switch and self.activity()['dungeon'] == 'NotInDungeon':
+            self.switch_character(finished=False)
+        elif not switch and not all(self.char_opts()[k] for k in ('include', 'silver', 'tribute')):
+            raise Stop('현재 카드 번호를 확인할 수 없습니다. 캐릭터 전환을 켜고 한 번 실행하세요.')
         while True:
             try:
                 self.run()
                 return
             except Exhausted as reason:
+                if self.slot is None and switch:
+                    self.log('작업 완료가 아니라 카드별 설정 확인을 위해 선택 화면으로 갑니다.')
+                    self.start = None
+                    self.switch_character(finished=False)
+                    continue
                 if self.fresh and self.recheck():
                     continue  # 접속 직후 덜 읽힌 재화였다. 이 캐릭터로 계속 돈다
                 self.reload_config()  # 도는 중에 공방에서 바꾼 캐릭터 표·정리 설정을 여기서부터 적용
@@ -577,7 +591,7 @@ class Macro:
             self.switch_character()
 
     # ---- 캐릭터를 바꾸기 전 가방 정리 ----
-    def clean_bag(self):
+    def clean_bag(self, force=False):
         """녹화(20261005-154846, 20261005-160805)한 순서 그대로 가방을 정리한다.
 
         자세히 가방 정리 → 아이템 탭 소모품: 등급 전체, "열기"로 전체 선택(패션 티켓 조각 보물 상자는 뺌) 정리
@@ -585,6 +599,8 @@ class Macro:
         → 보석·룬: 고른 등급(기본 일반~에픽)만 전체 선택 분해 → X로 닫기.
         상자·소모품은 공방 설정 clean, 장비·룬 분해는 캐릭터 표의 카드별 설정을 따른다.
         """
+        if not self.clean_allowed:
+            return
         opts = self.char_opts()
         if not opts['include']:
             return  # 매크로에서 뺀 캐릭터의 가방은 건드리지 않는다
@@ -593,7 +609,7 @@ class Macro:
         runes = opts['rune'] and list(self.config['rune_grades'])
         if not (items or equip or runes):
             return
-        if self.slot is not None and not self.roster.needs_cleaning(self.slot):
+        if not force and self.slot is not None and not self.roster.needs_cleaning(self.slot):
             # 재시작했을 때 이미 정리한 캐릭터를 또 정리하지 않는다(정리한 뒤로 던전을 안 돌았다).
             self.log(f'{self.slot + 1}번 캐릭터는 마지막으로 던전을 돈 뒤 이미 가방을 정리했습니다'
                      f'({self.roster.cards[str(self.slot)]["cleaned_at"]}) · 건너뜀')
@@ -783,17 +799,21 @@ class Macro:
         started = time.monotonic()
         last, since, money = None, None, {}
         while True:
+            self.check()
             reading = currencies()
             now = time.monotonic()
-            if isinstance(reading, dict) and 'error' not in reading:
+            if (isinstance(reading, dict) and 'error' not in reading
+                    and all(route.currency in reading for route in self.routes)):
                 money = reading
                 key = tuple(reading.get(route.currency, 0) for route in ROUTES)
                 if key != last:
                     last, since = key, now
                 elif now - since >= quiet and now - started >= least:
                     return money
+            else:
+                last, since = None, None
             if now - started > timeout:
-                return money
+                raise Stop('접속 재화가 안정되지 않아 중단합니다. 다시 접속한 뒤 실행하세요.')
             self.wait(2)
 
     # ---- 캐릭터 변경 ----
@@ -802,6 +822,8 @@ class Macro:
         found = []
         for row, top in enumerate(CARD_TOPS):
             for col, left in enumerate(CARD_LEFTS):
+                if row * len(CARD_LEFTS) + col >= SLOTS:
+                    break
                 r, _, b = ImageStat.Stat(image.crop((left, top + 20, left + 3, top + 150))).mean
                 found.append({
                     'slot': row * len(CARD_LEFTS) + col,
@@ -849,78 +871,122 @@ class Macro:
         self.wait(1.5)  # 카드가 다 그려질 때까지
 
     def in_game(self):
-        return self.ready(summarize_activity(cli('get_activity')))
+        return (not self.game.find('select_title')
+                and self.ready(summarize_activity(cli('get_activity'))))
 
     @staticmethod
     def ready(a):
         # 접속·이동 로딩 중에는 not_in_game 오류나, 던전 상태 같은 항목이 비어 있는 응답이 온다.
         return isinstance(a, dict) and 'error' not in a and a.get('dungeon') is not None
 
-    def switch_character(self):
+    def switch_character(self, finished=True):
         """Save the current character's currencies and log in to a level-100 one that can run a dungeon.
 
         재화는 카드별로 파일에 남기고 충전 속도로 지금 양을 추정해, 돌 수 없는 캐릭터는 접속하지 않는다.
         """
         before, money = self.me(), currencies()
-        self.done_ids.add(before['id'])
         self.to_character_select()
         self.game.scroll(400, 300, 10)  # 목록 맨 위로
         self.wait(1)
         cards = self.cards(self.game.capture())
-        current = next((c['slot'] for c in cards if c['selected']), None)
-        self.slot, self.ident = (current if current is not None else self.slot), before['id']
+        selected = [c['slot'] for c in cards if c['selected']]
+        if len(selected) != 1:
+            raise Stop('현재 캐릭터 카드가 하나로 확인되지 않습니다. 선택 화면을 확인하세요.')
+        self.slot, self.ident = selected[0], before['id']
+        preferred_slot = self.slot if not finished else None
+        if finished:
+            self.completed_slots.add(self.slot)
+        self.log(f'현재 카드 확인 · {self.slot + 1}번 · '
+                 + ('작업 완료' if finished else '설정 확인 · 아직 작업 미완료'))
         if isinstance(money, dict) and 'error' not in money:
             self.remember(money)
         if self.pending_clean and self.slot is not None:
             self.roster.mark(self.slot, 'cleaned')
         self.pending_clean = False
-        # 캐릭터 표에서 뺐거나 은동전·공물을 둘 다 끈 카드는 고르지 않는다.
-        candidates = [c for c in cards if c['lv100'] and c['slot'] not in self.skip_slots
-                      and self.costs_for(c['slot'])]
-        ready = {c['slot']: self.roster.ready_at(c['slot'], self.costs_for(c['slot'])) for c in candidates}
-        self.log('캐릭터 선택 · ' + (' / '.join(self.roster.describe(c['slot'], self.costs_for(c['slot']))
-                                               for c in candidates) or '돌릴 캐릭터 없음'))
         while True:
-            todo = [c for c in candidates if ready[c['slot']] <= self.roster.now()]
+            self.check()
+            self.reload_config()
+            candidates = [c for c in cards if c['lv100'] and c['slot'] not in self.skip_slots
+                          and self.costs_for(c['slot'])]
+            ready = {c['slot']: self.roster.ready_at(c['slot'], self.costs_for(c['slot'])) for c in candidates}
+            self.log('캐릭터 선택 · ' + (' / '.join(self.roster.describe(c['slot'], self.costs_for(c['slot']))
+                                                   + (' · 이번 순회 완료' if c['slot'] in self.completed_slots else '')
+                                                   for c in candidates) or '돌릴 캐릭터 없음'))
+            todo = [c for c in candidates if c['slot'] not in self.completed_slots
+                    and ready[c['slot']] <= self.roster.now()]
             if todo:
-                break
+                card = min(todo, key=lambda c: c['slot'] != preferred_slot)
+                self.until(f'{card["slot"] + 1}번 캐릭터 카드 선택',
+                           lambda: [c['slot'] for c in self.cards(self.game.capture()) if c['selected']]
+                           == [card['slot']],
+                           lambda: self.game.click(*card['center']), every=2, first=True)
+                self.log(f'{card["slot"] + 1}번 카드 선택 · 화면 {self.screenshot("select")}')
+                self.until('캐릭터 접속', self.in_game,
+                           lambda: self.game.find('select_title') and self.game.click(*GAME_START),
+                           every=8, first=True)
+                now, money = self.settled_character()
+                # CLI의 서버·직업·칭호는 고유 ID가 아니다. 확인한 카드 번호로 순회를 관리한다.
+                self.slot, self.ident = card['slot'], now['id']
+                self.remember(money)
+                self.log(f'{card["slot"] + 1}번 캐릭터 접속 · {now["realm"]} {now["job"]} {now["level"]}레벨 · '
+                         f'재화 {money}')
+                self.fresh = True
+                if now['level'] == 100:
+                    return
+                self.log('100레벨이 아니라 건너뜁니다.')
+                self.skip_slots.add(card['slot'])
+                self.to_character_select()
+                self.game.scroll(400, 300, 10)
+                self.wait(1)
+                cards = self.cards(self.game.capture())
+                continue
             soonest = min(candidates, key=lambda c: ready[c['slot']], default=None)
             if soonest is None or ready[soonest['slot']] == float('inf'):
                 raise Stop('매크로에 포함한 100레벨 캐릭터가 없습니다. 종료합니다.')
             when = f'가장 빠른 것은 {soonest["slot"] + 1}번 캐릭터, {clock(ready[soonest["slot"]])}쯤부터입니다.'
             if not self.config['wait']:
-                raise Stop(f'모든 100레벨 캐릭터의 은동전·마족 공물이 부족합니다. {when} 종료합니다.')
-            self.log(f'모든 캐릭터의 재화가 부족합니다. {when} 그때까지 기다렸다 이어서 돕니다.')
+                if all(c['slot'] in self.completed_slots for c in candidates):
+                    raise Stop('포함한 모든 100레벨 캐릭터의 작업을 완료했습니다. 종료합니다.')
+                raise Stop(f'남은 100레벨 캐릭터의 은동전·마족 공물이 부족합니다. {when} 종료합니다.')
+            self.log(f'이번 순회 완료 또는 남은 재화 부족. {when} 충전을 기다렸다 다시 확인합니다.')
             # 충전 간격을 기록 시각부터 세므로 1분 여유를 둔다. 기다리는 동안에도 중지할 수 있다.
-            while self.roster.now() < ready[soonest['slot']] + 60:
-                self.wait(min(60, ready[soonest['slot']] + 60 - self.roster.now()))
+            wake = max(self.roster.now(), ready[soonest['slot']]) + 60
+            while self.roster.now() < wake:
+                self.wait(min(60, wake - self.roster.now()))
+                self.reload_config()
+                if not self.config['wait']:
+                    raise Stop('충전 대기 설정이 꺼져 종료합니다.')
+            self.completed_slots.clear()
             self.until('캐릭터 선택 화면', lambda: self.game.find('select_title'), lambda: None, every=60)
-        card = todo[0]
-        self.until(f'{card["slot"] + 1}번 캐릭터 카드 선택',
-                   lambda: self.cards(self.game.capture())[card['slot']]['selected'],
-                   lambda: self.game.click(*card['center']), every=2, first=True)
-        self.log(f'{card["slot"] + 1}번 카드 선택 · 화면 {self.screenshot("select")}')
-        # 접속하면 CLI가 응답한다. 선택 화면이 그대로면 게임 시작을 다시 누른다.
-        self.until('캐릭터 접속', self.in_game,
-                   lambda: self.game.find('select_title') and self.game.click(*GAME_START), every=8, first=True)
-        now = self.me()
-        money = self.settled_currencies()
-        self.log(f'{card["slot"] + 1}번 캐릭터 접속 · {now["realm"]} {now["job"]} {now["level"]}레벨 · '
-                 f'재화 {money}')
-        for _ in range(3):  # 접속하면 공지 팝업(배너)이 뜬다. 겹쳐 뜨는 알림까지 닫는다
-            if not self.close_notice():
-                break
-        if now['id'] in self.done_ids:
-            # 고른 카드와 다른 캐릭터다. 기록하지 않고 선택 화면에서 다시 고른다.
-            self.log(f'이미 끝낸 캐릭터로 접속됨({now["realm"]} {now["job"]}) · 다음 캐릭터로 넘어갑니다.')
-            return self.switch_character()
-        self.slot, self.ident = card['slot'], now['id']
-        self.remember(money)
-        self.fresh = True
-        if now['level'] != 100:
-            self.log('100레벨이 아니라 건너뜁니다.')
-            self.skip_slots.add(card['slot'])
-            return self.switch_character()
+
+    def settled_character(self, quiet=6, least=10, timeout=60):
+        """캐릭터·재화·위치가 함께 안정된 필드에서만 접속 완료를 인정한다."""
+        started = time.monotonic()
+        last, since = None, started
+        while time.monotonic() - started <= timeout:
+            self.check()
+            activity = summarize_activity(cli('get_activity'))
+            money = currencies()
+            info = self.me()
+            env = summarize_env(cli('get_current_environment'))
+            valid = (self.ready(activity) and info['level'] and info['realm'] and info['job']
+                     and isinstance(money, dict) and 'error' not in money
+                     and all(r.currency in money for r in self.routes)
+                     and isinstance(env, dict) and env.get('space'))
+            image = self.game.capture()
+            if self.close_notice(image) or self.skip_dialogue(activity):
+                valid = False
+            valid = valid and self.hud(image)
+            snap = (info['id'], info['level'], tuple(money.get(r.currency) for r in self.routes),
+                    env['space']) if valid else None
+            now = time.monotonic()
+            if snap is None or snap != last:
+                last, since = snap, now
+            elif now - since >= quiet and now - started >= least:
+                self.log(f'접속 정보 안정 ({now - started:.0f}초)')
+                return info, money
+            self.wait(1)
+        raise Stop('접속 후 캐릭터·재화·위치가 안정되지 않아 중단합니다.')
 
     def me(self):
         """Who is logged in: level, job, realm and an id to tell characters apart (CLI has no name)."""

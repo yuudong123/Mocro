@@ -133,6 +133,15 @@ class DungeonTab(unittest.TestCase):
         self.assertTrue(self.paths['STOP_FILE'].exists())
         panel.process = None
 
+    def test_lifestyle_blocks_dungeon_actions(self):
+        panel = DungeonPanel(can_launch=lambda: False)
+        with patch.object(dungeon_tab, 'installed', return_value=True), \
+                patch.object(dungeon_tab, 'launch_elevated') as launch:
+            panel.launch()
+        launch.assert_not_called()
+        self.assertIsNone(panel.process)
+        self.assertIn('생활 작업을 중지', panel.log.toPlainText())
+
 
 class WindowHasDungeonTab(unittest.TestCase):
     @classmethod

@@ -36,8 +36,8 @@ class Roster:
     def record(self, slot, ident, money):
         """Save what card `slot` (0-based) holds now; `ident` tells characters apart."""
         now = self.now()
-        # 같은 캐릭터가 다른 칸에 남아 있으면(카드 순서가 바뀐 경우) 지운다.
-        self.cards = {k: v for k, v in self.cards.items() if v.get('id') != list(ident) or k == str(slot)}
+        # CLI의 서버/직업/칭호는 고유 ID가 아니다. 같은 값을 가진 다른
+        # 카드의 기록을 지우지 않는다(순회와 설정의 기준은 카드 번호).
         old = self.cards.get(str(slot), {})
         # 같은 캐릭터(서버·직업)면 마지막으로 던전을 돈·가방을 정리한 시각을 이어 간다.
         times = {k: old[k] for k in ('played', 'played_at', 'cleaned', 'cleaned_at')
@@ -73,7 +73,7 @@ class Roster:
         ident = list(ident)
         exact = [int(k) for k, v in self.cards.items() if v.get('id') == ident]
         if exact:
-            return exact[0]
+            return exact[0] if len(exact) == 1 else None
         same = [int(k) for k, v in self.cards.items() if (v.get('id') or [])[:2] == ident[:2]]
         return same[0] if len(same) == 1 else None
 
