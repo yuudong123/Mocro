@@ -72,6 +72,15 @@ python -m pip install -r .\workshop\requirements.txt
 
 `빌드.bat`을 실행하면 `dist\모비 통합 매크로\모비 통합 매크로.exe`가 만들어집니다(빌드용 가상환경은 `build\.venv`). 버튼 이미지는 `dungeon\templates\`에 있고, 게임 화면이 바뀌면 `dungeon\record.py`로 직접 플레이를 녹화해 다시 만듭니다.
 
+빌드는 외부 프로그램의 DLL이 섞이지 않도록 Windows·Python 경로에서 의존성을 찾습니다. Qt가 쓰는 Windows ICU와 API DLL은 배포 폴더에 넣지 않습니다. 배포 전에는 아래처럼 관리자 권한이나 게임 조작 없이 실제 포장된 실행 파일의 Qt·던전·화면 모듈 로딩을 확인할 수 있습니다. 점검 후 환경변수를 지우고 `빌드.bat`으로 실제 앱을 빌드합니다.
+
+```powershell
+$env:MOCRO_STARTUP_CHECK = '1'
+.\build\.venv\Scripts\python.exe -m PyInstaller --noconfirm --clean --distpath build\smoke-dist --workpath build\smoke-work '모비 통합 매크로.spec'
+.\build\smoke-dist\MocroStartupCheck\MocroStartupCheck.exe
+Remove-Item Env:MOCRO_STARTUP_CHECK
+```
+
 ```powershell
 cd .\workshop
 python -m unittest discover -v
